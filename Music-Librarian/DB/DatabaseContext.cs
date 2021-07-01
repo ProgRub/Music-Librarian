@@ -69,6 +69,11 @@ namespace DB
             modelBuilder.Entity<UrlReplacement>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<UrlReplacement>().Property(e => e.StringReplacement).IsRequired();
             modelBuilder.Entity<UrlReplacement>().Property(e => e.StringToReplace).IsRequired();
+            modelBuilder.Entity<YearLyricsChangeDetailsException>().Property(e => e.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<YearLyricsChangeDetailsException>().Property(e => e.OriginalAlbum).IsRequired();
+            modelBuilder.Entity<YearLyricsChangeDetailsException>().Property(e => e.OriginalArtist).IsRequired();
+            modelBuilder.Entity<YearLyricsChangeDetailsException>().Property(e => e.OriginalTitle).IsRequired();
+            modelBuilder.Entity<YearLyricsChangeDetailsException>().Property(e => e.Type).IsRequired();
         }
 
         private void RelationshipsConfiguration(ModelBuilder modelBuilder)
