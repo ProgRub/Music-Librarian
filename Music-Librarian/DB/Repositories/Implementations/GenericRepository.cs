@@ -6,9 +6,10 @@ using DB.Repositories.Interfaces;
 
 namespace DB.Repositories.Implementations
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class 
     {
         protected readonly DatabaseContext _context;
+        
         public GenericRepository(DatabaseContext context)
         {
             _context = context;

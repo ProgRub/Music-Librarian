@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,7 @@ namespace DB
             modelBuilder.Entity<Workout>().ToTable("Workout");
             modelBuilder.Entity<Directories>().ToTable("Directories");
             modelBuilder.Entity<UniFileFormat>().ToTable("UniFileFormat");
+            modelBuilder.Entity<UrlReplacement>().ToTable("UrlReplacement");
         }
 
         private void TablesConfiguration(ModelBuilder modelBuilder)
@@ -61,9 +63,12 @@ namespace DB
             modelBuilder.Entity<UniFileFormat>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<UniFileFormat>().Property(e => e.Extension).IsRequired();
             modelBuilder.Entity<UniFileFormat>().Property(e => e.Description).IsRequired();
-            modelBuilder.Entity<Directories>().HasNoKey();
+            modelBuilder.Entity<Directories>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<SongHasContributingArtists>().HasKey(e => new {e.ArtistId, e.SongId});
-            modelBuilder.Entity<WorkoutHasTimes>().HasKey(e => new { e.WorkoutTimeId, e.WorkoutId });
+            modelBuilder.Entity<WorkoutHasTimes>().HasKey(e => new {e.WorkoutTimeId, e.WorkoutId});
+            modelBuilder.Entity<UrlReplacement>().Property(e => e.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UrlReplacement>().Property(e => e.StringReplacement).IsRequired();
+            modelBuilder.Entity<UrlReplacement>().Property(e => e.StringToReplace).IsRequired();
         }
 
         private void RelationshipsConfiguration(ModelBuilder modelBuilder)
@@ -109,6 +114,57 @@ namespace DB
                 new UniFileFormat {Id = 3, Extension = ".docx", Description = "Word Files"},
                 new UniFileFormat {Id = 4, Extension = ".zip", Description = "Compressed Files"},
                 new UniFileFormat {Id = 5, Extension = ".rar", Description = "Compressed Files"});
+            modelBuilder.Entity<Directories>().HasData(new Directories
+            {
+                Id = 1,
+                MusicFrom = Path.Combine("C:", "Users", "ruben", "Desktop"),
+                MusicTo = Path.Combine("C:", "Users", "ruben", "Desktop", "Test"),
+                UniFrom = Path.Combine("C:", "Users", "ruben", "Downloads"),
+                UniToBaseDirectory = Path.Combine("C:", "Users", "ruben", "OneDrive - Universidade da Madeira", "Ano_3",
+                    "Semestre_2")
+            });
+            var id = 1;
+            modelBuilder.Entity<UrlReplacement>().HasData(
+                new UrlReplacement {Id = id++, StringToReplace = "pt.", StringReplacement = "pt "},
+                new UrlReplacement {Id = id++, StringToReplace = "part.", StringReplacement = "part "},
+                new UrlReplacement {Id = id++, StringToReplace = "pts.", StringReplacement = "pts "},
+                new UrlReplacement {Id = id++, StringToReplace = "mr.", StringReplacement = "mr "},
+                new UrlReplacement {Id = id++, StringToReplace = "vol.", StringReplacement = "vol "},
+                new UrlReplacement {Id = id++, StringToReplace = "ꞌ.", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "/", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = ">", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "<", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "'", StringReplacement = ""},
+                new UrlReplacement {Id = id++, StringToReplace = "*", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "“", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "”", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "’", StringReplacement = ""},
+                new UrlReplacement {Id = id++, StringToReplace = "\"", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "…", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "&", StringReplacement = "And"},
+                new UrlReplacement {Id = id++, StringToReplace = ",", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "|", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "_", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "(", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = ")", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "+", StringReplacement = ""},
+                new UrlReplacement {Id = id++, StringToReplace = "=", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "é", StringReplacement = "e"},
+                new UrlReplacement {Id = id++, StringToReplace = "à", StringReplacement = "a"},
+                new UrlReplacement {Id = id++, StringToReplace = "â", StringReplacement = "a"},
+                new UrlReplacement {Id = id++, StringToReplace = "ñ", StringReplacement = "n"},
+                new UrlReplacement {Id = id++, StringToReplace = "@", StringReplacement = "at"},
+                new UrlReplacement {Id = id++, StringToReplace = "...", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "!", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "?", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "#", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "$", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "–", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = ":", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "ꞌ", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = ".", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "%", StringReplacement = " "},
+                new UrlReplacement {Id = id++, StringToReplace = "-", StringReplacement = " "});
         }
 
         private void ConvertersConfiguration(ModelBuilder modelBuilder)
