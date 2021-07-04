@@ -31,9 +31,7 @@ namespace DB
 		private void PropertiesConfiguration(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Song>().ToTable("Song");
-			modelBuilder.Entity<SongHasContributingArtists>().ToTable("SongHasContributingArtists");
 			modelBuilder.Entity<Album>().ToTable("Album");
-			modelBuilder.Entity<Artist>().ToTable("Artist");
 			modelBuilder.Entity<Genre>().ToTable("Genre");
 			modelBuilder.Entity<Workout>().ToTable("Workout");
 			modelBuilder.Entity<WorkoutTime>().ToTable("WorkoutTime");
@@ -57,8 +55,6 @@ namespace DB
 			modelBuilder.Entity<Album>().Property(e => e.Title).IsRequired();
 			modelBuilder.Entity<Album>().Property(e => e.TotalTrackCount).IsRequired();
 			modelBuilder.Entity<Album>().Property(e => e.TotalDiscCount).IsRequired();
-			modelBuilder.Entity<Artist>().Property(e => e.Id).ValueGeneratedOnAdd();
-			modelBuilder.Entity<Artist>().Property(e => e.Name).IsRequired();
 			modelBuilder.Entity<Genre>().Property(e => e.Id).ValueGeneratedOnAdd();
 			modelBuilder.Entity<Genre>().Property(e => e.Name).IsRequired();
 			modelBuilder.Entity<Genre>().Ignore(e => e.Color);
@@ -68,7 +64,6 @@ namespace DB
 			modelBuilder.Entity<UniFileFormat>().Property(e => e.Extension).IsRequired();
 			modelBuilder.Entity<UniFileFormat>().Property(e => e.Description).IsRequired();
 			modelBuilder.Entity<Directories>().Property(e => e.Id).ValueGeneratedOnAdd();
-			modelBuilder.Entity<SongHasContributingArtists>().HasKey(e => new {e.ArtistId, e.SongId});
 			modelBuilder.Entity<WorkoutHasTimes>().HasKey(e => new {e.WorkoutTimeId, e.WorkoutId});
 			modelBuilder.Entity<UrlReplacement>().Property(e => e.Id).ValueGeneratedOnAdd();
 			modelBuilder.Entity<UrlReplacement>().Property(e => e.StringReplacement).IsRequired();
@@ -83,21 +78,9 @@ namespace DB
 			modelBuilder.Entity<Album>().HasOne(e => e.Genre).WithOne().HasForeignKey<Album>(e => e.GenreId)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<Album>().HasOne(e => e.Artist).WithOne().HasForeignKey<Album>(e => e.ArtistId)
-				.IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
 			modelBuilder.Entity<Album>().HasMany(e => e.Songs).WithOne(e => e.Album).IsRequired()
 				.OnDelete(DeleteBehavior.NoAction);
 			modelBuilder.Entity<Song>().HasOne(e => e.Genre).WithOne().HasForeignKey<Song>(e => e.GenreId).IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<Song>().HasOne(e => e.AlbumArtist).WithOne().HasForeignKey<Song>(e => e.AlbumArtistId)
-				.IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<SongHasContributingArtists>().HasOne(e => e.Song)
-				.WithMany(e => e.SongHasContributingArtistsCollection).HasForeignKey(e => e.SongId).IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<SongHasContributingArtists>().HasOne(e => e.Artist)
-				.WithMany(e => e.SongHasContributingArtistsCollection).HasForeignKey(e => e.ArtistId).IsRequired()
 				.OnDelete(DeleteBehavior.NoAction);
 			modelBuilder.Entity<WorkoutHasTimes>().HasOne(e => e.Workout)
 				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutId).IsRequired()
@@ -176,12 +159,15 @@ namespace DB
 
 		private void ConvertersConfiguration(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<Song>()
+				.Property(e => e.ContributingArtists)
+				.HasConversion(
+					v => string.Join(',', v),
+					v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
 		}
 
 		public DbSet<Album> Albums { get; set; }
 		public DbSet<Song> Songs { get; set; }
-		public DbSet<SongHasContributingArtists> SongHasContributingArtistsEnumerable { get; set; }
-		public DbSet<Artist> Artists { get; set; }
 		public DbSet<Genre> Genres { get; set; }
 		public DbSet<Workout> Workouts { get; set; }
 		public DbSet<WorkoutHasTimes> WorkoutHasTimesEnumerable { get; set; }

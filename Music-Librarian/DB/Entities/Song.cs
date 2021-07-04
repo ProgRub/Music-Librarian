@@ -6,9 +6,8 @@ namespace DB.Entities
 	{
 		public int Id { get; set; }
 		public string Filename { get; set; }
-		public int AlbumArtistId { get; set; }
-		public Artist AlbumArtist { get; set; }
-		public ICollection<SongHasContributingArtists> SongHasContributingArtistsCollection { get; set; }
+		public string AlbumArtist { get; set; }
+		public ICollection<string> ContributingArtists { get; set; }
 		public int AlbumId { get; set; }
 		public Album Album { get; set; }
 		public string Title { get; set; }
