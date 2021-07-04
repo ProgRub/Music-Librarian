@@ -2,8 +2,7 @@
 
 namespace DB.Repositories.Interfaces
 {
-    public interface IUniFileFormatRepository : IGenericRepository<UniFileFormat>
-    {
-        
-    }
+	public interface IUniFileFormatRepository : IGenericRepository<UniFileFormat>
+	{
+	}
 }

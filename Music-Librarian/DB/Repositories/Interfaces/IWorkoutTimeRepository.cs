@@ -2,8 +2,7 @@
 
 namespace DB.Repositories.Interfaces
 {
-    public interface IWorkoutTimeRepository : IGenericRepository<WorkoutTime>
-    {
-        
-    }
+	public interface IWorkoutTimeRepository : IGenericRepository<WorkoutTime>
+	{
+	}
 }

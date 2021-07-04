@@ -4,14 +4,16 @@ using DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DB.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210703204533_Corrections")]
+    partial class Corrections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,7 +188,7 @@ namespace DB.Migrations
 
                     b.HasIndex("SongId");
 
-                    b.ToTable("SongHasContributingArtists");
+                    b.ToTable("SongHasContributingArtistsEnumerable");
                 });
 
             modelBuilder.Entity("DB.Entities.UniFileFormat", b =>
@@ -558,7 +560,7 @@ namespace DB.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("WorkoutHasTimes");
+                    b.ToTable("WorkoutHasTimesEnumerable");
                 });
 
             modelBuilder.Entity("DB.Entities.WorkoutTime", b =>
@@ -573,7 +575,7 @@ namespace DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WorkoutTime");
+                    b.ToTable("WorkoutTimes");
                 });
 
             modelBuilder.Entity("DB.Entities.YearLyricsChangeDetailsException", b =>

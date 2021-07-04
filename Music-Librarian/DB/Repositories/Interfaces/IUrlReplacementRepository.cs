@@ -2,8 +2,7 @@
 
 namespace DB.Repositories.Interfaces
 {
-    public interface IUrlReplacementRepository : IGenericRepository<UrlReplacement>
-    {
-        
-    }
+	public interface IUrlReplacementRepository : IGenericRepository<UrlReplacement>
+	{
+	}
 }

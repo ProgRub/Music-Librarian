@@ -2,8 +2,7 @@
 
 namespace DB.Repositories.Interfaces
 {
-    public interface IGenreRepository : IGenericRepository<Genre>
-    {
-        
-    }
+	public interface IGenreRepository : IGenericRepository<Genre>
+	{
+	}
 }

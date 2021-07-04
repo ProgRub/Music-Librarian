@@ -2,8 +2,7 @@
 
 namespace DB.Repositories.Interfaces
 {
-    public interface IDirectoriesRepository : IGenericRepository<Directories>
-    {
-        
-    }
+	public interface IDirectoriesRepository : IGenericRepository<Directories>
+	{
+	}
 }
