@@ -46,6 +46,8 @@ namespace DB
 
 		private void TablesConfiguration(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<GrimeArtist>().Property(e => e.Id).ValueGeneratedOnAdd();
+			modelBuilder.Entity<GrimeArtist>().Property(e => e.ArtistName).IsRequired();
 			modelBuilder.Entity<Song>().Property(e => e.Id).ValueGeneratedOnAdd();
 			modelBuilder.Entity<Song>().Property(e => e.Filename).IsRequired();
 			modelBuilder.Entity<Song>().Property(e => e.Title).IsRequired();
@@ -154,6 +156,21 @@ namespace DB
 				new UrlReplacement {Id = id++, StringToReplace = ".", StringReplacement = " "},
 				new UrlReplacement {Id = id++, StringToReplace = "%", StringReplacement = " "},
 				new UrlReplacement {Id = id++, StringToReplace = "-", StringReplacement = " "});
+			id = 1;
+			modelBuilder.Entity<GrimeArtist>().HasData(new GrimeArtist {Id = id++, ArtistName = "Frisco"},
+				new GrimeArtist {Id = id++, ArtistName = "JME"},
+				new GrimeArtist {Id = id++, ArtistName = "Skepta"},
+				new GrimeArtist {Id = id++, ArtistName = "Wiley"},
+				new GrimeArtist {Id = id++, ArtistName = "Dave"},
+				new GrimeArtist {Id = id++, ArtistName = "slowthai"},
+				new GrimeArtist {Id = id++, ArtistName = "Dizzee Rascal"},
+				new GrimeArtist {Id = id++, ArtistName = "Chip"},
+				new GrimeArtist {Id = id++, ArtistName = "Stormzy"},
+				new GrimeArtist {Id = id++, ArtistName = "Kano"},
+				new GrimeArtist {Id = id++, ArtistName = "AJ Tracey"},
+				new GrimeArtist {Id = id++, ArtistName = "Giggs"},
+				new GrimeArtist {Id = id++, ArtistName = "P Money"},
+				new GrimeArtist {Id = id++, ArtistName = "Yizzy"});
 		}
 
 		private void ConvertersConfiguration(ModelBuilder modelBuilder)

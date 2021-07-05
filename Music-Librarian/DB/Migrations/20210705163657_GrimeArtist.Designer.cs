@@ -4,14 +4,16 @@ using DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DB.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210705163657_GrimeArtist")]
+    partial class GrimeArtist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,84 +115,11 @@ namespace DB.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ArtistName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("GrimeArtist");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ArtistName = "Frisco"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ArtistName = "JME"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ArtistName = "Skepta"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ArtistName = "Wiley"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ArtistName = "Dave"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ArtistName = "slowthai"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ArtistName = "Dizzee Rascal"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ArtistName = "Chip"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ArtistName = "Stormzy"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ArtistName = "Kano"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ArtistName = "AJ Tracey"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ArtistName = "Giggs"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ArtistName = "P Money"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ArtistName = "Yizzy"
-                        });
                 });
 
             modelBuilder.Entity("DB.Entities.Song", b =>
