@@ -11,7 +11,8 @@ namespace DB
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer(
+			optionsBuilder.EnableSensitiveDataLogging();
+			optionsBuilder.UseLazyLoadingProxies().UseSqlServer(
 				@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MusicWorkoutsAndOthersDb;MultipleActiveResultSets=True");
 		}
 
@@ -75,18 +76,15 @@ namespace DB
 
 		private void RelationshipsConfiguration(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Album>().HasOne(e => e.Genre).WithOne().HasForeignKey<Album>(e => e.GenreId)
-				.IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<Album>().HasMany(e => e.Songs).WithOne(e => e.Album).IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<Song>().HasOne(e => e.Genre).WithOne().HasForeignKey<Song>(e => e.GenreId).IsRequired()
-				.OnDelete(DeleteBehavior.NoAction);
+			modelBuilder.Entity<Album>().HasOne(e => e.Genre).WithMany().OnDelete(DeleteBehavior.Cascade);
+			modelBuilder.Entity<Album>().HasMany(e => e.Songs).WithOne(e => e.Album).OnDelete(DeleteBehavior.NoAction);
+			modelBuilder.Entity<Song>().HasOne(e => e.Genre).WithMany()
+				.OnDelete(DeleteBehavior.Cascade);
 			modelBuilder.Entity<WorkoutHasTimes>().HasOne(e => e.Workout)
-				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutId).IsRequired()
+				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutId)
 				.OnDelete(DeleteBehavior.NoAction);
 			modelBuilder.Entity<WorkoutHasTimes>().HasOne(e => e.WorkoutTime)
-				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutTimeId).IsRequired()
+				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutTimeId)
 				.OnDelete(DeleteBehavior.NoAction);
 		}
 
@@ -162,8 +160,8 @@ namespace DB
 			modelBuilder.Entity<Song>()
 				.Property(e => e.ContributingArtists)
 				.HasConversion(
-					v => string.Join(',', v),
-					v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+					v => string.Join(';', v),
+					v => v.Split(';', StringSplitOptions.RemoveEmptyEntries));
 		}
 
 		public DbSet<Album> Albums { get; set; }

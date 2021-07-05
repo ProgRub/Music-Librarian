@@ -4,14 +4,16 @@ using DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DB.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210705131417_SongLyricsAndAllOriginalFieldsInExceptionRequired")]
+    partial class SongLyricsAndAllOriginalFieldsInExceptionRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,8 @@ namespace DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GenreId");
+                    b.HasIndex("GenreId")
+                        .IsUnique();
 
                     b.ToTable("Album");
                 });
@@ -151,7 +154,8 @@ namespace DB.Migrations
 
                     b.HasIndex("AlbumId");
 
-                    b.HasIndex("GenreId");
+                    b.HasIndex("GenreId")
+                        .IsUnique();
 
                     b.ToTable("Song");
                 });
@@ -560,6 +564,7 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OriginalAlbum")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OriginalArtist")
@@ -567,6 +572,7 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OriginalTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Type")
@@ -580,9 +586,9 @@ namespace DB.Migrations
             modelBuilder.Entity("DB.Entities.Album", b =>
                 {
                     b.HasOne("DB.Entities.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("DB.Entities.Album", "GenreId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Genre");
@@ -597,9 +603,9 @@ namespace DB.Migrations
                         .IsRequired();
 
                     b.HasOne("DB.Entities.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("DB.Entities.Song", "GenreId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Album");

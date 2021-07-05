@@ -9,13 +9,14 @@ namespace DB.Entities
 		public string AlbumArtist { get; set; }
 		public ICollection<string> ContributingArtists { get; set; }
 		public int AlbumId { get; set; }
-		public Album Album { get; set; }
+		public virtual Album Album { get; set; }
 		public string Title { get; set; }
 		public int GenreId { get; set; }
-		public Genre Genre { get; set; }
+		public virtual Genre Genre { get; set; }
 		public int TrackNumber { get; set; }
 		public int DiscNumber { get; set; }
 		public int Year { get; set; }
 		public int PlayCount { get; set; }
+		public string Lyrics { get; set; }
 	}
 }

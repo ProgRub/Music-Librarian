@@ -7,6 +7,6 @@ namespace DB.Entities
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public ICollection<WorkoutHasTimes> WorkoutHasTimesCollection { get; set; }
+		public virtual ICollection<WorkoutHasTimes> WorkoutHasTimesCollection { get; set; }
 	}
 }
