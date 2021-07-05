@@ -41,6 +41,7 @@ namespace DB
 			modelBuilder.Entity<UniFileFormat>().ToTable("UniFileFormat");
 			modelBuilder.Entity<UrlReplacement>().ToTable("UrlReplacement");
 			modelBuilder.Entity<YearLyricsChangeDetailsException>().ToTable("YearLyricsChangeDetailsException");
+			modelBuilder.Entity<GrimeArtist>().ToTable("GrimeArtist");
 		}
 
 		private void TablesConfiguration(ModelBuilder modelBuilder)
@@ -174,5 +175,6 @@ namespace DB
 		public DbSet<Directories> Directories { get; set; }
 		public DbSet<UrlReplacement> UrlReplacements { get; set; }
 		public DbSet<YearLyricsChangeDetailsException> YearLyricsChangeDetailsExceptions { get; set; }
+		public DbSet<GrimeArtist> GrimeArtists { get; set; }
 	}
 }
