@@ -153,16 +153,16 @@ namespace DB
 				new UrlReplacement {Id = id++, StringToReplace = "–", StringReplacement = " "},
 				new UrlReplacement {Id = id++, StringToReplace = ":", StringReplacement = " "},
 				new UrlReplacement {Id = id++, StringToReplace = "ꞌ", StringReplacement = " "},
-				new UrlReplacement {Id = id++, StringToReplace = ".", StringReplacement = " "},
+				new UrlReplacement {Id = id++, StringToReplace = ".", StringReplacement = ""},
 				new UrlReplacement {Id = id++, StringToReplace = "%", StringReplacement = " "},
-				new UrlReplacement {Id = id++, StringToReplace = "-", StringReplacement = " "});
+				new UrlReplacement {Id = id++, StringToReplace = "-", StringReplacement = " "},
+				new UrlReplacement {Id = id++, StringToReplace = "ō", StringReplacement = "o"});
 			id = 1;
 			modelBuilder.Entity<GrimeArtist>().HasData(new GrimeArtist {Id = id++, ArtistName = "Frisco"},
 				new GrimeArtist {Id = id++, ArtistName = "JME"},
 				new GrimeArtist {Id = id++, ArtistName = "Skepta"},
 				new GrimeArtist {Id = id++, ArtistName = "Wiley"},
 				new GrimeArtist {Id = id++, ArtistName = "Dave"},
-				new GrimeArtist {Id = id++, ArtistName = "slowthai"},
 				new GrimeArtist {Id = id++, ArtistName = "Dizzee Rascal"},
 				new GrimeArtist {Id = id++, ArtistName = "Chip"},
 				new GrimeArtist {Id = id++, ArtistName = "Stormzy"},

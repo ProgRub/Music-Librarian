@@ -18,6 +18,7 @@ namespace DB.Repositories.Implementations
 			if (genres.Any()) return genres.First();
 			var genre = new Genre {Name = name, Argb = Color.White.ToArgb()};
 			Add(genre);
+			SaveChanges();
 			return genre;
 		}
 	}
