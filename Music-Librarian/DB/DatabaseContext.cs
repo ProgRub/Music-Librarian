@@ -156,7 +156,8 @@ namespace DB
 				new UrlReplacement {Id = id++, StringToReplace = ".", StringReplacement = ""},
 				new UrlReplacement {Id = id++, StringToReplace = "%", StringReplacement = " "},
 				new UrlReplacement {Id = id++, StringToReplace = "-", StringReplacement = " "},
-				new UrlReplacement {Id = id++, StringToReplace = "ō", StringReplacement = "o"});
+				new UrlReplacement {Id = id++, StringToReplace = "ō", StringReplacement = "o"},
+				new UrlReplacement {Id = id++, StringToReplace = "‘", StringReplacement = " "});
 			id = 1;
 			modelBuilder.Entity<GrimeArtist>().HasData(new GrimeArtist {Id = id++, ArtistName = "Frisco"},
 				new GrimeArtist {Id = id++, ArtistName = "JME"},
