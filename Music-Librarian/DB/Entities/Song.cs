@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DB.Entities
 {
@@ -18,5 +19,6 @@ namespace DB.Entities
 		public int Year { get; set; }
 		public int PlayCount { get; set; }
 		public string Lyrics { get; set; }
+		public TimeSpan Duration { get; set; }
 	}
 }
