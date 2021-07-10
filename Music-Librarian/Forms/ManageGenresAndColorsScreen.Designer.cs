@@ -29,7 +29,7 @@ namespace Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.TextBoxDirectory = new System.Windows.Forms.TextBox();
+			this.TextBoxGenreName = new System.Windows.Forms.TextBox();
 			this.ButtonSaveChanges = new System.Windows.Forms.Button();
 			this.ColorPicker = new System.Windows.Forms.ColorDialog();
 			this.LabelGenreName = new System.Windows.Forms.Label();
@@ -43,17 +43,17 @@ namespace Forms
 			this.ButtonBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.ButtonBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			// 
-			// TextBoxDirectory
+			// TextBoxGenreName
 			// 
-			this.TextBoxDirectory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
-			this.TextBoxDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.TextBoxDirectory.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.TextBoxDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxDirectory.Location = new System.Drawing.Point(117, 47);
-			this.TextBoxDirectory.Name = "TextBoxDirectory";
-			this.TextBoxDirectory.ReadOnly = true;
-			this.TextBoxDirectory.Size = new System.Drawing.Size(289, 24);
-			this.TextBoxDirectory.TabIndex = 8;
+			this.TextBoxGenreName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
+			this.TextBoxGenreName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.TextBoxGenreName.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.TextBoxGenreName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.TextBoxGenreName.Location = new System.Drawing.Point(117, 47);
+			this.TextBoxGenreName.Name = "TextBoxGenreName";
+			this.TextBoxGenreName.ReadOnly = true;
+			this.TextBoxGenreName.Size = new System.Drawing.Size(289, 24);
+			this.TextBoxGenreName.TabIndex = 8;
 			// 
 			// ButtonSaveChanges
 			// 
@@ -125,11 +125,11 @@ namespace Forms
 			this.Controls.Add(this.ButtonPickColor);
 			this.Controls.Add(this.LabelGenreName);
 			this.Controls.Add(this.ButtonSaveChanges);
-			this.Controls.Add(this.TextBoxDirectory);
+			this.Controls.Add(this.TextBoxGenreName);
 			this.Name = "ManageGenresAndColorsScreen";
 			this.Enter += new System.EventHandler(this.ManageGenresAndColorsScreen_Enter);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
-			this.Controls.SetChildIndex(this.TextBoxDirectory, 0);
+			this.Controls.SetChildIndex(this.TextBoxGenreName, 0);
 			this.Controls.SetChildIndex(this.ButtonSaveChanges, 0);
 			this.Controls.SetChildIndex(this.LabelGenreName, 0);
 			this.Controls.SetChildIndex(this.ButtonPickColor, 0);
@@ -141,7 +141,7 @@ namespace Forms
 
 		#endregion
 
-		private System.Windows.Forms.TextBox TextBoxDirectory;
+		private System.Windows.Forms.TextBox TextBoxGenreName;
 		private System.Windows.Forms.Button ButtonSaveChanges;
 		private System.Windows.Forms.ColorDialog ColorPicker;
 		private System.Windows.Forms.Label LabelGenreName;
