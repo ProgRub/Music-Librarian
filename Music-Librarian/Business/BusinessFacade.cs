@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Business.DTOs;
 using Business.Services;
 
 namespace Business
@@ -18,5 +20,10 @@ namespace Business
 
 		public void LoadDatabase() =>
 			throw new NotImplementedException(); //GenresService.Instance.GetAllSkipLyricsExceptions();
+
+		public IEnumerable<GenreDTO> GetAllGenres()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
