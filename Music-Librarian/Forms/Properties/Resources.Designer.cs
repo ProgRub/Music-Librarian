@@ -63,26 +63,6 @@ namespace Forms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _967_9673945_help_question_mark_icon_vector_png {
-            get {
-                object obj = ResourceManager.GetObject("967-9673945_help-question-mark-icon-vector-png", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _967_9673945_help_question_mark_icon_vector_png_removebg_preview {
-            get {
-                object obj = ResourceManager.GetObject("967-9673945_help-question-mark-icon-vector-png-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap HelpQuestionMark {
             get {
                 object obj = ResourceManager.GetObject("HelpQuestionMark", resourceCulture);

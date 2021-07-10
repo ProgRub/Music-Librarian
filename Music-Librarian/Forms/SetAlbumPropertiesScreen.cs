@@ -21,5 +21,19 @@ namespace Forms
 		{
 			MoveToScreen(new ShowAllPossibleAlbumsScreen(),this);
 		}
+
+		private void ButtonChooseWorkout_Click(object sender, EventArgs e)
+		{
+			if (ButtonChooseWorkout.Text == "Choose Workout")
+			{
+				ButtonChooseWorkout.Text = "Get Album Time For Selected Workout";
+				ComboBoxWorkouts.Enabled = true;
+			}
+			else
+			{
+				ButtonChooseWorkout.Text = "Choose Workout";
+				ComboBoxWorkouts.Enabled = false;
+			}
+		}
 	}
 }
