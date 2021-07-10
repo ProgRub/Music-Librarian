@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,6 +15,10 @@ namespace Forms
 			InitializeComponent();
 			AutoSize = true;
 		}
+
+		protected void MaximizeWindow() => ((Window) Parent).WindowState = FormWindowState.Maximized;
+
+		protected Size GetWindowSize() => ((Window) Parent).Size;
 
 		protected void MoveToScreen(BaseControl newControl, BaseControl previousControl)
 		{
@@ -63,11 +69,11 @@ namespace Forms
 		}
 
 
-		protected void ClearAllTextboxesPlaceholderText()
+		protected void ClearAllTextboxes()
 		{
 			foreach (var textBox in Controls.OfType<TextBox>())
 			{
-				textBox.PlaceholderText = "";
+				textBox.Text = "";
 			}
 		}
 

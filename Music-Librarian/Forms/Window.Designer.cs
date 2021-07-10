@@ -29,13 +29,41 @@ namespace Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Window";
+			this.homeScreen1 = new Forms.HomeScreen();
+			this.SuspendLayout();
+			// 
+			// homeScreen1
+			// 
+			this.homeScreen1.AutoSize = true;
+			this.homeScreen1.BackColor = System.Drawing.Color.Transparent;
+			this.homeScreen1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.homeScreen1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.homeScreen1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.homeScreen1.Location = new System.Drawing.Point(0, 0);
+			this.homeScreen1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.homeScreen1.Name = "homeScreen1";
+			this.homeScreen1.Size = new System.Drawing.Size(980, 450);
+			this.homeScreen1.TabIndex = 0;
+			// 
+			// Window
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(41)))));
+			this.ClientSize = new System.Drawing.Size(980, 450);
+			this.Controls.Add(this.homeScreen1);
+			this.Name = "Window";
+			this.Text = "Window";
+			this.ResumeLayout(false);
+			this.PerformLayout();
+
         }
 
-        #endregion
-    }
+		#endregion
+
+		private HomeScreen homeScreen1;
+	}
 }
 
