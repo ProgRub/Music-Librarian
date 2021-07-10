@@ -18,12 +18,14 @@ namespace Business
 
 		public string GetMusicLibraryDirectory() => DirectoriesService.Instance.MusicToDirectory;
 
-		public void LoadDatabase() =>
-			throw new NotImplementedException(); //GenresService.Instance.GetAllSkipLyricsExceptions();
+		public void LoadDatabase() =>GenresService.Instance.GetAllGenres();
 
-		public IEnumerable<GenreDTO> GetAllGenres()
+		public IEnumerable<GenreDTO> GetAllGenres() => GenresService.Instance.GetAllGenres();
+
+		public void SaveChanges()
 		{
-			throw new NotImplementedException();
+			GenresService.Instance.SaveChanges();
+			DirectoriesService.Instance.SaveChanges();
 		}
 	}
 }

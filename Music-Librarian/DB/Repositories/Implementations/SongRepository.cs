@@ -9,8 +9,8 @@ namespace DB.Repositories.Implementations
 {
 	public class SongRepository : GenericRepository<Song>, ISongRepository
 	{
-		private IAlbumRepository _albumRepository;
-		private IGenreRepository _genreRepository;
+		private readonly IAlbumRepository _albumRepository;
+		private readonly IGenreRepository _genreRepository;
 
 		public SongRepository(DatabaseContext context) : base(context)
 		{
