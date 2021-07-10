@@ -32,10 +32,10 @@ namespace Forms
 			this.ButtonGetPossibleAlbums = new System.Windows.Forms.Button();
 			this.LabelAlbumTime = new System.Windows.Forms.Label();
 			this.DateTimePickerAlbumTime = new System.Windows.Forms.DateTimePicker();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.DateTimePickerLeeway = new System.Windows.Forms.DateTimePicker();
 			this.LabelTimeLeeway = new System.Windows.Forms.Label();
 			this.CheckBoxSelectAll = new System.Windows.Forms.CheckBox();
-			this.ButtonChooseWorkout = new System.Windows.Forms.Button();
+			this.ButtonChooseSelectWorkout = new System.Windows.Forms.Button();
 			this.ComboBoxWorkouts = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
@@ -91,22 +91,22 @@ namespace Forms
 			this.DateTimePickerAlbumTime.TabIndex = 19;
 			this.DateTimePickerAlbumTime.Value = new System.DateTime(2021, 7, 10, 0, 0, 0, 0);
 			// 
-			// dateTimePicker1
+			// DateTimePickerLeeway
 			// 
-			this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.dateTimePicker1.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.dateTimePicker1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
-			this.dateTimePicker1.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.dateTimePicker1.CalendarTrailingForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.dateTimePicker1.CustomFormat = "HH:mm";
-			this.dateTimePicker1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-			this.dateTimePicker1.Location = new System.Drawing.Point(237, 70);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.ShowUpDown = true;
-			this.dateTimePicker1.Size = new System.Drawing.Size(107, 24);
-			this.dateTimePicker1.TabIndex = 21;
-			this.dateTimePicker1.Value = new System.DateTime(2021, 7, 10, 0, 0, 0, 0);
+			this.DateTimePickerLeeway.CalendarFont = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.DateTimePickerLeeway.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.DateTimePickerLeeway.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
+			this.DateTimePickerLeeway.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.DateTimePickerLeeway.CalendarTrailingForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.DateTimePickerLeeway.CustomFormat = "HH:mm";
+			this.DateTimePickerLeeway.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.DateTimePickerLeeway.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+			this.DateTimePickerLeeway.Location = new System.Drawing.Point(237, 70);
+			this.DateTimePickerLeeway.Name = "DateTimePickerLeeway";
+			this.DateTimePickerLeeway.ShowUpDown = true;
+			this.DateTimePickerLeeway.Size = new System.Drawing.Size(107, 24);
+			this.DateTimePickerLeeway.TabIndex = 21;
+			this.DateTimePickerLeeway.Value = new System.DateTime(2021, 7, 10, 0, 0, 0, 0);
 			// 
 			// LabelTimeLeeway
 			// 
@@ -127,25 +127,25 @@ namespace Forms
 			this.CheckBoxSelectAll.Text = "Select All";
 			this.CheckBoxSelectAll.UseVisualStyleBackColor = true;
 			// 
-			// ButtonChooseWorkout
+			// ButtonChooseSelectWorkout
 			// 
-			this.ButtonChooseWorkout.AutoSize = true;
-			this.ButtonChooseWorkout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ButtonChooseWorkout.BackColor = System.Drawing.Color.Transparent;
-			this.ButtonChooseWorkout.FlatAppearance.BorderSize = 0;
-			this.ButtonChooseWorkout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.ButtonChooseWorkout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.ButtonChooseWorkout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.ButtonChooseWorkout.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.ButtonChooseWorkout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonChooseWorkout.Location = new System.Drawing.Point(419, 40);
-			this.ButtonChooseWorkout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.ButtonChooseWorkout.Name = "ButtonChooseWorkout";
-			this.ButtonChooseWorkout.Size = new System.Drawing.Size(149, 27);
-			this.ButtonChooseWorkout.TabIndex = 23;
-			this.ButtonChooseWorkout.Text = "Choose Workout";
-			this.ButtonChooseWorkout.UseVisualStyleBackColor = false;
-			this.ButtonChooseWorkout.Click += new System.EventHandler(this.ButtonChooseWorkout_Click);
+			this.ButtonChooseSelectWorkout.AutoSize = true;
+			this.ButtonChooseSelectWorkout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonChooseSelectWorkout.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonChooseSelectWorkout.FlatAppearance.BorderSize = 0;
+			this.ButtonChooseSelectWorkout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonChooseSelectWorkout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonChooseSelectWorkout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonChooseSelectWorkout.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonChooseSelectWorkout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonChooseSelectWorkout.Location = new System.Drawing.Point(419, 40);
+			this.ButtonChooseSelectWorkout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonChooseSelectWorkout.Name = "ButtonChooseSelectWorkout";
+			this.ButtonChooseSelectWorkout.Size = new System.Drawing.Size(149, 27);
+			this.ButtonChooseSelectWorkout.TabIndex = 23;
+			this.ButtonChooseSelectWorkout.Text = "Choose Workout";
+			this.ButtonChooseSelectWorkout.UseVisualStyleBackColor = false;
+			this.ButtonChooseSelectWorkout.Click += new System.EventHandler(this.ButtonChooseWorkout_Click);
 			// 
 			// ComboBoxWorkouts
 			// 
@@ -165,9 +165,9 @@ namespace Forms
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.ComboBoxWorkouts);
-			this.Controls.Add(this.ButtonChooseWorkout);
+			this.Controls.Add(this.ButtonChooseSelectWorkout);
 			this.Controls.Add(this.CheckBoxSelectAll);
-			this.Controls.Add(this.dateTimePicker1);
+			this.Controls.Add(this.DateTimePickerLeeway);
 			this.Controls.Add(this.LabelTimeLeeway);
 			this.Controls.Add(this.DateTimePickerAlbumTime);
 			this.Controls.Add(this.LabelAlbumTime);
@@ -178,9 +178,9 @@ namespace Forms
 			this.Controls.SetChildIndex(this.LabelAlbumTime, 0);
 			this.Controls.SetChildIndex(this.DateTimePickerAlbumTime, 0);
 			this.Controls.SetChildIndex(this.LabelTimeLeeway, 0);
-			this.Controls.SetChildIndex(this.dateTimePicker1, 0);
+			this.Controls.SetChildIndex(this.DateTimePickerLeeway, 0);
 			this.Controls.SetChildIndex(this.CheckBoxSelectAll, 0);
-			this.Controls.SetChildIndex(this.ButtonChooseWorkout, 0);
+			this.Controls.SetChildIndex(this.ButtonChooseSelectWorkout, 0);
 			this.Controls.SetChildIndex(this.ComboBoxWorkouts, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -192,10 +192,10 @@ namespace Forms
 		private System.Windows.Forms.Button ButtonGetPossibleAlbums;
 		private System.Windows.Forms.Label LabelAlbumTime;
 		private System.Windows.Forms.DateTimePicker DateTimePickerAlbumTime;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private System.Windows.Forms.DateTimePicker DateTimePickerLeeway;
 		private System.Windows.Forms.Label LabelTimeLeeway;
 		private System.Windows.Forms.CheckBox CheckBoxSelectAll;
-		private System.Windows.Forms.Button ButtonChooseWorkout;
+		private System.Windows.Forms.Button ButtonChooseSelectWorkout;
 		private System.Windows.Forms.ComboBox ComboBoxWorkouts;
 	}
 }

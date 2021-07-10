@@ -24,14 +24,14 @@ namespace Forms
 
 		private void ButtonChooseWorkout_Click(object sender, EventArgs e)
 		{
-			if (ButtonChooseWorkout.Text == "Choose Workout")
+			if (ButtonChooseSelectWorkout.Text == "Choose Workout")
 			{
-				ButtonChooseWorkout.Text = "Get Album Time For Selected Workout";
+				ButtonChooseSelectWorkout.Text = "Get Album Time For Selected Workout";
 				ComboBoxWorkouts.Enabled = true;
 			}
 			else
 			{
-				ButtonChooseWorkout.Text = "Choose Workout";
+				ButtonChooseSelectWorkout.Text = "Choose Workout";
 				ComboBoxWorkouts.Enabled = false;
 			}
 		}
