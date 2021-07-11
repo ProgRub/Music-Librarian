@@ -29,10 +29,6 @@ namespace Business.Services
 
 		internal void ClearSelectedGenres() => SelectedGenres.Clear();
 
-		internal void GetAlbumsFromDatabase()
-		{
-			new Thread(()=>Albums = _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet()).Start();
-		}
-
+		internal void GetAlbumsFromDatabase() => new Thread(()=>Albums = _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet()).Start();
 	}
 }
