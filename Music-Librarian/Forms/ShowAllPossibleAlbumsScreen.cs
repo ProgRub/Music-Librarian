@@ -31,6 +31,7 @@ namespace Forms
 
 		private void ShowAllPossibleAlbumsScreen_Enter(object sender, EventArgs e)
 		{
+			ListViewPossibleAlbums.Items.Clear();
 			_albums = BusinessFacade.Instance.GetPossibleAlbums();
 			var minimumTime = BusinessFacade.Instance.GetMinimumAlbumTime();
 			var maximumTime = BusinessFacade.Instance.GetMaximumAlbumTime();
@@ -56,7 +57,7 @@ namespace Forms
 		private void ListViewPossibleAlbums_DoubleClick(object sender, EventArgs e)
 		{
 			BusinessFacade.Instance.SetSelectedAlbum(GetSelectedAlbum());
-			MoveToScreen(new AlbumTracklistScreen(),this);
+			MoveToScreen(new AlbumTrackListScreen(),this);
 		}
 
 		private void ListViewPossibleAlbums_ColumnClick(object sender, ColumnClickEventArgs e)

@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Business.DTOs;
 using Business.Enums;
 using Business.Services;
+using Business.Services.MusicServices;
 
 namespace Business
 {
 	public class BusinessFacade
 	{
+		internal IMusicService MusicService { get; }
 		private BusinessFacade()
 		{
 			AlbumService.Instance.GetAlbumsFromDatabase();
+			MusicService = iTunesService.Instance;
+			MusicService.OpenService();
 		}
 
 		public static BusinessFacade Instance { get; } = new();
@@ -30,6 +35,8 @@ namespace Business
 		{
 			GenresService.Instance.SaveChanges();
 			DirectoriesService.Instance.SaveChanges();
+			SongService.Instance.SaveChanges();
+			AlbumService.Instance.SaveChanges();
 		}
 
 		public void SetLeewayType(LeewayType type)
@@ -59,5 +66,10 @@ namespace Business
 
 		public void SetSelectedAlbum(AlbumDTO selectedAlbum) => AlbumService.Instance.SelectedAlbum = selectedAlbum;
 		public AlbumDTO GetSelectedAlbum() => AlbumService.Instance.SelectedAlbum;
+
+		public MemoryStream GetAlbumArtworkMemoryStream(SongDTO song) =>
+			SongService.Instance.GetAlbumArtworkMemoryStream(song);
+
+		public void OpenAlbumOnService(AlbumDTO album) => MusicService.OpenAlbum(album);
 	}
 }

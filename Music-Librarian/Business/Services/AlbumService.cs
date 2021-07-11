@@ -38,5 +38,7 @@ namespace Business.Services
 			MaximumAlbumTime = LeewayType != LeewayType.Under ? AlbumTime + Leeway : AlbumTime;
 			return Albums.Where(album=>album.Duration>= MinimumAlbumTime && album.Duration <= MaximumAlbumTime &&SelectedGenres.Contains(album.Genre));
 		}
+
+		internal void SaveChanges() => _albumRepository.SaveChanges();
 	}
 }
