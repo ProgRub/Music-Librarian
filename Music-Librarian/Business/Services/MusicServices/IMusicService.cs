@@ -11,5 +11,6 @@ namespace Business.Services.MusicServices
 		IITTrack GetTrack(string title, string album);
 		void OpenService();
 		void OpenAlbum(AlbumDTO albumDto);
+		void EndLink();
 	}
 }

@@ -71,5 +71,10 @@ namespace Business
 			SongService.Instance.GetAlbumArtworkMemoryStream(song);
 
 		public void OpenAlbumOnService(AlbumDTO album) => MusicService.OpenAlbum(album);
+
+		public void EndServiceLink()
+		{
+			MusicService.EndLink();
+		}
 	}
 }
