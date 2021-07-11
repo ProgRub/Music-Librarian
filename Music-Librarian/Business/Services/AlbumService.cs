@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using Business.DTOs;
 using Business.Enums;
 using DB;
@@ -13,12 +14,11 @@ namespace Business.Services
 {
 	public class AlbumService
 	{
-		private IAlbumRepository _albumRepository;
+		private readonly IAlbumRepository _albumRepository;
 
 		private AlbumService()
 		{
 			_albumRepository = new AlbumRepository(Database.GetContext());
-			GetAlbumsFromDatabase();
 		}
 		internal static AlbumService Instance { get; } = new();
 		internal TimeSpan AlbumTime { get; set; }
@@ -29,9 +29,9 @@ namespace Business.Services
 
 		internal void ClearSelectedGenres() => SelectedGenres.Clear();
 
-		private void GetAlbumsFromDatabase()
+		internal void GetAlbumsFromDatabase()
 		{
-			Albums = _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet();
+			new Thread(()=>Albums = _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet()).Start();
 		}
 
 	}

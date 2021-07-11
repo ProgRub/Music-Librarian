@@ -11,6 +11,7 @@ namespace Business
 	{
 		private BusinessFacade()
 		{
+			AlbumService.Instance.GetAlbumsFromDatabase();
 		}
 
 		public static BusinessFacade Instance { get; } = new();
