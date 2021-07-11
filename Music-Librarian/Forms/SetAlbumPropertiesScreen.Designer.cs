@@ -130,7 +130,7 @@ namespace Forms
 			this.CheckBoxSelectAll.Size = new System.Drawing.Size(97, 21);
 			this.CheckBoxSelectAll.TabIndex = 22;
 			this.CheckBoxSelectAll.Text = "Select All";
-			this.CheckBoxSelectAll.UseVisualStyleBackColor = true;
+			this.CheckBoxSelectAll.Click += new System.EventHandler(this.CheckBoxSelectAll_Click);
 			// 
 			// ButtonChooseSelectWorkout
 			// 
@@ -143,7 +143,7 @@ namespace Forms
 			this.ButtonChooseSelectWorkout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonChooseSelectWorkout.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonChooseSelectWorkout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonChooseSelectWorkout.Location = new System.Drawing.Point(419, 40);
+			this.ButtonChooseSelectWorkout.Location = new System.Drawing.Point(489, 66);
 			this.ButtonChooseSelectWorkout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonChooseSelectWorkout.Name = "ButtonChooseSelectWorkout";
 			this.ButtonChooseSelectWorkout.Size = new System.Drawing.Size(149, 27);
@@ -160,7 +160,7 @@ namespace Forms
 			this.ComboBoxWorkouts.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.ComboBoxWorkouts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.ComboBoxWorkouts.FormattingEnabled = true;
-			this.ComboBoxWorkouts.Location = new System.Drawing.Point(419, 69);
+			this.ComboBoxWorkouts.Location = new System.Drawing.Point(408, 39);
 			this.ComboBoxWorkouts.Name = "ComboBoxWorkouts";
 			this.ComboBoxWorkouts.Size = new System.Drawing.Size(312, 24);
 			this.ComboBoxWorkouts.TabIndex = 24;
@@ -183,11 +183,12 @@ namespace Forms
 			this.ButtonAllAlbums.TabIndex = 25;
 			this.ButtonAllAlbums.Text = "All Albums";
 			this.ButtonAllAlbums.UseVisualStyleBackColor = false;
+			this.ButtonAllAlbums.Click += new System.EventHandler(this.ButtonAllAlbums_Click);
 			// 
 			// LabelLeewayType
 			// 
 			this.LabelLeewayType.AutoSize = true;
-			this.LabelLeewayType.Location = new System.Drawing.Point(23, 77);
+			this.LabelLeewayType.Location = new System.Drawing.Point(12, 76);
 			this.LabelLeewayType.Name = "LabelLeewayType";
 			this.LabelLeewayType.Size = new System.Drawing.Size(110, 17);
 			this.LabelLeewayType.TabIndex = 26;
@@ -197,7 +198,7 @@ namespace Forms
 			// 
 			this.RadioButtonBoth.AutoSize = true;
 			this.RadioButtonBoth.Checked = true;
-			this.RadioButtonBoth.Location = new System.Drawing.Point(4, 112);
+			this.RadioButtonBoth.Location = new System.Drawing.Point(12, 111);
 			this.RadioButtonBoth.Name = "RadioButtonBoth";
 			this.RadioButtonBoth.Size = new System.Drawing.Size(63, 21);
 			this.RadioButtonBoth.TabIndex = 27;
@@ -208,7 +209,7 @@ namespace Forms
 			// RadioButtonOver
 			// 
 			this.RadioButtonOver.AutoSize = true;
-			this.RadioButtonOver.Location = new System.Drawing.Point(4, 139);
+			this.RadioButtonOver.Location = new System.Drawing.Point(12, 138);
 			this.RadioButtonOver.Name = "RadioButtonOver";
 			this.RadioButtonOver.Size = new System.Drawing.Size(63, 21);
 			this.RadioButtonOver.TabIndex = 28;
@@ -218,7 +219,7 @@ namespace Forms
 			// RadioButtonUnder
 			// 
 			this.RadioButtonUnder.AutoSize = true;
-			this.RadioButtonUnder.Location = new System.Drawing.Point(4, 166);
+			this.RadioButtonUnder.Location = new System.Drawing.Point(12, 165);
 			this.RadioButtonUnder.Name = "RadioButtonUnder";
 			this.RadioButtonUnder.Size = new System.Drawing.Size(73, 21);
 			this.RadioButtonUnder.TabIndex = 29;
@@ -243,6 +244,7 @@ namespace Forms
 			this.Controls.Add(this.LabelAlbumTime);
 			this.Controls.Add(this.ButtonGetPossibleAlbums);
 			this.Name = "SetAlbumPropertiesScreen";
+			this.Enter += new System.EventHandler(this.SetAlbumPropertiesScreen_Enter);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
 			this.Controls.SetChildIndex(this.ButtonGetPossibleAlbums, 0);
 			this.Controls.SetChildIndex(this.LabelAlbumTime, 0);
