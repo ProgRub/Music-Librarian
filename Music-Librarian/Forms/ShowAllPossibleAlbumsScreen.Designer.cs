@@ -29,7 +29,6 @@ namespace Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.ButtonShowSelectedAlbumTracklist = new System.Windows.Forms.Button();
 			this.ListViewPossibleAlbums = new System.Windows.Forms.ListView();
 			this.ColumnHeaderAlbumArtist = new System.Windows.Forms.ColumnHeader();
 			this.ColumnHeaderAlbum = new System.Windows.Forms.ColumnHeader();
@@ -43,26 +42,6 @@ namespace Forms
 			this.ButtonBack.FlatAppearance.BorderSize = 0;
 			this.ButtonBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.ButtonBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			// 
-			// ButtonShowSelectedAlbumTracklist
-			// 
-			this.ButtonShowSelectedAlbumTracklist.AutoSize = true;
-			this.ButtonShowSelectedAlbumTracklist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ButtonShowSelectedAlbumTracklist.BackColor = System.Drawing.Color.Transparent;
-			this.ButtonShowSelectedAlbumTracklist.FlatAppearance.BorderSize = 0;
-			this.ButtonShowSelectedAlbumTracklist.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.ButtonShowSelectedAlbumTracklist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.ButtonShowSelectedAlbumTracklist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.ButtonShowSelectedAlbumTracklist.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.ButtonShowSelectedAlbumTracklist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonShowSelectedAlbumTracklist.Location = new System.Drawing.Point(480, 561);
-			this.ButtonShowSelectedAlbumTracklist.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.ButtonShowSelectedAlbumTracklist.Name = "ButtonShowSelectedAlbumTracklist";
-			this.ButtonShowSelectedAlbumTracklist.Size = new System.Drawing.Size(269, 27);
-			this.ButtonShowSelectedAlbumTracklist.TabIndex = 11;
-			this.ButtonShowSelectedAlbumTracklist.Text = "Show Selected Album\'s Tracklist";
-			this.ButtonShowSelectedAlbumTracklist.UseVisualStyleBackColor = false;
-			this.ButtonShowSelectedAlbumTracklist.Click += new System.EventHandler(this.ButtonShowSelectedAlbumTracklist_Click);
 			// 
 			// ListViewPossibleAlbums
 			// 
@@ -85,6 +64,8 @@ namespace Forms
 			this.ListViewPossibleAlbums.TabIndex = 12;
 			this.ListViewPossibleAlbums.UseCompatibleStateImageBehavior = false;
 			this.ListViewPossibleAlbums.View = System.Windows.Forms.View.Details;
+			this.ListViewPossibleAlbums.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListViewPossibleAlbums_ColumnClick);
+			this.ListViewPossibleAlbums.DoubleClick += new System.EventHandler(this.ListViewPossibleAlbums_DoubleClick);
 			// 
 			// ColumnHeaderAlbumArtist
 			// 
@@ -94,7 +75,7 @@ namespace Forms
 			// ColumnHeaderAlbum
 			// 
 			this.ColumnHeaderAlbum.Text = "Album";
-			this.ColumnHeaderAlbum.Width = 600;
+			this.ColumnHeaderAlbum.Width = 580;
 			// 
 			// ColumnHeaderDuration
 			// 
@@ -122,11 +103,10 @@ namespace Forms
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.LabelAlbumTimeRange);
 			this.Controls.Add(this.ListViewPossibleAlbums);
-			this.Controls.Add(this.ButtonShowSelectedAlbumTracklist);
 			this.Name = "ShowAllPossibleAlbumsScreen";
 			this.Size = new System.Drawing.Size(1185, 680);
+			this.Enter += new System.EventHandler(this.ShowAllPossibleAlbumsScreen_Enter);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
-			this.Controls.SetChildIndex(this.ButtonShowSelectedAlbumTracklist, 0);
 			this.Controls.SetChildIndex(this.ListViewPossibleAlbums, 0);
 			this.Controls.SetChildIndex(this.LabelAlbumTimeRange, 0);
 			this.ResumeLayout(false);
@@ -135,8 +115,6 @@ namespace Forms
 		}
 
 		#endregion
-
-		private System.Windows.Forms.Button ButtonShowSelectedAlbumTracklist;
 		private System.Windows.Forms.ListView ListViewPossibleAlbums;
 		private System.Windows.Forms.ColumnHeader ColumnHeaderAlbumArtist;
 		private System.Windows.Forms.ColumnHeader ColumnHeaderAlbum;

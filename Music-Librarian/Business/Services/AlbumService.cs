@@ -23,12 +23,20 @@ namespace Business.Services
 		internal static AlbumService Instance { get; } = new();
 		internal TimeSpan AlbumTime { get; set; }
 		internal TimeSpan Leeway { get; set; }
-		internal ISet<Genre> SelectedGenres { get; } = new HashSet<Genre>();
+		internal TimeSpan MinimumAlbumTime { get; set; }
+		internal TimeSpan MaximumAlbumTime { get; set; }
+		internal ISet<GenreDTO> SelectedGenres { get; set; }
 		internal LeewayType LeewayType { get; set; }
 		internal ISet<AlbumDTO> Albums { get; set; }
-
-		internal void ClearSelectedGenres() => SelectedGenres.Clear();
+		internal AlbumDTO SelectedAlbum { get; set; }
 
 		internal void GetAlbumsFromDatabase() => new Thread(()=>Albums = _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet()).Start();
+
+		internal IEnumerable<AlbumDTO> GetPossibleAlbums()
+		{
+			MinimumAlbumTime = LeewayType != LeewayType.Over ? AlbumTime - Leeway : AlbumTime;
+			MaximumAlbumTime = LeewayType != LeewayType.Under ? AlbumTime + Leeway : AlbumTime;
+			return Albums.Where(album=>album.Duration>= MinimumAlbumTime && album.Duration <= MaximumAlbumTime &&SelectedGenres.Contains(album.Genre));
+		}
 	}
 }

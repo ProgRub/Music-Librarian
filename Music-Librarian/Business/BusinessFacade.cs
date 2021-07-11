@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Business.DTOs;
 using Business.Enums;
 using Business.Services;
@@ -47,16 +48,16 @@ namespace Business
 
 		public void SetSelectedGenres(IEnumerable<GenreDTO> selectedGenres)
 		{
-			AlbumService.Instance.ClearSelectedGenres();
-			foreach (var selectedGenre in selectedGenres)
-			{
-				AlbumService.Instance.SelectedGenres.Add(GenresService.Instance.GetGenreById(selectedGenre.Id));
-			}
-
-			foreach (var genre in AlbumService.Instance.SelectedGenres)
-			{
-				Debug.WriteLine(genre.Name);
-			}
+			AlbumService.Instance.SelectedGenres = selectedGenres.ToHashSet();
 		}
+
+		public IEnumerable<AlbumDTO> GetPossibleAlbums() => AlbumService.Instance.GetPossibleAlbums();
+
+		public TimeSpan GetMinimumAlbumTime() => AlbumService.Instance.MinimumAlbumTime;
+
+		public TimeSpan GetMaximumAlbumTime() => AlbumService.Instance.MaximumAlbumTime;
+
+		public void SetSelectedAlbum(AlbumDTO selectedAlbum) => AlbumService.Instance.SelectedAlbum = selectedAlbum;
+		public AlbumDTO GetSelectedAlbum() => AlbumService.Instance.SelectedAlbum;
 	}
 }

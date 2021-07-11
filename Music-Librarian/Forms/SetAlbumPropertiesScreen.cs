@@ -60,6 +60,10 @@ namespace Forms
 		{
 			DateTimePickerAlbumTime.Value = new DateTime(2000, 1,1, 1, 30, 0);
 			DateTimePickerLeeway.Value = new DateTime(2000, 1,1, 1, 30, 0);
+			foreach (var checkBox in Controls.OfType<CheckBox>())
+			{
+				checkBox.Checked = true;
+			}
 		}
 
 		private void SetAlbumPropertiesScreen_Enter(object sender, EventArgs e)
