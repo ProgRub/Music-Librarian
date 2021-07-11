@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Business.DTOs;
+using Business.Enums;
 using Business.Services;
 
 namespace Business
@@ -26,6 +28,34 @@ namespace Business
 		{
 			GenresService.Instance.SaveChanges();
 			DirectoriesService.Instance.SaveChanges();
+		}
+
+		public void SetLeewayType(LeewayType type)
+		{
+			AlbumService.Instance.LeewayType = type;
+			Debug.WriteLine(AlbumService.Instance.LeewayType);
+		}
+
+		public void SetAlbumProperties(TimeSpan albumTime, TimeSpan leeway)
+		{
+			AlbumService.Instance.AlbumTime = albumTime;
+			AlbumService.Instance.Leeway = leeway;
+			Debug.WriteLine(AlbumService.Instance.AlbumTime);
+			Debug.WriteLine(AlbumService.Instance.Leeway);
+		}
+
+		public void SetSelectedGenres(IEnumerable<GenreDTO> selectedGenres)
+		{
+			AlbumService.Instance.ClearSelectedGenres();
+			foreach (var selectedGenre in selectedGenres)
+			{
+				AlbumService.Instance.SelectedGenres.Add(GenresService.Instance.GetGenreById(selectedGenre.Id));
+			}
+
+			foreach (var genre in AlbumService.Instance.SelectedGenres)
+			{
+				Debug.WriteLine(genre.Name);
+			}
 		}
 	}
 }

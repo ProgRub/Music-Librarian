@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Business.DTOs;
+using Business.Enums;
 
 namespace Forms
 {
@@ -23,7 +24,22 @@ namespace Forms
 
 		private void ButtonGetPossibleAlbums_Click(object sender, EventArgs e)
 		{
+			BusinessFacade.Instance.SetAlbumProperties(DateTimePickerAlbumTime.Value.TimeOfDay,
+				DateTimePickerLeeway.Value.TimeOfDay);
+			BusinessFacade.Instance.SetSelectedGenres(_genres.Where(genre =>
+				Controls.OfType<CheckBox>().Any(checkBox =>checkBox.Checked&& checkBox.Text == genre.Name)));
+			BusinessFacade.Instance.SetLeewayType(GetSelectedLeewayType());
 			MoveToScreen(new ShowAllPossibleAlbumsScreen(),this);
+		}
+
+		private LeewayType GetSelectedLeewayType()
+		{
+			return Controls.OfType<RadioButton>().First(e => e.Checked).Text switch
+			{
+				"Over" => LeewayType.Over,
+				"Under" => LeewayType.Under,
+				_ => LeewayType.OverAndUnder
+			};
 		}
 
 		private void ButtonChooseWorkout_Click(object sender, EventArgs e)
@@ -66,7 +82,7 @@ namespace Forms
 
 		private void CheckBoxSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var checkBox in Controls.OfType<CheckBox>().Where(e=>e!=CheckBoxSelectAll))
+			foreach (var checkBox in Controls.OfType<CheckBox>().Where(checkBox=>checkBox!=CheckBoxSelectAll))
 			{
 				checkBox.Checked = CheckBoxSelectAll.Checked;
 			}
@@ -74,7 +90,7 @@ namespace Forms
 
 		private void CheckBoxGenre_Clicked(object sender, EventArgs e)
 		{
-			CheckBoxSelectAll.Checked = Controls.OfType<CheckBox>().Where(e=>e!=CheckBoxSelectAll).All(checkBox => checkBox.Checked);
+			CheckBoxSelectAll.Checked = Controls.OfType<CheckBox>().Where(checkBox=>checkBox!=CheckBoxSelectAll).All(checkBox => checkBox.Checked);
 		}
 	}
 }
