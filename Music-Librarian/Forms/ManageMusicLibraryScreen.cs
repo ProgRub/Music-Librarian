@@ -58,10 +58,85 @@ namespace Forms
 
 		private void ListBoxSongFilenames_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			Debug.WriteLine("HERE");
 			SetChangeControlsEnabled(ListBoxSongFilenames.SelectedIndices.Count > 0);
 			TextBoxChangeFilename.Enabled = ListBoxSongFilenames.SelectedIndices.Count == 1;
 			ButtonEditSelectedSongLyrics.Enabled = ListBoxSongFilenames.SelectedIndices.Count == 1;
+			if (ListBoxSongFilenames.SelectedIndices.Count > 0)
+			{
+				FillChangeTextBoxes();
+			}
+			else
+			{
+				ClearChangeTextBoxes();
+			}
+		}
+
+		private void FillChangeTextBoxes()
+		{
+			ClearChangeTextBoxes();
+			if (ListBoxSongFilenames.SelectedIndices.Count == 1)
+			{
+				TextBoxChangeFilename.Text = ListBoxSongFilenames.Items[ListBoxSongFilenames.SelectedIndices[0]].ToString();
+			}
+
+			var selectedSongs = new HashSet<SongDTO>();
+			foreach (int selectedIndex in ListBoxSongFilenames.SelectedIndices)
+			{
+				selectedSongs.Add(_songs.First(song =>
+					song.Filename == ListBoxSongFilenames.Items[selectedIndex].ToString()));
+			}
+
+			var firstSong = selectedSongs.First();
+			if (selectedSongs.All(song => song.AlbumArtist == firstSong.AlbumArtist))
+			{
+				TextBoxChangeAlbumArtist.Text = firstSong.AlbumArtist;
+			}
+			if (selectedSongs.All(song => Equals(song.ContributingArtists, firstSong.ContributingArtists)))
+			{
+				TextBoxChangeContributingArtists.Text = string.Join(';',firstSong.ContributingArtists);
+			}
+			if (selectedSongs.All(song => song.Album == firstSong.Album))
+			{
+				TextBoxChangeAlbum.Text = firstSong.Album;
+			}
+			if (selectedSongs.All(song => song.Title == firstSong.Title))
+			{
+				TextBoxChangeSongTitle.Text = firstSong.Title;
+			}
+			if (selectedSongs.All(song => song.Genre == firstSong.Genre))
+			{
+				TextBoxChangeGenre.Text = firstSong.Genre;
+			}
+			if (selectedSongs.All(song => song.Year == firstSong.Year))
+			{
+				TextBoxChangeYear.Text = firstSong.Year.ToString();
+			}
+			if (selectedSongs.All(song => song.TrackNumber == firstSong.TrackNumber))
+			{
+				TextBoxChangeTrackNumber.Text = firstSong.TrackNumber.ToString();
+			}
+			if (selectedSongs.All(song => song.DiscNumber == firstSong.DiscNumber))
+			{
+				TextBoxChangeDiscNumber.Text = firstSong.DiscNumber.ToString();
+			}
+			if (selectedSongs.All(song => song.PlayCount == firstSong.PlayCount))
+			{
+				TextBoxChangePlayCount.Text = firstSong.PlayCount.ToString();
+			}
+		}
+
+		private void ClearChangeTextBoxes()
+		{
+			ClearTextBox(TextBoxChangeAlbum);
+			ClearTextBox(TextBoxChangeAlbumArtist);
+			ClearTextBox(TextBoxChangeContributingArtists);
+			ClearTextBox(TextBoxChangeDiscNumber);
+			ClearTextBox(TextBoxChangeGenre);
+			ClearTextBox(TextBoxChangePlayCount);
+			ClearTextBox(TextBoxChangeSongTitle);
+			ClearTextBox(TextBoxChangeTrackNumber);
+			ClearTextBox(TextBoxChangeYear);
+			ClearTextBox(TextBoxChangeFilename);
 		}
 
 		private void SetChangeControlsEnabled(bool state)
