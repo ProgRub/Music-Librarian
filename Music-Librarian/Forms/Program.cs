@@ -21,6 +21,7 @@ namespace Forms
 			BusinessFacade.Instance.LoadDatabase();
 			Application.Run(new Window());
 			BusinessFacade.Instance.SaveChanges();
+			BusinessFacade.Instance.EndServiceLink();
 		}
 	}
 }

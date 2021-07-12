@@ -29,14 +29,12 @@ namespace DB
 			ConvertersConfiguration(modelBuilder);
 		}
 
-		private void PropertiesConfiguration(ModelBuilder modelBuilder)
+		private static void PropertiesConfiguration(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Song>().ToTable("Song");
 			modelBuilder.Entity<Album>().ToTable("Album");
 			modelBuilder.Entity<Genre>().ToTable("Genre");
 			modelBuilder.Entity<Workout>().ToTable("Workout");
-			modelBuilder.Entity<WorkoutTime>().ToTable("WorkoutTime");
-			modelBuilder.Entity<WorkoutHasTimes>().ToTable("WorkoutHasTimes");
 			modelBuilder.Entity<Directories>().ToTable("Directories");
 			modelBuilder.Entity<UniFileFormat>().ToTable("UniFileFormat");
 			modelBuilder.Entity<UrlReplacement>().ToTable("UrlReplacement");
@@ -44,7 +42,7 @@ namespace DB
 			modelBuilder.Entity<GrimeArtist>().ToTable("GrimeArtist");
 		}
 
-		private void TablesConfiguration(ModelBuilder modelBuilder)
+		private static void TablesConfiguration(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<GrimeArtist>().Property(e => e.Id).ValueGeneratedOnAdd();
 			modelBuilder.Entity<GrimeArtist>().Property(e => e.ArtistName).IsRequired();
@@ -70,7 +68,6 @@ namespace DB
 			modelBuilder.Entity<UniFileFormat>().Property(e => e.Extension).IsRequired();
 			modelBuilder.Entity<UniFileFormat>().Property(e => e.Description).IsRequired();
 			modelBuilder.Entity<Directories>().Property(e => e.Id).ValueGeneratedOnAdd();
-			modelBuilder.Entity<WorkoutHasTimes>().HasKey(e => new {e.WorkoutTimeId, e.WorkoutId});
 			modelBuilder.Entity<UrlReplacement>().Property(e => e.Id).ValueGeneratedOnAdd();
 			modelBuilder.Entity<UrlReplacement>().Property(e => e.StringReplacement).IsRequired();
 			modelBuilder.Entity<UrlReplacement>().Property(e => e.StringToReplace).IsRequired();
@@ -79,21 +76,15 @@ namespace DB
 			modelBuilder.Entity<YearLyricsChangeDetailsException>().Property(e => e.Type).IsRequired();
 		}
 
-		private void RelationshipsConfiguration(ModelBuilder modelBuilder)
+		private static void RelationshipsConfiguration(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Album>().HasOne(e => e.Genre).WithMany().OnDelete(DeleteBehavior.Cascade);
 			modelBuilder.Entity<Album>().HasMany(e => e.Songs).WithOne(e => e.Album).OnDelete(DeleteBehavior.NoAction);
 			modelBuilder.Entity<Song>().HasOne(e => e.Genre).WithMany()
 				.OnDelete(DeleteBehavior.Cascade);
-			modelBuilder.Entity<WorkoutHasTimes>().HasOne(e => e.Workout)
-				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutId)
-				.OnDelete(DeleteBehavior.NoAction);
-			modelBuilder.Entity<WorkoutHasTimes>().HasOne(e => e.WorkoutTime)
-				.WithMany(e => e.WorkoutHasTimesCollection).HasForeignKey(e => e.WorkoutTimeId)
-				.OnDelete(DeleteBehavior.NoAction);
 		}
 
-		private void SeedData(ModelBuilder modelBuilder)
+		private static void SeedData(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Workout>().HasData(new Workout
 					{Id = 1, Name = "The Complete Crush"},
@@ -176,21 +167,26 @@ namespace DB
 				new GrimeArtist {Id = id++, ArtistName = "Yizzy"});
 		}
 
-		private void ConvertersConfiguration(ModelBuilder modelBuilder)
+		private static void ConvertersConfiguration(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Song>()
 				.Property(e => e.ContributingArtists)
 				.HasConversion(
 					v => string.Join(';', v),
 					v => v.Split(';', StringSplitOptions.RemoveEmptyEntries));
+			modelBuilder
+				.Entity<Workout>()
+				.Property(e => e.WorkoutDateTimes)
+				.HasConversion(v => string.Join(';', v.Select(e => e.ToString("g")).ToArray()),
+					v => v.Split(new[] {';'})
+						.Select(e => DateTime.Parse(e))
+						.ToList());
 		}
 
 		public DbSet<Album> Albums { get; set; }
 		public DbSet<Song> Songs { get; set; }
 		public DbSet<Genre> Genres { get; set; }
 		public DbSet<Workout> Workouts { get; set; }
-		public DbSet<WorkoutHasTimes> WorkoutHasTimesEnumerable { get; set; }
-		public DbSet<WorkoutTime> WorkoutTimes { get; set; }
 		public DbSet<UniFileFormat> UniFileFormats { get; set; }
 		public DbSet<Directories> Directories { get; set; }
 		public DbSet<UrlReplacement> UrlReplacements { get; set; }

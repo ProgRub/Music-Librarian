@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Business.DTOs;
 using Business.Enums;
 using Business.Services;
@@ -17,7 +18,9 @@ namespace Business
 		{
 			AlbumService.Instance.GetAlbumsFromDatabase();
 			MusicService = iTunesService.Instance;
+			SongService.Instance.MusicService = MusicService;
 			MusicService.OpenService();
+			SongService.Instance.UpdateAllPlayCounts();
 		}
 
 		public static BusinessFacade Instance { get; } = new();
@@ -71,5 +74,10 @@ namespace Business
 			SongService.Instance.GetAlbumArtworkMemoryStream(song);
 
 		public void OpenAlbumOnService(AlbumDTO album) => MusicService.OpenAlbum(album);
+
+		public void EndServiceLink()
+		{
+			MusicService.EndLink();
+		}
 	}
 }

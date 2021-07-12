@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DB.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210705163657_GrimeArtist")]
-    partial class GrimeArtist
+    [Migration("20210712101112_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,11 +115,79 @@ namespace DB.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ArtistName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("GrimeArtist");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArtistName = "Frisco"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistName = "JME"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArtistName = "Skepta"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArtistName = "Wiley"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArtistName = "Dave"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ArtistName = "Dizzee Rascal"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ArtistName = "Chip"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ArtistName = "Stormzy"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ArtistName = "Kano"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ArtistName = "AJ Tracey"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ArtistName = "Giggs"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ArtistName = "P Money"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ArtistName = "Yizzy"
+                        });
                 });
 
             modelBuilder.Entity("DB.Entities.Song", b =>
@@ -140,6 +208,9 @@ namespace DB.Migrations
 
                     b.Property<int>("DiscNumber")
                         .HasColumnType("int");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
 
                     b.Property<string>("Filename")
                         .IsRequired()
@@ -470,7 +541,7 @@ namespace DB.Migrations
                         new
                         {
                             Id = 38,
-                            StringReplacement = " ",
+                            StringReplacement = "",
                             StringToReplace = "."
                         },
                         new
@@ -484,6 +555,18 @@ namespace DB.Migrations
                             Id = 40,
                             StringReplacement = " ",
                             StringToReplace = "-"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            StringReplacement = "o",
+                            StringToReplace = "ō"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            StringReplacement = " ",
+                            StringToReplace = "‘"
                         });
                 });
 
@@ -496,6 +579,9 @@ namespace DB.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkoutDateTimes")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -528,36 +614,6 @@ namespace DB.Migrations
                             Id = 6,
                             Name = "Burpee Beach"
                         });
-                });
-
-            modelBuilder.Entity("DB.Entities.WorkoutHasTimes", b =>
-                {
-                    b.Property<int>("WorkoutTimeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WorkoutTimeId", "WorkoutId");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("WorkoutHasTimes");
-                });
-
-            modelBuilder.Entity("DB.Entities.WorkoutTime", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateAndDuration")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WorkoutTime");
                 });
 
             modelBuilder.Entity("DB.Entities.YearLyricsChangeDetailsException", b =>
@@ -624,38 +680,9 @@ namespace DB.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("DB.Entities.WorkoutHasTimes", b =>
-                {
-                    b.HasOne("DB.Entities.Workout", "Workout")
-                        .WithMany("WorkoutHasTimesCollection")
-                        .HasForeignKey("WorkoutId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DB.Entities.WorkoutTime", "WorkoutTime")
-                        .WithMany("WorkoutHasTimesCollection")
-                        .HasForeignKey("WorkoutTimeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Workout");
-
-                    b.Navigation("WorkoutTime");
-                });
-
             modelBuilder.Entity("DB.Entities.Album", b =>
                 {
                     b.Navigation("Songs");
-                });
-
-            modelBuilder.Entity("DB.Entities.Workout", b =>
-                {
-                    b.Navigation("WorkoutHasTimesCollection");
-                });
-
-            modelBuilder.Entity("DB.Entities.WorkoutTime", b =>
-                {
-                    b.Navigation("WorkoutHasTimesCollection");
                 });
 #pragma warning restore 612, 618
         }
