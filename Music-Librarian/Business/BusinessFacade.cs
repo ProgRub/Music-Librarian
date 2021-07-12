@@ -36,6 +36,10 @@ namespace Business
 
 		public void SaveChanges()
 		{
+			foreach (var thread in SongService.Instance.Threads)
+			{
+				thread.Join();
+			}
 			GenresService.Instance.SaveChanges();
 			DirectoriesService.Instance.SaveChanges();
 			SongService.Instance.SaveChanges();

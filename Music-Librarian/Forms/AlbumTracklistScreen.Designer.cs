@@ -48,7 +48,7 @@ namespace Forms
 			this.LabelArtistAndAlbumTitle.Name = "LabelArtistAndAlbumTitle";
 			this.LabelArtistAndAlbumTitle.Size = new System.Drawing.Size(581, 35);
 			this.LabelArtistAndAlbumTitle.TabIndex = 14;
-			this.LabelArtistAndAlbumTitle.Text = "This is the Tracklist for x - y";
+			this.LabelArtistAndAlbumTitle.Text = "This is the Tracklist for º - ª";
 			this.LabelArtistAndAlbumTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// TextBoxTrackList

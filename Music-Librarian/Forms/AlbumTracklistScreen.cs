@@ -29,7 +29,7 @@ namespace Forms
 				Debug.WriteLine($"{song.TrackNumber}. {song.Title}");
 			}
 			LabelArtistAndAlbumTitle.Text =
-				LabelArtistAndAlbumTitle.Text.Replace("x", _album.Artist).Replace("y", _album.Title);
+				LabelArtistAndAlbumTitle.Text.Replace("º", _album.Artist).Replace("ª", _album.Title);
 			PictureBoxAlbumCover.Image =
 				Image.FromStream(BusinessFacade.Instance.GetAlbumArtworkMemoryStream(_album.Songs.First()));
 			var addToTrackNumber = 0;

@@ -29,10 +29,6 @@ namespace Business.Services
 
 		internal void SaveChanges()
 		{
-			foreach (var thread in Threads)
-			{
-				thread.Join();
-			}
 			foreach (var song in AllSongs)
 			{
 				_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
