@@ -139,9 +139,9 @@ namespace Forms
 			this.TextBoxAlbumArtist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxAlbumArtist.Location = new System.Drawing.Point(199, 42);
 			this.TextBoxAlbumArtist.Name = "TextBoxAlbumArtist";
-			this.TextBoxAlbumArtist.ReadOnly = true;
 			this.TextBoxAlbumArtist.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxAlbumArtist.TabIndex = 15;
+			this.TextBoxAlbumArtist.TextChanged += new System.EventHandler(this.TextBoxAlbumArtist_TextChanged);
 			// 
 			// LabelAlbumArtist
 			// 
@@ -169,9 +169,9 @@ namespace Forms
 			this.TextBoxContributingArtists.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxContributingArtists.Location = new System.Drawing.Point(199, 72);
 			this.TextBoxContributingArtists.Name = "TextBoxContributingArtists";
-			this.TextBoxContributingArtists.ReadOnly = true;
 			this.TextBoxContributingArtists.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxContributingArtists.TabIndex = 17;
+			this.TextBoxContributingArtists.TextChanged += new System.EventHandler(this.TextBoxContributingArtists_TextChanged);
 			// 
 			// LabelAlbum
 			// 
@@ -190,9 +190,9 @@ namespace Forms
 			this.TextBoxAlbum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxAlbum.Location = new System.Drawing.Point(199, 102);
 			this.TextBoxAlbum.Name = "TextBoxAlbum";
-			this.TextBoxAlbum.ReadOnly = true;
 			this.TextBoxAlbum.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxAlbum.TabIndex = 19;
+			this.TextBoxAlbum.TextChanged += new System.EventHandler(this.TextBoxAlbum_TextChanged);
 			// 
 			// LabelSongTitle
 			// 
@@ -211,9 +211,9 @@ namespace Forms
 			this.TextBoxSongTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxSongTitle.Location = new System.Drawing.Point(199, 132);
 			this.TextBoxSongTitle.Name = "TextBoxSongTitle";
-			this.TextBoxSongTitle.ReadOnly = true;
 			this.TextBoxSongTitle.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxSongTitle.TabIndex = 21;
+			this.TextBoxSongTitle.TextChanged += new System.EventHandler(this.TextBoxSongTitle_TextChanged);
 			// 
 			// LabelGenre
 			// 
@@ -232,9 +232,9 @@ namespace Forms
 			this.TextBoxGenre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxGenre.Location = new System.Drawing.Point(199, 162);
 			this.TextBoxGenre.Name = "TextBoxGenre";
-			this.TextBoxGenre.ReadOnly = true;
 			this.TextBoxGenre.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxGenre.TabIndex = 23;
+			this.TextBoxGenre.TextChanged += new System.EventHandler(this.TextBoxGenre_TextChanged);
 			// 
 			// LabelYear
 			// 
@@ -253,9 +253,9 @@ namespace Forms
 			this.TextBoxYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxYear.Location = new System.Drawing.Point(199, 192);
 			this.TextBoxYear.Name = "TextBoxYear";
-			this.TextBoxYear.ReadOnly = true;
 			this.TextBoxYear.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxYear.TabIndex = 25;
+			this.TextBoxYear.TextChanged += new System.EventHandler(this.TextBoxYear_TextChanged);
 			// 
 			// ControlHint
 			// 
@@ -358,9 +358,9 @@ namespace Forms
 			this.TextBoxPlayCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxPlayCount.Location = new System.Drawing.Point(199, 222);
 			this.TextBoxPlayCount.Name = "TextBoxPlayCount";
-			this.TextBoxPlayCount.ReadOnly = true;
 			this.TextBoxPlayCount.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxPlayCount.TabIndex = 28;
+			this.TextBoxPlayCount.TextChanged += new System.EventHandler(this.TextBoxPlayCount_TextChanged);
 			// 
 			// LabelSearchFields
 			// 
