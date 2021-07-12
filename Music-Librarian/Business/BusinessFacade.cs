@@ -83,5 +83,7 @@ namespace Business
 		{
 			MusicService.EndLink();
 		}
+
+		public IEnumerable<SongDTO> GetAllSongs() => SongService.Instance.AllSongs;
 	}
 }

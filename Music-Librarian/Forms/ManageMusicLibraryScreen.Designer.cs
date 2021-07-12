@@ -74,6 +74,11 @@ namespace Forms
 			this.TextBoxChangeTrackNumber = new System.Windows.Forms.TextBox();
 			this.LabelChangeDiscNumber = new System.Windows.Forms.Label();
 			this.TextBoxChangeDiscNumber = new System.Windows.Forms.TextBox();
+			this.ButtonRedo = new System.Windows.Forms.Button();
+			this.ButtonUndo = new System.Windows.Forms.Button();
+			this.ButtonSaveChanges = new System.Windows.Forms.Button();
+			this.LabelFilename = new System.Windows.Forms.Label();
+			this.TextBoxFilename = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).BeginInit();
@@ -93,13 +98,14 @@ namespace Forms
 			this.ButtonEditSelectedSongLyrics.AutoSize = true;
 			this.ButtonEditSelectedSongLyrics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonEditSelectedSongLyrics.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonEditSelectedSongLyrics.Enabled = false;
 			this.ButtonEditSelectedSongLyrics.FlatAppearance.BorderSize = 0;
 			this.ButtonEditSelectedSongLyrics.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.ButtonEditSelectedSongLyrics.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.ButtonEditSelectedSongLyrics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonEditSelectedSongLyrics.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonEditSelectedSongLyrics.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonEditSelectedSongLyrics.Location = new System.Drawing.Point(794, 556);
+			this.ButtonEditSelectedSongLyrics.Location = new System.Drawing.Point(1212, 513);
 			this.ButtonEditSelectedSongLyrics.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonEditSelectedSongLyrics.Name = "ButtonEditSelectedSongLyrics";
 			this.ButtonEditSelectedSongLyrics.Size = new System.Drawing.Size(226, 27);
@@ -279,7 +285,7 @@ namespace Forms
 			// PictureBoxHelpChangePlayCount
 			// 
 			this.PictureBoxHelpChangePlayCount.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpChangePlayCount.Location = new System.Drawing.Point(1237, 282);
+			this.PictureBoxHelpChangePlayCount.Location = new System.Drawing.Point(1237, 307);
 			this.PictureBoxHelpChangePlayCount.Name = "PictureBoxHelpChangePlayCount";
 			this.PictureBoxHelpChangePlayCount.Size = new System.Drawing.Size(33, 24);
 			this.PictureBoxHelpChangePlayCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -290,7 +296,7 @@ namespace Forms
 			// PictureBoxHelpChangeYear
 			// 
 			this.PictureBoxHelpChangeYear.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpChangeYear.Location = new System.Drawing.Point(1286, 192);
+			this.PictureBoxHelpChangeYear.Location = new System.Drawing.Point(1286, 217);
 			this.PictureBoxHelpChangeYear.Name = "PictureBoxHelpChangeYear";
 			this.PictureBoxHelpChangeYear.Size = new System.Drawing.Size(33, 24);
 			this.PictureBoxHelpChangeYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -301,7 +307,7 @@ namespace Forms
 			// PictureBoxHelpChangeTrackNumber
 			// 
 			this.PictureBoxHelpChangeTrackNumber.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpChangeTrackNumber.Location = new System.Drawing.Point(1212, 222);
+			this.PictureBoxHelpChangeTrackNumber.Location = new System.Drawing.Point(1212, 247);
 			this.PictureBoxHelpChangeTrackNumber.Name = "PictureBoxHelpChangeTrackNumber";
 			this.PictureBoxHelpChangeTrackNumber.Size = new System.Drawing.Size(33, 24);
 			this.PictureBoxHelpChangeTrackNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -312,7 +318,7 @@ namespace Forms
 			// PictureBoxChangeDiscNumber
 			// 
 			this.PictureBoxChangeDiscNumber.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxChangeDiscNumber.Location = new System.Drawing.Point(1224, 252);
+			this.PictureBoxChangeDiscNumber.Location = new System.Drawing.Point(1224, 277);
 			this.PictureBoxChangeDiscNumber.Name = "PictureBoxChangeDiscNumber";
 			this.PictureBoxChangeDiscNumber.Size = new System.Drawing.Size(33, 24);
 			this.PictureBoxChangeDiscNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -353,7 +359,7 @@ namespace Forms
 			// LabelChangePlayCount
 			// 
 			this.LabelChangePlayCount.AutoSize = true;
-			this.LabelChangePlayCount.Location = new System.Drawing.Point(1276, 284);
+			this.LabelChangePlayCount.Location = new System.Drawing.Point(1276, 309);
 			this.LabelChangePlayCount.Name = "LabelChangePlayCount";
 			this.LabelChangePlayCount.Size = new System.Drawing.Size(98, 17);
 			this.LabelChangePlayCount.TabIndex = 46;
@@ -366,7 +372,7 @@ namespace Forms
 			this.TextBoxChangePlayCount.Enabled = false;
 			this.TextBoxChangePlayCount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangePlayCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangePlayCount.Location = new System.Drawing.Point(1380, 282);
+			this.TextBoxChangePlayCount.Location = new System.Drawing.Point(1380, 307);
 			this.TextBoxChangePlayCount.Name = "TextBoxChangePlayCount";
 			this.TextBoxChangePlayCount.ReadOnly = true;
 			this.TextBoxChangePlayCount.Size = new System.Drawing.Size(378, 24);
@@ -375,7 +381,7 @@ namespace Forms
 			// LabelChangeYear
 			// 
 			this.LabelChangeYear.AutoSize = true;
-			this.LabelChangeYear.Location = new System.Drawing.Point(1325, 194);
+			this.LabelChangeYear.Location = new System.Drawing.Point(1325, 219);
 			this.LabelChangeYear.Name = "LabelChangeYear";
 			this.LabelChangeYear.Size = new System.Drawing.Size(49, 17);
 			this.LabelChangeYear.TabIndex = 43;
@@ -388,7 +394,7 @@ namespace Forms
 			this.TextBoxChangeYear.Enabled = false;
 			this.TextBoxChangeYear.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeYear.Location = new System.Drawing.Point(1380, 192);
+			this.TextBoxChangeYear.Location = new System.Drawing.Point(1380, 217);
 			this.TextBoxChangeYear.Name = "TextBoxChangeYear";
 			this.TextBoxChangeYear.ReadOnly = true;
 			this.TextBoxChangeYear.Size = new System.Drawing.Size(378, 24);
@@ -397,7 +403,7 @@ namespace Forms
 			// LabelChangeGenre
 			// 
 			this.LabelChangeGenre.AutoSize = true;
-			this.LabelChangeGenre.Location = new System.Drawing.Point(1314, 164);
+			this.LabelChangeGenre.Location = new System.Drawing.Point(1314, 189);
 			this.LabelChangeGenre.Name = "LabelChangeGenre";
 			this.LabelChangeGenre.Size = new System.Drawing.Size(60, 17);
 			this.LabelChangeGenre.TabIndex = 41;
@@ -410,7 +416,7 @@ namespace Forms
 			this.TextBoxChangeGenre.Enabled = false;
 			this.TextBoxChangeGenre.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeGenre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeGenre.Location = new System.Drawing.Point(1380, 162);
+			this.TextBoxChangeGenre.Location = new System.Drawing.Point(1380, 187);
 			this.TextBoxChangeGenre.Name = "TextBoxChangeGenre";
 			this.TextBoxChangeGenre.ReadOnly = true;
 			this.TextBoxChangeGenre.Size = new System.Drawing.Size(378, 24);
@@ -419,7 +425,7 @@ namespace Forms
 			// LabelChangeSongTitle
 			// 
 			this.LabelChangeSongTitle.AutoSize = true;
-			this.LabelChangeSongTitle.Location = new System.Drawing.Point(1282, 134);
+			this.LabelChangeSongTitle.Location = new System.Drawing.Point(1282, 159);
 			this.LabelChangeSongTitle.Name = "LabelChangeSongTitle";
 			this.LabelChangeSongTitle.Size = new System.Drawing.Size(92, 17);
 			this.LabelChangeSongTitle.TabIndex = 39;
@@ -432,7 +438,7 @@ namespace Forms
 			this.TextBoxChangeSongTitle.Enabled = false;
 			this.TextBoxChangeSongTitle.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeSongTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeSongTitle.Location = new System.Drawing.Point(1380, 132);
+			this.TextBoxChangeSongTitle.Location = new System.Drawing.Point(1380, 157);
 			this.TextBoxChangeSongTitle.Name = "TextBoxChangeSongTitle";
 			this.TextBoxChangeSongTitle.ReadOnly = true;
 			this.TextBoxChangeSongTitle.Size = new System.Drawing.Size(378, 24);
@@ -441,7 +447,7 @@ namespace Forms
 			// LabelChangeAlbum
 			// 
 			this.LabelChangeAlbum.AutoSize = true;
-			this.LabelChangeAlbum.Location = new System.Drawing.Point(1311, 104);
+			this.LabelChangeAlbum.Location = new System.Drawing.Point(1311, 129);
 			this.LabelChangeAlbum.Name = "LabelChangeAlbum";
 			this.LabelChangeAlbum.Size = new System.Drawing.Size(63, 17);
 			this.LabelChangeAlbum.TabIndex = 37;
@@ -454,7 +460,7 @@ namespace Forms
 			this.TextBoxChangeAlbum.Enabled = false;
 			this.TextBoxChangeAlbum.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeAlbum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeAlbum.Location = new System.Drawing.Point(1380, 102);
+			this.TextBoxChangeAlbum.Location = new System.Drawing.Point(1380, 127);
 			this.TextBoxChangeAlbum.Name = "TextBoxChangeAlbum";
 			this.TextBoxChangeAlbum.ReadOnly = true;
 			this.TextBoxChangeAlbum.Size = new System.Drawing.Size(378, 24);
@@ -463,7 +469,7 @@ namespace Forms
 			// LabelChangeContributingArtists
 			// 
 			this.LabelChangeContributingArtists.AutoSize = true;
-			this.LabelChangeContributingArtists.Location = new System.Drawing.Point(1207, 74);
+			this.LabelChangeContributingArtists.Location = new System.Drawing.Point(1207, 99);
 			this.LabelChangeContributingArtists.Name = "LabelChangeContributingArtists";
 			this.LabelChangeContributingArtists.Size = new System.Drawing.Size(167, 17);
 			this.LabelChangeContributingArtists.TabIndex = 35;
@@ -476,7 +482,7 @@ namespace Forms
 			this.TextBoxChangeContributingArtists.Enabled = false;
 			this.TextBoxChangeContributingArtists.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeContributingArtists.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeContributingArtists.Location = new System.Drawing.Point(1380, 72);
+			this.TextBoxChangeContributingArtists.Location = new System.Drawing.Point(1380, 97);
 			this.TextBoxChangeContributingArtists.Name = "TextBoxChangeContributingArtists";
 			this.TextBoxChangeContributingArtists.ReadOnly = true;
 			this.TextBoxChangeContributingArtists.Size = new System.Drawing.Size(378, 24);
@@ -485,7 +491,7 @@ namespace Forms
 			// LabelChangeAlbumArtist
 			// 
 			this.LabelChangeAlbumArtist.AutoSize = true;
-			this.LabelChangeAlbumArtist.Location = new System.Drawing.Point(1264, 44);
+			this.LabelChangeAlbumArtist.Location = new System.Drawing.Point(1264, 69);
 			this.LabelChangeAlbumArtist.Name = "LabelChangeAlbumArtist";
 			this.LabelChangeAlbumArtist.Size = new System.Drawing.Size(110, 17);
 			this.LabelChangeAlbumArtist.TabIndex = 33;
@@ -498,7 +504,7 @@ namespace Forms
 			this.TextBoxChangeAlbumArtist.Enabled = false;
 			this.TextBoxChangeAlbumArtist.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeAlbumArtist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeAlbumArtist.Location = new System.Drawing.Point(1380, 42);
+			this.TextBoxChangeAlbumArtist.Location = new System.Drawing.Point(1380, 67);
 			this.TextBoxChangeAlbumArtist.Name = "TextBoxChangeAlbumArtist";
 			this.TextBoxChangeAlbumArtist.ReadOnly = true;
 			this.TextBoxChangeAlbumArtist.Size = new System.Drawing.Size(378, 24);
@@ -516,7 +522,7 @@ namespace Forms
 			// LabelChangeTrackNumber
 			// 
 			this.LabelChangeTrackNumber.AutoSize = true;
-			this.LabelChangeTrackNumber.Location = new System.Drawing.Point(1251, 224);
+			this.LabelChangeTrackNumber.Location = new System.Drawing.Point(1251, 249);
 			this.LabelChangeTrackNumber.Name = "LabelChangeTrackNumber";
 			this.LabelChangeTrackNumber.Size = new System.Drawing.Size(123, 17);
 			this.LabelChangeTrackNumber.TabIndex = 50;
@@ -529,7 +535,7 @@ namespace Forms
 			this.TextBoxChangeTrackNumber.Enabled = false;
 			this.TextBoxChangeTrackNumber.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeTrackNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeTrackNumber.Location = new System.Drawing.Point(1380, 222);
+			this.TextBoxChangeTrackNumber.Location = new System.Drawing.Point(1380, 247);
 			this.TextBoxChangeTrackNumber.Name = "TextBoxChangeTrackNumber";
 			this.TextBoxChangeTrackNumber.ReadOnly = true;
 			this.TextBoxChangeTrackNumber.Size = new System.Drawing.Size(378, 24);
@@ -538,7 +544,7 @@ namespace Forms
 			// LabelChangeDiscNumber
 			// 
 			this.LabelChangeDiscNumber.AutoSize = true;
-			this.LabelChangeDiscNumber.Location = new System.Drawing.Point(1263, 254);
+			this.LabelChangeDiscNumber.Location = new System.Drawing.Point(1263, 279);
 			this.LabelChangeDiscNumber.Name = "LabelChangeDiscNumber";
 			this.LabelChangeDiscNumber.Size = new System.Drawing.Size(111, 17);
 			this.LabelChangeDiscNumber.TabIndex = 53;
@@ -551,16 +557,106 @@ namespace Forms
 			this.TextBoxChangeDiscNumber.Enabled = false;
 			this.TextBoxChangeDiscNumber.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeDiscNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeDiscNumber.Location = new System.Drawing.Point(1380, 252);
+			this.TextBoxChangeDiscNumber.Location = new System.Drawing.Point(1380, 277);
 			this.TextBoxChangeDiscNumber.Name = "TextBoxChangeDiscNumber";
 			this.TextBoxChangeDiscNumber.ReadOnly = true;
 			this.TextBoxChangeDiscNumber.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeDiscNumber.TabIndex = 52;
 			// 
+			// ButtonRedo
+			// 
+			this.ButtonRedo.AutoSize = true;
+			this.ButtonRedo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonRedo.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonRedo.Enabled = false;
+			this.ButtonRedo.FlatAppearance.BorderSize = 0;
+			this.ButtonRedo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonRedo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonRedo.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonRedo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonRedo.Image = global::Forms.Properties.Resources.Redo;
+			this.ButtonRedo.Location = new System.Drawing.Point(928, 546);
+			this.ButtonRedo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonRedo.Name = "ButtonRedo";
+			this.ButtonRedo.Size = new System.Drawing.Size(22, 22);
+			this.ButtonRedo.TabIndex = 56;
+			this.ButtonRedo.UseVisualStyleBackColor = false;
+			this.ButtonRedo.Click += new System.EventHandler(this.ButtonRedo_Click);
+			// 
+			// ButtonUndo
+			// 
+			this.ButtonUndo.AutoSize = true;
+			this.ButtonUndo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonUndo.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonUndo.Enabled = false;
+			this.ButtonUndo.FlatAppearance.BorderSize = 0;
+			this.ButtonUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonUndo.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonUndo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonUndo.Image = global::Forms.Properties.Resources.Undo;
+			this.ButtonUndo.Location = new System.Drawing.Point(835, 546);
+			this.ButtonUndo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonUndo.Name = "ButtonUndo";
+			this.ButtonUndo.Size = new System.Drawing.Size(22, 22);
+			this.ButtonUndo.TabIndex = 55;
+			this.ButtonUndo.UseVisualStyleBackColor = false;
+			this.ButtonUndo.Click += new System.EventHandler(this.ButtonUndo_Click);
+			// 
+			// ButtonSaveChanges
+			// 
+			this.ButtonSaveChanges.AutoSize = true;
+			this.ButtonSaveChanges.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonSaveChanges.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonSaveChanges.Enabled = false;
+			this.ButtonSaveChanges.FlatAppearance.BorderSize = 0;
+			this.ButtonSaveChanges.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonSaveChanges.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonSaveChanges.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonSaveChanges.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonSaveChanges.Location = new System.Drawing.Point(1508, 337);
+			this.ButtonSaveChanges.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonSaveChanges.Name = "ButtonSaveChanges";
+			this.ButtonSaveChanges.Size = new System.Drawing.Size(127, 27);
+			this.ButtonSaveChanges.TabIndex = 57;
+			this.ButtonSaveChanges.Text = "Save Changes";
+			this.ButtonSaveChanges.UseVisualStyleBackColor = false;
+			this.ButtonSaveChanges.Click += new System.EventHandler(this.ButtonSaveChanges_Click);
+			// 
+			// LabelFilename
+			// 
+			this.LabelFilename.AutoSize = true;
+			this.LabelFilename.Location = new System.Drawing.Point(1292, 39);
+			this.LabelFilename.Name = "LabelFilename";
+			this.LabelFilename.Size = new System.Drawing.Size(82, 17);
+			this.LabelFilename.TabIndex = 59;
+			this.LabelFilename.Text = "Filename:";
+			// 
+			// TextBoxFilename
+			// 
+			this.TextBoxFilename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
+			this.TextBoxFilename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.TextBoxFilename.Enabled = false;
+			this.TextBoxFilename.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.TextBoxFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.TextBoxFilename.Location = new System.Drawing.Point(1380, 37);
+			this.TextBoxFilename.Name = "TextBoxFilename";
+			this.TextBoxFilename.ReadOnly = true;
+			this.TextBoxFilename.Size = new System.Drawing.Size(378, 24);
+			this.TextBoxFilename.TabIndex = 58;
+			// 
 			// ManageMusicLibraryScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.LabelFilename);
+			this.Controls.Add(this.TextBoxFilename);
+			this.Controls.Add(this.ButtonSaveChanges);
+			this.Controls.Add(this.ButtonRedo);
+			this.Controls.Add(this.ButtonUndo);
 			this.Controls.Add(this.PictureBoxChangeDiscNumber);
 			this.Controls.Add(this.LabelChangeDiscNumber);
 			this.Controls.Add(this.TextBoxChangeDiscNumber);
@@ -605,6 +701,7 @@ namespace Forms
 			this.Controls.Add(this.ButtonEditSelectedSongLyrics);
 			this.Name = "ManageMusicLibraryScreen";
 			this.Size = new System.Drawing.Size(1761, 601);
+			this.Enter += new System.EventHandler(this.ManageMusicLibraryScreen_Enter);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
 			this.Controls.SetChildIndex(this.ButtonEditSelectedSongLyrics, 0);
 			this.Controls.SetChildIndex(this.ListBoxSongFilenames, 0);
@@ -648,6 +745,11 @@ namespace Forms
 			this.Controls.SetChildIndex(this.TextBoxChangeDiscNumber, 0);
 			this.Controls.SetChildIndex(this.LabelChangeDiscNumber, 0);
 			this.Controls.SetChildIndex(this.PictureBoxChangeDiscNumber, 0);
+			this.Controls.SetChildIndex(this.ButtonUndo, 0);
+			this.Controls.SetChildIndex(this.ButtonRedo, 0);
+			this.Controls.SetChildIndex(this.ButtonSaveChanges, 0);
+			this.Controls.SetChildIndex(this.TextBoxFilename, 0);
+			this.Controls.SetChildIndex(this.LabelFilename, 0);
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).EndInit();
@@ -704,5 +806,10 @@ namespace Forms
 		private System.Windows.Forms.PictureBox PictureBoxChangeDiscNumber;
 		private System.Windows.Forms.Label LabelChangeDiscNumber;
 		private System.Windows.Forms.TextBox TextBoxChangeDiscNumber;
+		private System.Windows.Forms.Button ButtonRedo;
+		private System.Windows.Forms.Button ButtonUndo;
+		private System.Windows.Forms.Button ButtonSaveChanges;
+		private System.Windows.Forms.Label LabelFilename;
+		private System.Windows.Forms.TextBox TextBoxFilename;
 	}
 }
