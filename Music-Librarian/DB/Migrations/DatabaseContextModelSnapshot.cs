@@ -579,6 +579,9 @@ namespace DB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("WorkoutDateTimes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Workout");
@@ -609,36 +612,6 @@ namespace DB.Migrations
                             Id = 6,
                             Name = "Burpee Beach"
                         });
-                });
-
-            modelBuilder.Entity("DB.Entities.WorkoutHasTimes", b =>
-                {
-                    b.Property<int>("WorkoutTimeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WorkoutTimeId", "WorkoutId");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("WorkoutHasTimes");
-                });
-
-            modelBuilder.Entity("DB.Entities.WorkoutTime", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateAndDuration")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WorkoutTime");
                 });
 
             modelBuilder.Entity("DB.Entities.YearLyricsChangeDetailsException", b =>
@@ -705,38 +678,9 @@ namespace DB.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("DB.Entities.WorkoutHasTimes", b =>
-                {
-                    b.HasOne("DB.Entities.Workout", "Workout")
-                        .WithMany("WorkoutHasTimesCollection")
-                        .HasForeignKey("WorkoutId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DB.Entities.WorkoutTime", "WorkoutTime")
-                        .WithMany("WorkoutHasTimesCollection")
-                        .HasForeignKey("WorkoutTimeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Workout");
-
-                    b.Navigation("WorkoutTime");
-                });
-
             modelBuilder.Entity("DB.Entities.Album", b =>
                 {
                     b.Navigation("Songs");
-                });
-
-            modelBuilder.Entity("DB.Entities.Workout", b =>
-                {
-                    b.Navigation("WorkoutHasTimesCollection");
-                });
-
-            modelBuilder.Entity("DB.Entities.WorkoutTime", b =>
-                {
-                    b.Navigation("WorkoutHasTimesCollection");
                 });
 #pragma warning restore 612, 618
         }

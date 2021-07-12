@@ -1,4 +1,5 @@
 ﻿using Business.DTOs;
+using DB.Entities;
 using iTunesLib;
 
 namespace Business.Services.MusicServices

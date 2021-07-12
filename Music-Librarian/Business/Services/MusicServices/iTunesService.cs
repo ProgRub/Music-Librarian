@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Business.DTOs;
+using DB.Entities;
 using iTunesLib;
 
 namespace Business.Services.MusicServices
@@ -41,7 +42,6 @@ namespace Business.Services.MusicServices
 		{
 			return GetTrack(song.Title, song.Album).PlayedCount;
 		}
-
 		public IITTrack GetTrack(string title, string album)
 		{
 			if (_iTunes == null)
