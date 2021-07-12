@@ -90,4 +90,10 @@ If you want to specify the track number outright, just type in the track number 
 Example: "+1" will increase the selected songs' disc number by one.
 If you want to specify the disc number outright, just type in the disc number or change the written one.</value>
   </data>
+  <data name="PictureBoxListBox.ToolTip" xml:space="preserve">
+    <value>Select the songs you want to change or delete. 
+If you want to delete them simply press the Delete key after selecting the songs you want to delete.
+After you select the songs, the text boxes on the right will allow you to change the selected songs' details.
+If they're blank, that means that detail is not equal in all the selected songs, you can still change the detail on all the selected songs.</value>
+  </data>
 </root>

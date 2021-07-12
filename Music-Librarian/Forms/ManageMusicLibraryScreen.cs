@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,28 @@ namespace Forms
 		private void ButtonRedo_Click(object sender, EventArgs e)
 		{
 			CommandsManager.Instance.Redo();
+		}
+
+		private void ListBoxSongFilenames_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			Debug.WriteLine("HERE");
+			SetChangeControlsEnabled(ListBoxSongFilenames.SelectedIndices.Count > 0);
+			TextBoxChangeFilename.Enabled = ListBoxSongFilenames.SelectedIndices.Count == 1;
+			ButtonEditSelectedSongLyrics.Enabled = ListBoxSongFilenames.SelectedIndices.Count == 1;
+		}
+
+		private void SetChangeControlsEnabled(bool state)
+		{
+			TextBoxChangeAlbum.Enabled = state;
+			TextBoxChangeAlbumArtist.Enabled = state;
+			TextBoxChangeContributingArtists.Enabled = state;
+			TextBoxChangeDiscNumber.Enabled = state;
+			TextBoxChangeGenre.Enabled = state;
+			TextBoxChangePlayCount.Enabled = state;
+			TextBoxChangeSongTitle.Enabled = state;
+			TextBoxChangeTrackNumber.Enabled = state;
+			TextBoxChangeYear.Enabled = state;
+			ButtonSaveChanges.Enabled = state;
 		}
 	}
 }

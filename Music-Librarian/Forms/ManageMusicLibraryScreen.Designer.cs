@@ -52,6 +52,7 @@ namespace Forms
 			this.PictureBoxHelpChangeYear = new System.Windows.Forms.PictureBox();
 			this.PictureBoxHelpChangeTrackNumber = new System.Windows.Forms.PictureBox();
 			this.PictureBoxChangeDiscNumber = new System.Windows.Forms.PictureBox();
+			this.PictureBoxListBox = new System.Windows.Forms.PictureBox();
 			this.LabelPlayCount = new System.Windows.Forms.Label();
 			this.TextBoxPlayCount = new System.Windows.Forms.TextBox();
 			this.LabelSearchFields = new System.Windows.Forms.Label();
@@ -77,14 +78,15 @@ namespace Forms
 			this.ButtonRedo = new System.Windows.Forms.Button();
 			this.ButtonUndo = new System.Windows.Forms.Button();
 			this.ButtonSaveChanges = new System.Windows.Forms.Button();
-			this.LabelFilename = new System.Windows.Forms.Label();
-			this.TextBoxFilename = new System.Windows.Forms.TextBox();
+			this.LabelChangeFilename = new System.Windows.Forms.Label();
+			this.TextBoxChangeFilename = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangeYear)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangeTrackNumber)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxChangeDiscNumber)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxListBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ButtonBack
@@ -124,8 +126,10 @@ namespace Forms
 			this.ListBoxSongFilenames.ItemHeight = 16;
 			this.ListBoxSongFilenames.Location = new System.Drawing.Point(595, 42);
 			this.ListBoxSongFilenames.Name = "ListBoxSongFilenames";
+			this.ListBoxSongFilenames.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
 			this.ListBoxSongFilenames.Size = new System.Drawing.Size(595, 498);
 			this.ListBoxSongFilenames.TabIndex = 14;
+			this.ListBoxSongFilenames.SelectedIndexChanged += new System.EventHandler(this.ListBoxSongFilenames_SelectedIndexChanged);
 			// 
 			// TextBoxAlbumArtist
 			// 
@@ -325,6 +329,17 @@ namespace Forms
 			this.PictureBoxChangeDiscNumber.TabIndex = 54;
 			this.PictureBoxChangeDiscNumber.TabStop = false;
 			this.ControlHint.SetToolTip(this.PictureBoxChangeDiscNumber, resources.GetString("PictureBoxChangeDiscNumber.ToolTip"));
+			// 
+			// PictureBoxListBox
+			// 
+			this.PictureBoxListBox.Image = global::Forms.Properties.Resources.HelpQuestionMark;
+			this.PictureBoxListBox.Location = new System.Drawing.Point(556, 516);
+			this.PictureBoxListBox.Name = "PictureBoxListBox";
+			this.PictureBoxListBox.Size = new System.Drawing.Size(33, 24);
+			this.PictureBoxListBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.PictureBoxListBox.TabIndex = 60;
+			this.PictureBoxListBox.TabStop = false;
+			this.ControlHint.SetToolTip(this.PictureBoxListBox, resources.GetString("PictureBoxListBox.ToolTip"));
 			// 
 			// LabelPlayCount
 			// 
@@ -626,34 +641,35 @@ namespace Forms
 			this.ButtonSaveChanges.UseVisualStyleBackColor = false;
 			this.ButtonSaveChanges.Click += new System.EventHandler(this.ButtonSaveChanges_Click);
 			// 
-			// LabelFilename
+			// LabelChangeFilename
 			// 
-			this.LabelFilename.AutoSize = true;
-			this.LabelFilename.Location = new System.Drawing.Point(1292, 39);
-			this.LabelFilename.Name = "LabelFilename";
-			this.LabelFilename.Size = new System.Drawing.Size(82, 17);
-			this.LabelFilename.TabIndex = 59;
-			this.LabelFilename.Text = "Filename:";
+			this.LabelChangeFilename.AutoSize = true;
+			this.LabelChangeFilename.Location = new System.Drawing.Point(1292, 39);
+			this.LabelChangeFilename.Name = "LabelChangeFilename";
+			this.LabelChangeFilename.Size = new System.Drawing.Size(82, 17);
+			this.LabelChangeFilename.TabIndex = 59;
+			this.LabelChangeFilename.Text = "Filename:";
 			// 
-			// TextBoxFilename
+			// TextBoxChangeFilename
 			// 
-			this.TextBoxFilename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
-			this.TextBoxFilename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.TextBoxFilename.Enabled = false;
-			this.TextBoxFilename.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.TextBoxFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxFilename.Location = new System.Drawing.Point(1380, 37);
-			this.TextBoxFilename.Name = "TextBoxFilename";
-			this.TextBoxFilename.ReadOnly = true;
-			this.TextBoxFilename.Size = new System.Drawing.Size(378, 24);
-			this.TextBoxFilename.TabIndex = 58;
+			this.TextBoxChangeFilename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
+			this.TextBoxChangeFilename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.TextBoxChangeFilename.Enabled = false;
+			this.TextBoxChangeFilename.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.TextBoxChangeFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.TextBoxChangeFilename.Location = new System.Drawing.Point(1380, 37);
+			this.TextBoxChangeFilename.Name = "TextBoxChangeFilename";
+			this.TextBoxChangeFilename.ReadOnly = true;
+			this.TextBoxChangeFilename.Size = new System.Drawing.Size(378, 24);
+			this.TextBoxChangeFilename.TabIndex = 58;
 			// 
 			// ManageMusicLibraryScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.LabelFilename);
-			this.Controls.Add(this.TextBoxFilename);
+			this.Controls.Add(this.PictureBoxListBox);
+			this.Controls.Add(this.LabelChangeFilename);
+			this.Controls.Add(this.TextBoxChangeFilename);
 			this.Controls.Add(this.ButtonSaveChanges);
 			this.Controls.Add(this.ButtonRedo);
 			this.Controls.Add(this.ButtonUndo);
@@ -748,14 +764,16 @@ namespace Forms
 			this.Controls.SetChildIndex(this.ButtonUndo, 0);
 			this.Controls.SetChildIndex(this.ButtonRedo, 0);
 			this.Controls.SetChildIndex(this.ButtonSaveChanges, 0);
-			this.Controls.SetChildIndex(this.TextBoxFilename, 0);
-			this.Controls.SetChildIndex(this.LabelFilename, 0);
+			this.Controls.SetChildIndex(this.TextBoxChangeFilename, 0);
+			this.Controls.SetChildIndex(this.LabelChangeFilename, 0);
+			this.Controls.SetChildIndex(this.PictureBoxListBox, 0);
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangeYear)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangeTrackNumber)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxChangeDiscNumber)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxListBox)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -809,7 +827,8 @@ namespace Forms
 		private System.Windows.Forms.Button ButtonRedo;
 		private System.Windows.Forms.Button ButtonUndo;
 		private System.Windows.Forms.Button ButtonSaveChanges;
-		private System.Windows.Forms.Label LabelFilename;
-		private System.Windows.Forms.TextBox TextBoxFilename;
+		private System.Windows.Forms.Label LabelChangeFilename;
+		private System.Windows.Forms.TextBox TextBoxChangeFilename;
+		private System.Windows.Forms.PictureBox PictureBoxListBox;
 	}
 }
