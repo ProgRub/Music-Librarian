@@ -22,10 +22,11 @@ namespace Business.Services
 		private SongService()
 		{
 			_songRepository = new SongRepository(Database.GetContext());
+			AllSongs = _songRepository.GetAll().Select(SongDTO.ConvertSongToDTO).ToHashSet();
 		}
 
 		internal static SongService Instance { get; } = new();
-		internal ISet<SongDTO> AllSongs { get; private set; }
+		internal ISet<SongDTO> AllSongs { get; }
 
 		internal void SaveChanges()
 		{
@@ -45,7 +46,6 @@ namespace Business.Services
 
 		internal void UpdateAllPlayCounts()
 		{
-			AllSongs = _songRepository.GetAll().Select(SongDTO.ConvertSongToDTO).ToHashSet();
 			var totalNumberOfSongs = AllSongs.Count;
 			var rest = totalNumberOfSongs % _numberOfThreads;
 			var result = totalNumberOfSongs / (double) _numberOfThreads;

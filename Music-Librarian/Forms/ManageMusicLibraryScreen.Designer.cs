@@ -133,6 +133,8 @@ namespace Forms
 			// 
 			// TextBoxAlbumArtist
 			// 
+			this.TextBoxAlbumArtist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.TextBoxAlbumArtist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.TextBoxAlbumArtist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxAlbumArtist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxAlbumArtist.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -163,6 +165,8 @@ namespace Forms
 			// 
 			// TextBoxContributingArtists
 			// 
+			this.TextBoxContributingArtists.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.TextBoxContributingArtists.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.TextBoxContributingArtists.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxContributingArtists.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxContributingArtists.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -184,6 +188,8 @@ namespace Forms
 			// 
 			// TextBoxAlbum
 			// 
+			this.TextBoxAlbum.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.TextBoxAlbum.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.TextBoxAlbum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxAlbum.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -226,6 +232,8 @@ namespace Forms
 			// 
 			// TextBoxGenre
 			// 
+			this.TextBoxGenre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.TextBoxGenre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.TextBoxGenre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxGenre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxGenre.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);

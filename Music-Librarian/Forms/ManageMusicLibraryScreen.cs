@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Business.Commands;
@@ -17,7 +10,10 @@ namespace Forms
 {
 	public partial class ManageMusicLibraryScreen : BaseControl
 	{
+		private const int SearchDelay = 500;
 		private ISet<SongDTO> _songs;
+		private ISet<GenreDTO> _genres;
+		private Timer _searchTimer;
 
 		private IDictionary<string, bool> _searchParameters = new Dictionary<string, bool>
 		{
@@ -46,11 +42,27 @@ namespace Forms
 				ButtonUndo.Enabled = CommandsManager.Instance.HasUndo;
 				ButtonRedo.Enabled = CommandsManager.Instance.HasRedo;
 			};
+			_genres = BusinessFacade.Instance.GetAllGenres().ToHashSet();
 			_songs = BusinessFacade.Instance.GetAllSongs().ToHashSet();
+			SetAutoCompletesOnSearchTextBoxes();
 			foreach (var song in _songs)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
+		}
+
+		private void SetAutoCompletesOnSearchTextBoxes()
+		{
+			var autoCompleteCustomSource = new AutoCompleteStringCollection();
+			autoCompleteCustomSource.AddRange(_genres.Select(genre => genre.Name).ToArray());
+			TextBoxGenre.AutoCompleteCustomSource = autoCompleteCustomSource;
+			autoCompleteCustomSource = new AutoCompleteStringCollection();
+			autoCompleteCustomSource.AddRange(_songs.Select(song => song.AlbumArtist).ToArray());
+			TextBoxAlbumArtist.AutoCompleteCustomSource = autoCompleteCustomSource;
+			TextBoxContributingArtists.AutoCompleteCustomSource = autoCompleteCustomSource;
+			autoCompleteCustomSource = new AutoCompleteStringCollection();
+			autoCompleteCustomSource.AddRange(_songs.Select(song => song.Album).ToArray());
+			TextBoxAlbum.AutoCompleteCustomSource = autoCompleteCustomSource;
 		}
 
 		private void ButtonUndo_Click(object sender, EventArgs e)
@@ -173,13 +185,20 @@ namespace Forms
 
 		#endregion
 
-		private bool ContainsIgnoreCase(string container, string inString)
+		private static bool ContainsIgnoreCase(string container, string inString)
 		{
 			return container.IndexOf(inString, StringComparison.OrdinalIgnoreCase) >= 0;
 		}
 
 		#region SearchTextBoxes
-
+		private void Delay(int milliseconds, EventHandler action)
+		{
+			if (_searchTimer is {Enabled: true}) _searchTimer.Enabled = false;
+			_searchTimer = new Timer {Interval = milliseconds};
+			_searchTimer.Tick += (_, _) => _searchTimer.Enabled = false;
+			_searchTimer.Tick += action;
+			_searchTimer.Enabled = true;
+		}
 		private void SearchSongs()
 		{
 			IEnumerable<SongDTO> resultSongs = _songs;
@@ -193,13 +212,20 @@ namespace Forms
 							ContainsIgnoreCase(song.AlbumArtist, TextBoxAlbumArtist.Text.Trim()));
 						break;
 					case "Contributing Artists":
-						resultSongs = resultSongs.Where(song => song.ContributingArtists.Any(contributingArtist => ContainsIgnoreCase(contributingArtist, TextBoxContributingArtists.Text.Trim())));
+						resultSongs = resultSongs.Where(song => song.ContributingArtists.Any(contributingArtist =>
+							ContainsIgnoreCase(contributingArtist, TextBoxContributingArtists.Text.Trim())));
 						break;
 					case "Album":
+						resultSongs = resultSongs.Where(song =>
+							ContainsIgnoreCase(song.Album, TextBoxAlbum.Text.Trim()));
 						break;
 					case "Song Title":
+						resultSongs = resultSongs.Where(song =>
+							ContainsIgnoreCase(song.Title, TextBoxSongTitle.Text.Trim()));
 						break;
 					case "Genre":
+						resultSongs = resultSongs.Where(song =>
+							ContainsIgnoreCase(song.Genre, TextBoxGenre.Text.Trim()));
 						break;
 					case "Year":
 						break;
@@ -207,7 +233,6 @@ namespace Forms
 						break;
 				}
 			}
-
 			ListBoxSongFilenames.Items.Clear();
 			foreach (var song in resultSongs)
 			{
@@ -218,43 +243,44 @@ namespace Forms
 		private void TextBoxAlbumArtist_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Album Artist"] = !string.IsNullOrWhiteSpace(TextBoxAlbumArtist.Text.Trim());
-			SearchSongs();
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		private void TextBoxContributingArtists_TextChanged(object sender, EventArgs e)
 		{
-			_searchParameters["Contributing Artists"] = !string.IsNullOrWhiteSpace(TextBoxContributingArtists.Text.Trim());
-			SearchSongs();
+			_searchParameters["Contributing Artists"] =
+				!string.IsNullOrWhiteSpace(TextBoxContributingArtists.Text.Trim());
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		private void TextBoxAlbum_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Album"] = !string.IsNullOrWhiteSpace(TextBoxAlbum.Text.Trim());
-			SearchSongs();
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		private void TextBoxSongTitle_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Song Title"] = !string.IsNullOrWhiteSpace(TextBoxSongTitle.Text.Trim());
-			SearchSongs();
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		private void TextBoxGenre_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Genre"] = !string.IsNullOrWhiteSpace(TextBoxGenre.Text.Trim());
-			SearchSongs();
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		private void TextBoxYear_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Year"] = !string.IsNullOrWhiteSpace(TextBoxYear.Text.Trim());
-			SearchSongs();
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		private void TextBoxPlayCount_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Play Count"] = !string.IsNullOrWhiteSpace(TextBoxPlayCount.Text.Trim());
-			SearchSongs();
+			Delay(SearchDelay,(_,_)=>SearchSongs());
 		}
 
 		#endregion

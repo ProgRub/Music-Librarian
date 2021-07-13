@@ -20,7 +20,7 @@ namespace Business
 			MusicService = iTunesService.Instance;
 			SongService.Instance.MusicService = MusicService;
 			MusicService.OpenService();
-			SongService.Instance.UpdateAllPlayCounts();
+			//SongService.Instance.UpdateAllPlayCounts();
 		}
 
 		public static BusinessFacade Instance { get; } = new();
