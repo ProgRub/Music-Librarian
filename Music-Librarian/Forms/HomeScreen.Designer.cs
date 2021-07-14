@@ -36,6 +36,7 @@ namespace Forms
 			this.ButtonChooseAlbum = new System.Windows.Forms.Button();
 			this.ButtonSearchLibrary = new System.Windows.Forms.Button();
 			this.ButtonManageGenres = new System.Windows.Forms.Button();
+			this.ButtonUpdatePlayCounts = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// ButtonBack
@@ -151,10 +152,31 @@ namespace Forms
 			this.ButtonManageGenres.UseVisualStyleBackColor = false;
 			this.ButtonManageGenres.Click += new System.EventHandler(this.ButtonManageGenres_Click);
 			// 
+			// ButtonUpdatePlayCounts
+			// 
+			this.ButtonUpdatePlayCounts.AutoSize = true;
+			this.ButtonUpdatePlayCounts.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonUpdatePlayCounts.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonUpdatePlayCounts.FlatAppearance.BorderSize = 0;
+			this.ButtonUpdatePlayCounts.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonUpdatePlayCounts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonUpdatePlayCounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonUpdatePlayCounts.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonUpdatePlayCounts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonUpdatePlayCounts.Location = new System.Drawing.Point(410, 174);
+			this.ButtonUpdatePlayCounts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonUpdatePlayCounts.Name = "ButtonUpdatePlayCounts";
+			this.ButtonUpdatePlayCounts.Size = new System.Drawing.Size(170, 27);
+			this.ButtonUpdatePlayCounts.TabIndex = 12;
+			this.ButtonUpdatePlayCounts.Text = "Update Play Counts";
+			this.ButtonUpdatePlayCounts.UseVisualStyleBackColor = false;
+			this.ButtonUpdatePlayCounts.Click += new System.EventHandler(this.ButtonUpdatePlayCounts_Click);
+			// 
 			// HomeScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.ButtonUpdatePlayCounts);
 			this.Controls.Add(this.ButtonManageGenres);
 			this.Controls.Add(this.ButtonSearchLibrary);
 			this.Controls.Add(this.ButtonChooseAlbum);
@@ -171,6 +193,7 @@ namespace Forms
 			this.Controls.SetChildIndex(this.ButtonChooseAlbum, 0);
 			this.Controls.SetChildIndex(this.ButtonSearchLibrary, 0);
 			this.Controls.SetChildIndex(this.ButtonManageGenres, 0);
+			this.Controls.SetChildIndex(this.ButtonUpdatePlayCounts, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -185,5 +208,6 @@ namespace Forms
 		private System.Windows.Forms.Button ButtonSearchLibrary;
 		private System.Windows.Forms.Button ButtonManageGenres;
 		private System.Windows.Forms.Button ButtonChooseFolder;
+		private System.Windows.Forms.Button ButtonUpdatePlayCounts;
 	}
 }

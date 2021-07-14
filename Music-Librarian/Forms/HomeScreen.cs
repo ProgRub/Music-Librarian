@@ -52,5 +52,10 @@ namespace Forms
 		{
 			MoveToScreen(new ManageMusicLibraryScreen(),this);
 		}
+
+		private void ButtonUpdatePlayCounts_Click(object sender, EventArgs e)
+		{
+			MoveToScreen(new UpdatePlayCountsScreen(),this);
+		}
 	}
 }

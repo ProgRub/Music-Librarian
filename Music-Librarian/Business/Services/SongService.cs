@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Business.CustomEventArgs;
 using Business.DTOs;
 using Business.Services.MusicServices;
 using DB;
@@ -18,6 +19,7 @@ namespace Business.Services
 		private static readonly int _numberOfThreads = (int) Math.Pow(2, (int) Math.Sqrt(Environment.ProcessorCount));
 		internal ICollection<Thread> Threads { get; } = new List<Thread>();
 		internal IMusicService MusicService { get; set; }
+		internal event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
 
 		private SongService()
 		{
@@ -34,6 +36,7 @@ namespace Business.Services
 			{
 				_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
 			}
+
 			_songRepository.SaveChanges();
 		}
 
@@ -81,8 +84,17 @@ namespace Business.Services
 			var songsSection = (HashSet<SongDTO>) parameter;
 			foreach (var song in songsSection)
 			{
+				var oldPlayCount = song.PlayCount;
 				song.PlayCount = MusicService.GetPlayCountOfSong(song);
+				NotifyUpdatePlayCounts?.Invoke(this,
+					new UpdatePlayCountEventArgs
+						{Song = song, OldPlayCount = oldPlayCount, NewPlayCount = song.PlayCount});
 			}
+		}
+
+		public void SetAllMusicServicePlayCounts()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

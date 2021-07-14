@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Business.CustomEventArgs;
 using Business.DTOs;
 using Business.Enums;
 using Business.Services;
@@ -13,6 +14,7 @@ namespace Business
 {
 	public class BusinessFacade
 	{
+		public event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
 		internal IMusicService MusicService { get; }
 		private BusinessFacade()
 		{
@@ -20,7 +22,8 @@ namespace Business
 			MusicService = iTunesService.Instance;
 			SongService.Instance.MusicService = MusicService;
 			MusicService.OpenService();
-			//SongService.Instance.UpdateAllPlayCounts();
+			SongService.Instance.NotifyUpdatePlayCounts +=
+				(sender, args) => NotifyUpdatePlayCounts.Invoke(sender, args);
 		}
 
 		public static BusinessFacade Instance { get; } = new();
@@ -85,5 +88,15 @@ namespace Business
 		}
 
 		public IEnumerable<SongDTO> GetAllSongs() => SongService.Instance.AllSongs;
+
+		public void UpdateDatabasePlayCounts()
+		{
+			SongService.Instance.UpdateAllPlayCounts();
+		}
+
+		public void SetMusicServicePlayCountsBasedOnDatabase()
+		{
+			SongService.Instance.SetAllMusicServicePlayCounts();
+		}
 	}
 }
