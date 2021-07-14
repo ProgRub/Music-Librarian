@@ -55,7 +55,12 @@ namespace Forms
 
 		private void ButtonUpdatePlayCounts_Click(object sender, EventArgs e)
 		{
-			MoveToScreen(new UpdatePlayCountsScreen(),this);
+			MoveToScreen(new UpdatePlayCountsScreen(UpdatePlayCountsType.UpdatePlayCountsFromMusicService),this);
+		}
+
+		private void ButtonSetPlayCountsFromDB_Click(object sender, EventArgs e)
+		{
+			MoveToScreen(new UpdatePlayCountsScreen(UpdatePlayCountsType.SetMusicServicePlayCountsFromDB),this);
 		}
 	}
 }

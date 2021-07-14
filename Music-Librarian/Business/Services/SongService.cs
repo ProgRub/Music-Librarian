@@ -94,7 +94,47 @@ namespace Business.Services
 
 		public void SetAllMusicServicePlayCounts()
 		{
-			throw new NotImplementedException();
+			var totalNumberOfSongs = AllSongs.Count;
+			var rest = totalNumberOfSongs % _numberOfThreads;
+			var result = totalNumberOfSongs / (double) _numberOfThreads;
+			var filesPerThreadList = new List<int>();
+			for (var i = 0; i < _numberOfThreads; i++)
+			{
+				if (rest-- > 0)
+					filesPerThreadList.Add((int) Math.Ceiling(result));
+				else
+					filesPerThreadList.Add((int) Math.Floor(result));
+			}
+
+			var previousFiles = 0;
+			for (var index = 0; index < _numberOfThreads; index++)
+			{
+				var thread = new Thread(SetMusicServicePlayCountsSectionOfSongs)
+				{
+					IsBackground = true
+				};
+				if (index != 0)
+				{
+					previousFiles += filesPerThreadList[index - 1];
+				}
+
+				thread.Priority = ThreadPriority.Highest;
+				Threads.Add(thread);
+				thread.Start(AllSongs.Skip(previousFiles).Take(filesPerThreadList[index]).ToHashSet());
+			}
+		}
+
+		private void SetMusicServicePlayCountsSectionOfSongs(object parameter)
+		{
+			var songsSection = (HashSet<SongDTO>) parameter;
+			foreach (var song in songsSection)
+			{
+				var oldPlayCount = MusicService.GetPlayCountOfSong(song);
+				MusicService.GetTrack(song.Title, song.Album).PlayedCount = song.PlayCount;
+				NotifyUpdatePlayCounts?.Invoke(this,
+					new UpdatePlayCountEventArgs
+						{Song = song, OldPlayCount = oldPlayCount, NewPlayCount = song.PlayCount});
+			}
 		}
 	}
 }

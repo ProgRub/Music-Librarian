@@ -37,6 +37,7 @@ namespace Forms
 			this.ButtonSearchLibrary = new System.Windows.Forms.Button();
 			this.ButtonManageGenres = new System.Windows.Forms.Button();
 			this.ButtonUpdatePlayCounts = new System.Windows.Forms.Button();
+			this.ButtonSetPlayCountsFromDB = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// ButtonBack
@@ -172,10 +173,31 @@ namespace Forms
 			this.ButtonUpdatePlayCounts.UseVisualStyleBackColor = false;
 			this.ButtonUpdatePlayCounts.Click += new System.EventHandler(this.ButtonUpdatePlayCounts_Click);
 			// 
+			// ButtonSetPlayCountsFromDB
+			// 
+			this.ButtonSetPlayCountsFromDB.AutoSize = true;
+			this.ButtonSetPlayCountsFromDB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonSetPlayCountsFromDB.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonSetPlayCountsFromDB.FlatAppearance.BorderSize = 0;
+			this.ButtonSetPlayCountsFromDB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonSetPlayCountsFromDB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonSetPlayCountsFromDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonSetPlayCountsFromDB.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonSetPlayCountsFromDB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonSetPlayCountsFromDB.Location = new System.Drawing.Point(410, 207);
+			this.ButtonSetPlayCountsFromDB.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonSetPlayCountsFromDB.Name = "ButtonSetPlayCountsFromDB";
+			this.ButtonSetPlayCountsFromDB.Size = new System.Drawing.Size(212, 27);
+			this.ButtonSetPlayCountsFromDB.TabIndex = 13;
+			this.ButtonSetPlayCountsFromDB.Text = "Set Play Counts From DB";
+			this.ButtonSetPlayCountsFromDB.UseVisualStyleBackColor = false;
+			this.ButtonSetPlayCountsFromDB.Click += new System.EventHandler(this.ButtonSetPlayCountsFromDB_Click);
+			// 
 			// HomeScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.ButtonSetPlayCountsFromDB);
 			this.Controls.Add(this.ButtonUpdatePlayCounts);
 			this.Controls.Add(this.ButtonManageGenres);
 			this.Controls.Add(this.ButtonSearchLibrary);
@@ -194,6 +216,7 @@ namespace Forms
 			this.Controls.SetChildIndex(this.ButtonSearchLibrary, 0);
 			this.Controls.SetChildIndex(this.ButtonManageGenres, 0);
 			this.Controls.SetChildIndex(this.ButtonUpdatePlayCounts, 0);
+			this.Controls.SetChildIndex(this.ButtonSetPlayCountsFromDB, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -209,5 +232,6 @@ namespace Forms
 		private System.Windows.Forms.Button ButtonManageGenres;
 		private System.Windows.Forms.Button ButtonChooseFolder;
 		private System.Windows.Forms.Button ButtonUpdatePlayCounts;
+		private System.Windows.Forms.Button ButtonSetPlayCountsFromDB;
 	}
 }

@@ -101,8 +101,4 @@ namespace Forms
 			_numberOfWrittenLines++;
 		}
 	}
-
-	public enum UpdatePlayCountsType
-	{UpdatePlayCountsFromMusicService,SetMusicServicePlayCountsFromDB
-	}
 }
