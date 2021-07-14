@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
+using Business.Commands;
 
 namespace Forms
 {
@@ -21,6 +22,7 @@ namespace Forms
 
 		private void HomeScreen_Enter(object sender, EventArgs e)
 		{
+			CommandsManager.Instance.ResetCommandsList();
 			_musicToDirectory = BusinessFacade.Instance.GetMusicLibraryDirectory();
 			TextBoxDirectory.Text = _musicToDirectory;
 		}
