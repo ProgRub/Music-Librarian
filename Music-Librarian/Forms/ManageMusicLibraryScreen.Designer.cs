@@ -263,6 +263,7 @@ namespace Forms
 			this.TextBoxYear.Name = "TextBoxYear";
 			this.TextBoxYear.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxYear.TabIndex = 25;
+			this.TextBoxYear.Click += new System.EventHandler(this.TextBoxYear_Click);
 			this.TextBoxYear.TextChanged += new System.EventHandler(this.TextBoxYear_TextChanged);
 			// 
 			// ControlHint
@@ -368,6 +369,7 @@ namespace Forms
 			this.TextBoxPlayCount.Name = "TextBoxPlayCount";
 			this.TextBoxPlayCount.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxPlayCount.TabIndex = 28;
+			this.TextBoxPlayCount.Click += new System.EventHandler(this.TextBoxPlayCount_Click);
 			this.TextBoxPlayCount.TextChanged += new System.EventHandler(this.TextBoxPlayCount_TextChanged);
 			// 
 			// LabelSearchFields
