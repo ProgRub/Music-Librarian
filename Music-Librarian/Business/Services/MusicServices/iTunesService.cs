@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Business.DTOs;
@@ -38,11 +39,56 @@ namespace Business.Services.MusicServices
 			GetTrack(song.Title, song.Album).Delete();
 		}
 
+		public void ChangePlayCount(SongDTO song, int newPlayCount)
+		{
+			GetTrack(song.Title, song.Album).PlayedCount = newPlayCount;
+		}
+
+		public void ChangeAlbumArtist(SongDTO song, string newAlbumArtist)
+		{
+			GetTrack(song.Title, song.Album).AlbumArtist = newAlbumArtist;
+		}
+
+		public void ChangeContributingArtists(SongDTO song, IEnumerable<string> newContributingArtists)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeAlbum(SongDTO song, string newAlbum)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeGenre(SongDTO song, string newGenre)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeSongTitle(SongDTO song, string newSongTitle)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeYear(SongDTO song, int newYear)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeTrackNumber(SongDTO song, int newTrackNumber)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeDiscNumber(SongDTO song, int newDiscNumber)
+		{
+			throw new NotImplementedException();
+		}
+
 		public int GetPlayCountOfSong(SongDTO song)
 		{
 			return GetTrack(song.Title, song.Album).PlayedCount;
 		}
-		public IITTrack GetTrack(string title, string album)
+		public IITFileOrCDTrack GetTrack(string title, string album)
 		{
 			if (_iTunes == null)
 			{
@@ -55,7 +101,7 @@ namespace Business.Services.MusicServices
 			{
 				if (tracks[index].Album == album)
 				{
-					return tracks[index];
+					return (IITFileOrCDTrack) tracks[index];
 				}
 			}
 

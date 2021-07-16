@@ -7,8 +7,10 @@ using Business.CustomEventArgs;
 using Business.DTOs;
 using Business.Services.MusicServices;
 using DB;
+using DB.Entities;
 using DB.Repositories.Implementations;
 using DB.Repositories.Interfaces;
+using Microsoft.VisualBasic.FileIO;
 using File = TagLib.File;
 
 namespace Business.Services
@@ -20,7 +22,7 @@ namespace Business.Services
 		internal ICollection<Thread> Threads { get; } = new List<Thread>();
 		internal IMusicService MusicService { get; set; }
 		internal event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
-
+		internal ISet<SongDTO> _songsToDelete;
 		private SongService()
 		{
 			_songRepository = new SongRepository(Database.GetContext());
@@ -32,6 +34,14 @@ namespace Business.Services
 
 		internal void SaveChanges()
 		{
+			var musicToDirectory = DirectoriesService.Instance.MusicToDirectory;
+			foreach (var songToDelete in _songsToDelete)
+			{
+				AllSongs.Remove(songToDelete);
+				_songRepository.Remove(_songRepository.GetById(songToDelete.Id));
+				FileSystem.DeleteFile(Path.Combine(musicToDirectory, songToDelete.Filename), UIOption.OnlyErrorDialogs,
+					RecycleOption.SendToRecycleBin);
+			}
 			foreach (var song in AllSongs)
 			{
 				_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
@@ -130,10 +140,26 @@ namespace Business.Services
 			foreach (var song in songsSection)
 			{
 				var oldPlayCount = MusicService.GetPlayCountOfSong(song);
-				MusicService.GetTrack(song.Title, song.Album).PlayedCount = song.PlayCount;
+				MusicService.ChangePlayCount(song,song.PlayCount);
 				NotifyUpdatePlayCounts?.Invoke(this,
 					new UpdatePlayCountEventArgs
 						{Song = song, OldPlayCount = oldPlayCount, NewPlayCount = song.PlayCount});
+			}
+		}
+
+		public void MarkSongsToDelete(ISet<SongDTO> songs)
+		{
+			foreach (var song in songs)
+			{
+				_songsToDelete.Add(song);
+			}
+		}
+
+		public void UnMarkSongsToDelete(ISet<SongDTO> songs)
+		{
+			foreach (var song in songs)
+			{
+				_songsToDelete.Remove(song);
 			}
 		}
 	}
