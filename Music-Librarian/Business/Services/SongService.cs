@@ -11,7 +11,6 @@ using DB.Entities;
 using DB.Repositories.Implementations;
 using DB.Repositories.Interfaces;
 using Microsoft.VisualBasic.FileIO;
-using File = TagLib.File;
 
 namespace Business.Services
 {
@@ -22,7 +21,7 @@ namespace Business.Services
 		internal ICollection<Thread> Threads { get; } = new List<Thread>();
 		internal IMusicService MusicService { get; set; }
 		internal event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
-		internal ISet<SongDTO> _songsToDelete;
+		internal ISet<SongDTO> _songsToDelete=new HashSet<SongDTO>();
 		private SongService()
 		{
 			_songRepository = new SongRepository(Database.GetContext());
@@ -39,8 +38,19 @@ namespace Business.Services
 			{
 				AllSongs.Remove(songToDelete);
 				_songRepository.Remove(_songRepository.GetById(songToDelete.Id));
-				FileSystem.DeleteFile(Path.Combine(musicToDirectory, songToDelete.Filename), UIOption.OnlyErrorDialogs,
-					RecycleOption.SendToRecycleBin);
+				try
+				{
+					MusicService.DeleteSong(songToDelete);
+				}
+				catch (Exception)
+				{
+					// ignored
+				}
+
+				var filePath = Path.Combine(musicToDirectory, songToDelete.Filename);
+				if(File.Exists(filePath))
+					FileSystem.DeleteFile(filePath, UIOption.OnlyErrorDialogs,
+						RecycleOption.SendToRecycleBin);
 			}
 			foreach (var song in AllSongs)
 			{
@@ -53,7 +63,7 @@ namespace Business.Services
 		internal MemoryStream GetAlbumArtworkMemoryStream(SongDTO song)
 		{
 			using var mp3 =
-				File.Create(Path.Combine(DirectoriesService.Instance.MusicToDirectory, song.Filename));
+				TagLib.File.Create(Path.Combine(DirectoriesService.Instance.MusicToDirectory, song.Filename));
 			return new MemoryStream(mp3.Tag.Pictures[0].Data.Data);
 		}
 

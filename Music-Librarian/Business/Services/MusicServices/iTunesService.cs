@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Business.DTOs;
@@ -95,7 +96,20 @@ namespace Business.Services.MusicServices
 				OpenService();
 			}
 
-			var tracks = _iTunesLibrary.Search(title, ITPlaylistSearchField.ITPlaylistSearchFieldSongNames);
+			IITTrackCollection tracks;
+			while (true)
+			{
+				try
+				{
+					tracks = _iTunesLibrary.Search(title, ITPlaylistSearchField.ITPlaylistSearchFieldSongNames);
+					break;
+				}
+				catch (Exception)
+				{
+					Debug.WriteLine("NO PLAYLIST");
+					_iTunesLibrary = _iTunes.LibraryPlaylist;
+				}
+			}
 			if (tracks == null) return null;
 			for (var index = 1; index <= tracks.Count; index++)
 			{

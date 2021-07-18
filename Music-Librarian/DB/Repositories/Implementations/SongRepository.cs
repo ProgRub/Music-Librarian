@@ -40,7 +40,7 @@ namespace DB.Repositories.Implementations
 
 			var album = song.Album;
 			album.Songs.Remove(song);
-			if (album.Songs.Count <= 1)
+			if (album.Songs.Count ==0)
 			{
 				_albumRepository.Remove(album);
 			}
