@@ -31,6 +31,8 @@ namespace Business.Commands.ManageLibrary
 					command.SongFile = mp3File;
 					command.Execute();
 				}
+
+				SongService.Instance.SetLastModifiedTime(song);
 				mp3File.Save();
 			}
 		}
@@ -45,6 +47,7 @@ namespace Business.Commands.ManageLibrary
 					command.Undo();
 					command.SongFile.Save();
 				}
+				SongService.Instance.SetLastModifiedTime(song);
 			}
 
 			_commands.Reverse();
@@ -59,6 +62,7 @@ namespace Business.Commands.ManageLibrary
 					command.Redo();
 					command.SongFile.Save();
 				}
+				SongService.Instance.SetLastModifiedTime(song);
 			}
 		}
 	}

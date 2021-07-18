@@ -21,7 +21,8 @@ namespace Business.Services
 		internal ICollection<Thread> Threads { get; } = new List<Thread>();
 		internal IMusicService MusicService { get; set; }
 		internal event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
-		internal ISet<SongDTO> _songsToDelete=new HashSet<SongDTO>();
+		internal ISet<SongDTO> _songsToDelete = new HashSet<SongDTO>();
+
 		private SongService()
 		{
 			_songRepository = new SongRepository(Database.GetContext());
@@ -48,10 +49,11 @@ namespace Business.Services
 				}
 
 				var filePath = Path.Combine(musicToDirectory, songToDelete.Filename);
-				if(File.Exists(filePath))
+				if (File.Exists(filePath))
 					FileSystem.DeleteFile(filePath, UIOption.OnlyErrorDialogs,
 						RecycleOption.SendToRecycleBin);
 			}
+
 			foreach (var song in AllSongs)
 			{
 				_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
@@ -150,7 +152,7 @@ namespace Business.Services
 			foreach (var song in songsSection)
 			{
 				var oldPlayCount = MusicService.GetPlayCountOfSong(song);
-				MusicService.ChangePlayCount(song,song.PlayCount);
+				MusicService.ChangePlayCount(song, song.PlayCount);
 				NotifyUpdatePlayCounts?.Invoke(this,
 					new UpdatePlayCountEventArgs
 						{Song = song, OldPlayCount = oldPlayCount, NewPlayCount = song.PlayCount});
@@ -171,6 +173,11 @@ namespace Business.Services
 			{
 				_songsToDelete.Remove(song);
 			}
+		}
+
+		public void SetLastModifiedTime(SongDTO song)
+		{
+			_songRepository.GetById(song.Id).LastModified = File.GetLastWriteTime(Path.Combine(DirectoriesService.Instance.MusicToDirectory,song.Filename));
 		}
 	}
 }

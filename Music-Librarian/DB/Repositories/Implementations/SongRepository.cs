@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace DB.Repositories.Implementations
 				album;
 			album.Songs.Add(song);
 			song.Genre = genre;
+			song.LastModified=DateTime.UtcNow;
 			Add(song);
 		}
 

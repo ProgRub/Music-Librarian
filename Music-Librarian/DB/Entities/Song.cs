@@ -20,5 +20,6 @@ namespace DB.Entities
 		public int PlayCount { get; set; }
 		public string Lyrics { get; set; }
 		public TimeSpan Duration { get; set; }
+		public DateTime LastModified { get; set; }
 	}
 }

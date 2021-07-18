@@ -54,6 +54,7 @@ namespace DB
 			modelBuilder.Entity<Song>().Property(e => e.DiscNumber).IsRequired();
 			modelBuilder.Entity<Song>().Property(e => e.PlayCount).IsRequired();
 			modelBuilder.Entity<Song>().Property(e => e.Duration).IsRequired();
+			modelBuilder.Entity<Song>().Property(e => e.LastModified).IsRequired();
 			modelBuilder.Entity<Album>().Property(e => e.Id).ValueGeneratedOnAdd();
 			modelBuilder.Entity<Album>().Property(e => e.Year).IsRequired();
 			modelBuilder.Entity<Album>().Property(e => e.Title).IsRequired();
