@@ -19,7 +19,7 @@ namespace DB.Repositories.Implementations
 			_genreRepository = new GenreRepository(context);
 		}
 
-		public void Add(Song song, string albumTitle, string genreName, int totalTrackCount, int totalDiscCount)
+		public void Add(Song song, string albumTitle, string genreName, int totalTrackCount, int totalDiscCount,DateTime lastModifiedDateTime)
 		{
 			var genre = _genreRepository.GetGenreOrCreateNewOne(genreName);
 			var album = _albumRepository.GetAlbumOrCreateNewOne(albumTitle, genre, song, totalTrackCount,
@@ -28,7 +28,7 @@ namespace DB.Repositories.Implementations
 				album;
 			album.Songs.Add(song);
 			song.Genre = genre;
-			song.LastModified=DateTime.UtcNow;
+			song.LastModified=lastModifiedDateTime;
 			Add(song);
 		}
 
@@ -45,7 +45,7 @@ namespace DB.Repositories.Implementations
 			}
 		}
 
-		private void ChangeGenre(Song song, string genreName)
+		public void ChangeGenre(Song song, string genreName)
 		{
 			var newGenre = _genreRepository.GetGenreOrCreateNewOne(genreName);
 			var oldGenre = song.Genre;
