@@ -30,6 +30,30 @@ namespace DB.Repositories.Implementations
 			Add(song);
 		}
 
+		public void ChangeAlbum(Song song, string albumTitle,  int totalTrackCount, int totalDiscCount)
+		{
+			var newAlbum =
+				_albumRepository.GetAlbumOrCreateNewOne(albumTitle, song.Genre, song, totalTrackCount, totalDiscCount);
+			var oldAlbum = song.Album;
+			song.Album = newAlbum;
+			oldAlbum.Songs.Remove(song);
+			if (oldAlbum.Songs.Count == 0)
+			{
+				_albumRepository.Remove(oldAlbum);
+			}
+		}
+
+		private void ChangeGenre(Song song, string genreName)
+		{
+			var newGenre = _genreRepository.GetGenreOrCreateNewOne(genreName);
+			var oldGenre = song.Genre;
+			song.Genre = newGenre;
+			if (!Find(e => e.Genre == oldGenre).Any())
+			{
+				_genreRepository.Remove(oldGenre);
+			}
+		}
+
 		public new void Remove(Song song)
 		{
 			var genre = song.Genre;
