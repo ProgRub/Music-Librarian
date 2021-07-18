@@ -1,5 +1,6 @@
 ﻿using Business.DTOs;
-using iTunesLib;
+using Business.Services;
+using DB.Entities;
 using TagLib;
 
 namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
@@ -10,6 +11,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 		private readonly string _newAlbumArtist;
 		private string _oldAlbumArtist;
 		private SongDTO _song;
+		private Song _songInDB;
 
 		File IChangeSongDetailsCommand.SongFile
 		{
@@ -32,8 +34,10 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 		public void Execute()
 		{
 			_oldAlbumArtist = _songFile.Tag.FirstAlbumArtist;
+			_songInDB = SongService.Instance.GetSongById(_song.Id);
 			_songFile.Tag.AlbumArtists = new[] {_newAlbumArtist};
 			_song.AlbumArtist = _newAlbumArtist;
+			_songInDB.AlbumArtist = _newAlbumArtist;
 			BusinessFacade.Instance.MusicService.ChangeAlbumArtist(_song,_newAlbumArtist);
 		}
 
@@ -41,9 +45,16 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 		{
 			_songFile.Tag.AlbumArtists = new[] {_oldAlbumArtist};
 			_song.AlbumArtist = _oldAlbumArtist;
+			_songInDB.AlbumArtist = _oldAlbumArtist;
 			BusinessFacade.Instance.MusicService.ChangeAlbumArtist(_song,_oldAlbumArtist);
 		}
 
-		public void Redo() => Execute();
+		public void Redo()
+		{
+			_songFile.Tag.AlbumArtists = new[] {_newAlbumArtist};
+			_song.AlbumArtist = _newAlbumArtist;
+			_songInDB.AlbumArtist = _newAlbumArtist;
+			BusinessFacade.Instance.MusicService.ChangeAlbumArtist(_song,_newAlbumArtist);
+		}
 	}
 }

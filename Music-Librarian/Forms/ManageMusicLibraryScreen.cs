@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Business;
@@ -8,7 +7,6 @@ using Business.Commands;
 using Business.Commands.ManageLibrary;
 using Business.Commands.ManageLibrary.ChangeSongDetailsCommands;
 using Business.DTOs;
-using DB.Entities;
 using Forms.Commands;
 
 namespace Forms
@@ -59,7 +57,7 @@ namespace Forms
 			var newContributingArtists = TextBoxChangeContributingArtists.Text.Trim();
 			if (newContributingArtists != _changeTextBoxesContent["Contributing Artists"])
 			{
-
+				macroChangeSongDetailsCommand.Add(new CommandChangeContributingArtists(newContributingArtists));
 			}
 
 			var newAlbum = TextBoxChangeAlbum.Text.Trim();

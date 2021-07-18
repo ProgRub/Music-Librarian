@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace DB.Entities
+﻿namespace DB.Entities
 {
 	public class Directories
 	{

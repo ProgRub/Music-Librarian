@@ -29,6 +29,7 @@ namespace Business.Commands.ManageLibrary
 				foreach (var command in _commands)
 				{
 					command.SongFile = mp3File;
+					command.Song = song;
 					command.Execute();
 				}
 

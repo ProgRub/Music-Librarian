@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Business.DTOs;
 using Business.Services;
-using DB.Entities;
 
 namespace Business.Commands.ManageLibrary
 {

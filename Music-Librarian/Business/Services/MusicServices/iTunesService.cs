@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Business.DTOs;
-using DB.Entities;
 using iTunesLib;
 
 namespace Business.Services.MusicServices
@@ -52,7 +51,7 @@ namespace Business.Services.MusicServices
 
 		public void ChangeContributingArtists(SongDTO song, IEnumerable<string> newContributingArtists)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).Artist = string.Join(';', newContributingArtists);
 		}
 
 		public void ChangeAlbum(SongDTO song, string newAlbum)
