@@ -69,7 +69,7 @@ namespace Forms
 			var newSongTitle = TextBoxChangeSongTitle.Text.Trim();
 			if (newSongTitle != _changeTextBoxesContent["Song Title"])
 			{
-
+				macroChangeSongDetailsCommand.Add(new CommandChangeSongTitle(newSongTitle));
 			}
 
 			var newGenre = TextBoxChangeGenre.Text.Trim();

@@ -66,7 +66,7 @@ namespace Business.Services.MusicServices
 
 		public void ChangeSongTitle(SongDTO song, string newSongTitle)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).Name = newSongTitle;
 		}
 
 		public void ChangeYear(SongDTO song, int newYear)
