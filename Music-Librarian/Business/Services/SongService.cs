@@ -24,9 +24,11 @@ namespace Business.Services
 		private ISet<SongDTO> _songsToDelete = new HashSet<SongDTO>();
 		private IDictionary<SongDTO, string> _songsAlbumChanges = new Dictionary<SongDTO, string>();
 		private IDictionary<SongDTO, string> _songsGenreChanges = new Dictionary<SongDTO, string>();
+		private bool _needToUpdateDatabasePlayCounts;
 
 		private SongService()
 		{
+			_needToUpdateDatabasePlayCounts = false;
 			_songRepository = new SongRepository(Database.GetContext());
 			AllSongs = _songRepository.GetAll().Select(SongDTO.ConvertSongToDTO).ToHashSet();
 		}
@@ -70,9 +72,12 @@ namespace Business.Services
 				_songRepository.ChangeGenre(_songRepository.GetById(song.Id),genreName);
 			}
 
-			foreach (var song in AllSongs)
+			if(_needToUpdateDatabasePlayCounts)
 			{
-				_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
+				foreach (var song in AllSongs)
+				{
+					_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
+				}
 			}
 
 			_songRepository.SaveChanges();
@@ -87,6 +92,7 @@ namespace Business.Services
 
 		internal void UpdateAllPlayCounts()
 		{
+			_needToUpdateDatabasePlayCounts = true;
 			var totalNumberOfSongs = AllSongs.Count;
 			var rest = totalNumberOfSongs % _numberOfThreads;
 			var result = totalNumberOfSongs / (double) _numberOfThreads;
@@ -132,6 +138,7 @@ namespace Business.Services
 
 		internal void SetAllMusicServicePlayCounts()
 		{
+			_needToUpdateDatabasePlayCounts = true;
 			var totalNumberOfSongs = AllSongs.Count;
 			var rest = totalNumberOfSongs % _numberOfThreads;
 			var result = totalNumberOfSongs / (double) _numberOfThreads;

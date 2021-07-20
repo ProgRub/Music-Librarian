@@ -40,7 +40,6 @@ namespace Forms
 
 		private void ButtonSaveChanges_Click(object sender, EventArgs e)
 		{
-
 			var executeMacro = false;
 			var macroCommand = new MacroCommand();
 			var newFilename = TextBoxChangeFilename.Text.Trim();
