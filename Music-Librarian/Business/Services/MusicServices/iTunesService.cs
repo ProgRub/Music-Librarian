@@ -56,12 +56,12 @@ namespace Business.Services.MusicServices
 
 		public void ChangeAlbum(SongDTO song, string newAlbum)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).Album = newAlbum;
 		}
 
 		public void ChangeGenre(SongDTO song, string newGenre)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).Genre = newGenre;
 		}
 
 		public void ChangeSongTitle(SongDTO song, string newSongTitle)

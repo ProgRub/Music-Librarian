@@ -14,14 +14,16 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace Business.Services
 {
-	public class SongService
+	internal class SongService
 	{
 		private ISongRepository _songRepository;
 		private static readonly int _numberOfThreads = (int) Math.Pow(2, (int) Math.Sqrt(Environment.ProcessorCount));
 		internal ICollection<Thread> Threads { get; } = new List<Thread>();
 		internal IMusicService MusicService { get; set; }
 		internal event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
-		internal ISet<SongDTO> _songsToDelete = new HashSet<SongDTO>();
+		private ISet<SongDTO> _songsToDelete = new HashSet<SongDTO>();
+		private IDictionary<SongDTO, string> _songsAlbumChanges = new Dictionary<SongDTO, string>();
+		private IDictionary<SongDTO, string> _songsGenreChanges = new Dictionary<SongDTO, string>();
 
 		private SongService()
 		{
@@ -53,6 +55,19 @@ namespace Business.Services
 				if (File.Exists(filePath))
 					FileSystem.DeleteFile(filePath, UIOption.OnlyErrorDialogs,
 						RecycleOption.SendToRecycleBin);
+			}
+
+			foreach (var (song, albumTitle) in _songsAlbumChanges)
+			{
+				if (song.Album == albumTitle) continue;
+				var songInDB = _songRepository.GetById(song.Id);
+				_songRepository.ChangeAlbum(songInDB,albumTitle,songInDB.Album.TotalTrackCount,songInDB.Album.TotalDiscCount);
+			}
+
+			foreach (var (song, genreName) in _songsGenreChanges)
+			{
+				if (song.Genre == genreName) continue;
+				_songRepository.ChangeGenre(_songRepository.GetById(song.Id),genreName);
 			}
 
 			foreach (var song in AllSongs)
@@ -115,7 +130,7 @@ namespace Business.Services
 			}
 		}
 
-		public void SetAllMusicServicePlayCounts()
+		internal void SetAllMusicServicePlayCounts()
 		{
 			var totalNumberOfSongs = AllSongs.Count;
 			var rest = totalNumberOfSongs % _numberOfThreads;
@@ -160,7 +175,7 @@ namespace Business.Services
 			}
 		}
 
-		public void MarkSongsToDelete(ISet<SongDTO> songs)
+		internal void MarkSongsToDelete(ISet<SongDTO> songs)
 		{
 			foreach (var song in songs)
 			{
@@ -168,7 +183,7 @@ namespace Business.Services
 			}
 		}
 
-		public void UnMarkSongsToDelete(ISet<SongDTO> songs)
+		internal void UnMarkSongsToDelete(ISet<SongDTO> songs)
 		{
 			foreach (var song in songs)
 			{
@@ -176,9 +191,19 @@ namespace Business.Services
 			}
 		}
 
-		public void SetLastModifiedTime(SongDTO song)
+		internal void SetLastModifiedTime(SongDTO song)
 		{
 			_songRepository.GetById(song.Id).LastModified = File.GetLastWriteTime(Path.Combine(DirectoriesService.Instance.MusicToDirectory,song.Filename));
+		}
+
+		internal void ChangeSongAlbum(SongDTO song, string newAlbum)
+		{
+			_songsAlbumChanges[song] = newAlbum;
+		}
+
+		internal void ChangeSongGenre(SongDTO song, string newGenre)
+		{
+			_songsGenreChanges[song] = newGenre;
 		}
 	}
 }

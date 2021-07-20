@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Business;
@@ -47,62 +48,75 @@ namespace Forms
 				macroCommand.Add(new CommandChangeFilename(GetSelectedSongs().First(),newFilename));
 			}
 
+			var addChangeDetailsMacroToExecute = false;
 			var macroChangeSongDetailsCommand = new MacroCommandChangeSongsDetails(GetSelectedSongs());
 			var newAlbumArtist = TextBoxChangeAlbumArtist.Text.Trim();
 			if (newAlbumArtist != _changeTextBoxesContent["Album Artist"])
 			{
 				macroChangeSongDetailsCommand.Add(new CommandChangeAlbumArtist(newAlbumArtist));
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newContributingArtists = TextBoxChangeContributingArtists.Text.Trim();
 			if (newContributingArtists != _changeTextBoxesContent["Contributing Artists"])
 			{
 				macroChangeSongDetailsCommand.Add(new CommandChangeContributingArtists(newContributingArtists));
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newAlbum = TextBoxChangeAlbum.Text.Trim();
 			if (newAlbum != _changeTextBoxesContent["Album"])
 			{
-
+				macroChangeSongDetailsCommand.Add(new CommandChangeSongAlbum(newAlbum));
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newSongTitle = TextBoxChangeSongTitle.Text.Trim();
 			if (newSongTitle != _changeTextBoxesContent["Song Title"])
 			{
 				macroChangeSongDetailsCommand.Add(new CommandChangeSongTitle(newSongTitle));
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newGenre = TextBoxChangeGenre.Text.Trim();
 			if (newGenre != _changeTextBoxesContent["Genre"])
 			{
-
+				macroChangeSongDetailsCommand.Add(new CommandChangeSongGenre(newGenre));
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newYear = TextBoxChangeYear.Text.Trim();
 			if (newYear != _changeTextBoxesContent["Year"])
 			{
-
+				
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newTrackNumber = TextBoxChangeTrackNumber.Text.Trim();
 			if (newTrackNumber != _changeTextBoxesContent["Track Number"])
 			{
-
+				
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newDiscNumber = TextBoxChangeDiscNumber.Text.Trim();
 			if (newDiscNumber != _changeTextBoxesContent["Disc Number"])
 			{
-
+				
+				addChangeDetailsMacroToExecute = true;
 			}
 
 			var newPlayCount = TextBoxChangePlayCount.Text.Trim();
 			if (newPlayCount != _changeTextBoxesContent["Play Count"])
 			{
-
+				
+				addChangeDetailsMacroToExecute = true;
 			}
-			macroCommand.Add(macroChangeSongDetailsCommand);
-			CommandsManager.Instance.Execute(macroCommand);
+			if(addChangeDetailsMacroToExecute)
+			{
+				macroCommand.Add(macroChangeSongDetailsCommand);
+				CommandsManager.Instance.Execute(macroCommand);
+			}
 			FillChangeTextBoxes();
 		}
 
