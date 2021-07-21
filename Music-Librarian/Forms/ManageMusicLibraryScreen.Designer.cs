@@ -435,6 +435,8 @@ namespace Forms
 			// 
 			// TextBoxChangeGenre
 			// 
+			this.TextBoxChangeGenre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.TextBoxChangeGenre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.TextBoxChangeGenre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxChangeGenre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxChangeGenre.Enabled = false;

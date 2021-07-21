@@ -46,12 +46,15 @@ namespace Forms
 		{
 			var executeMacro = false;
 			var macroCommand = new MacroCommand();
-			var newFilename = TextBoxChangeFilename.Text.Trim();
-			if (newFilename != _changeTextBoxesContent["Filename"])
+			if(TextBoxChangeFilename.Enabled)
 			{
-				macroCommand.Add(new CommandRenameSelectedListBoxItem(newFilename, ListBoxSongFilenames));
-				macroCommand.Add(new CommandChangeFilename(GetSelectedSongs().First(), newFilename));
-				executeMacro = true;
+				var newFilename = TextBoxChangeFilename.Text.Trim();
+				if (newFilename != _changeTextBoxesContent["Filename"])
+				{
+					macroCommand.Add(new CommandRenameSelectedListBoxItem(newFilename, ListBoxSongFilenames));
+					macroCommand.Add(new CommandChangeFilename(GetSelectedSongs().First(), newFilename));
+					executeMacro = true;
+				}
 			}
 
 			var macroChangeSongDetailsCommand = new MacroCommandChangeSongsDetails(GetSelectedSongs());
@@ -305,56 +308,56 @@ namespace Forms
 			if (selectedSongs.All(song => song.AlbumArtist == firstSong.AlbumArtist))
 			{
 				TextBoxChangeAlbumArtist.Text = firstSong.AlbumArtist;
-				_changeTextBoxesContent["Album Artist"] = TextBoxChangeAlbumArtist.Text;
 			}
+			_changeTextBoxesContent["Album Artist"] = TextBoxChangeAlbumArtist.Text;
 
 			if (selectedSongs.All(song => Equals(song.ContributingArtists, firstSong.ContributingArtists)))
 			{
 				TextBoxChangeContributingArtists.Text = string.Join(';', firstSong.ContributingArtists);
-				_changeTextBoxesContent["Contributing Artists"] = TextBoxChangeContributingArtists.Text;
 			}
+			_changeTextBoxesContent["Contributing Artists"] = TextBoxChangeContributingArtists.Text;
 
 			if (selectedSongs.All(song => song.Album == firstSong.Album))
 			{
 				TextBoxChangeAlbum.Text = firstSong.Album;
-				_changeTextBoxesContent["Album"] = TextBoxChangeAlbum.Text;
 			}
+			_changeTextBoxesContent["Album"] = TextBoxChangeAlbum.Text;
 
 			if (selectedSongs.All(song => song.Title == firstSong.Title))
 			{
 				TextBoxChangeSongTitle.Text = firstSong.Title;
-				_changeTextBoxesContent["Song Title"] = TextBoxChangeSongTitle.Text;
 			}
+			_changeTextBoxesContent["Song Title"] = TextBoxChangeSongTitle.Text;
 
 			if (selectedSongs.All(song => song.Genre == firstSong.Genre))
 			{
 				TextBoxChangeGenre.Text = firstSong.Genre;
-				_changeTextBoxesContent["Genre"] = TextBoxChangeGenre.Text;
 			}
+			_changeTextBoxesContent["Genre"] = TextBoxChangeGenre.Text;
 
 			if (selectedSongs.All(song => song.Year == firstSong.Year))
 			{
 				TextBoxChangeYear.Text = firstSong.Year.ToString();
-				_changeTextBoxesContent["Year"] = TextBoxChangeYear.Text;
 			}
+			_changeTextBoxesContent["Year"] = TextBoxChangeYear.Text;
 
 			if (selectedSongs.All(song => song.TrackNumber == firstSong.TrackNumber))
 			{
 				TextBoxChangeTrackNumber.Text = firstSong.TrackNumber.ToString();
-				_changeTextBoxesContent["Track Number"] = TextBoxChangeTrackNumber.Text;
 			}
+			_changeTextBoxesContent["Track Number"] = TextBoxChangeTrackNumber.Text;
 
 			if (selectedSongs.All(song => song.DiscNumber == firstSong.DiscNumber))
 			{
 				TextBoxChangeDiscNumber.Text = firstSong.DiscNumber.ToString();
-				_changeTextBoxesContent["Disc Number"] = TextBoxChangeDiscNumber.Text;
 			}
+			_changeTextBoxesContent["Disc Number"] = TextBoxChangeDiscNumber.Text;
 
 			if (selectedSongs.All(song => song.PlayCount == firstSong.PlayCount))
 			{
 				TextBoxChangePlayCount.Text = firstSong.PlayCount.ToString();
-				_changeTextBoxesContent["Play Count"] = TextBoxChangePlayCount.Text;
 			}
+			_changeTextBoxesContent["Play Count"] = TextBoxChangePlayCount.Text;
 		}
 
 		private void ClearChangeTextBoxes()
