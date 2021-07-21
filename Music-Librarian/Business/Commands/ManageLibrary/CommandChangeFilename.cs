@@ -6,8 +6,12 @@ namespace Business.Commands.ManageLibrary
 {
 	public class CommandChangeFilename : ICommand
 	{
-		private SongDTO _song;
-		private string _oldFilePath, _newFilePath,_newFilename,_oldFilename;
+		private readonly SongDTO _song;
+		private readonly string _oldFilePath;
+		private readonly string _newFilePath;
+		private readonly string _newFilename;
+		private readonly string _oldFilename;
+
 		public CommandChangeFilename(SongDTO song, string newFilename)
 		{
 			_song = song;

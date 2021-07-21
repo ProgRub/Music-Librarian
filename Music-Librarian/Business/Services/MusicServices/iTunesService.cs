@@ -39,11 +39,6 @@ namespace Business.Services.MusicServices
 			GetTrack(song.Title, song.Album).Delete();
 		}
 
-		public void ChangePlayCount(SongDTO song, int newPlayCount)
-		{
-			GetTrack(song.Title, song.Album).PlayedCount = newPlayCount;
-		}
-
 		public void ChangeAlbumArtist(SongDTO song, string newAlbumArtist)
 		{
 			GetTrack(song.Title, song.Album).AlbumArtist = newAlbumArtist;
@@ -71,17 +66,21 @@ namespace Business.Services.MusicServices
 
 		public void ChangeYear(SongDTO song, int newYear)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).Year = newYear;
 		}
 
 		public void ChangeTrackNumber(SongDTO song, int newTrackNumber)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).TrackNumber = newTrackNumber;
 		}
 
 		public void ChangeDiscNumber(SongDTO song, int newDiscNumber)
 		{
-			throw new NotImplementedException();
+			GetTrack(song.Title, song.Album).DiscNumber = newDiscNumber;
+		}
+		public void ChangePlayCount(SongDTO song, int newPlayCount)
+		{
+			GetTrack(song.Title, song.Album).PlayedCount = newPlayCount;
 		}
 
 		public int GetPlayCountOfSong(SongDTO song)

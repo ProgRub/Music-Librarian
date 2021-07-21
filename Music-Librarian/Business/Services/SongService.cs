@@ -16,14 +16,14 @@ namespace Business.Services
 {
 	internal class SongService
 	{
-		private ISongRepository _songRepository;
+		private readonly ISongRepository _songRepository;
 		private static readonly int _numberOfThreads = (int) Math.Pow(2, (int) Math.Sqrt(Environment.ProcessorCount));
 		internal ICollection<Thread> Threads { get; } = new List<Thread>();
 		internal IMusicService MusicService { get; set; }
 		internal event EventHandler<UpdatePlayCountEventArgs> NotifyUpdatePlayCounts;
-		private ISet<SongDTO> _songsToDelete = new HashSet<SongDTO>();
-		private IDictionary<SongDTO, string> _songsAlbumChanges = new Dictionary<SongDTO, string>();
-		private IDictionary<SongDTO, string> _songsGenreChanges = new Dictionary<SongDTO, string>();
+		private readonly ISet<SongDTO> _songsToDelete = new HashSet<SongDTO>();
+		private readonly IDictionary<SongDTO, string> _songsAlbumChanges = new Dictionary<SongDTO, string>();
+		private readonly IDictionary<SongDTO, string> _songsGenreChanges = new Dictionary<SongDTO, string>();
 		private bool _needToUpdateDatabasePlayCounts;
 
 		private SongService()
@@ -61,15 +61,16 @@ namespace Business.Services
 
 			foreach (var (song, albumTitle) in _songsAlbumChanges)
 			{
-				if (song.Album == albumTitle) continue;
 				var songInDB = _songRepository.GetById(song.Id);
+				if (songInDB.Album.Title == albumTitle) continue;
 				_songRepository.ChangeAlbum(songInDB,albumTitle,songInDB.Album.TotalTrackCount,songInDB.Album.TotalDiscCount);
 			}
 
 			foreach (var (song, genreName) in _songsGenreChanges)
 			{
-				if (song.Genre == genreName) continue;
-				_songRepository.ChangeGenre(_songRepository.GetById(song.Id),genreName);
+				var songInDB = _songRepository.GetById(song.Id);
+				if (songInDB.Genre.Name == genreName) continue;
+				_songRepository.ChangeGenre(songInDB,genreName);
 			}
 
 			if(_needToUpdateDatabasePlayCounts)

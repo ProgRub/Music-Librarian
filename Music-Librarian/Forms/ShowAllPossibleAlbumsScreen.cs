@@ -10,8 +10,8 @@ namespace Forms
 	public partial class ShowAllPossibleAlbumsScreen : BaseControl
 	{
 		private IEnumerable<AlbumDTO> _albums;
-		private string _timeSpanFormat;
-		private ListViewColumnSorter _columnSorter;
+		private readonly string _timeSpanFormat;
+		private readonly ListViewColumnSorter _columnSorter;
 
 		public ShowAllPossibleAlbumsScreen()
 		{

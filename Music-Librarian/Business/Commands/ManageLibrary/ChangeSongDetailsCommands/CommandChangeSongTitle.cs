@@ -10,7 +10,8 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 		private File _songFile;
 		private SongDTO _song;
 		private Song _songInDB;
-		private string _oldSongTitle, _newSongTitle;
+		private string _oldSongTitle;
+		private readonly string _newSongTitle;
 
 		File IChangeSongDetailsCommand.SongFile
 		{

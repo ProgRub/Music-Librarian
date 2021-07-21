@@ -9,8 +9,8 @@ namespace Forms
 	public partial class UpdatePlayCountsScreen : BaseControl
 	{
 		private int _numberOfWrittenLines;
-		private object _mutex=new();
-		private UpdatePlayCountsType _type;
+		private readonly object _mutex=new();
+		private readonly UpdatePlayCountsType _type;
 
 		public UpdatePlayCountsScreen(UpdatePlayCountsType type)
 		{

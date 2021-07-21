@@ -51,6 +51,12 @@ namespace DB.Repositories.Implementations
 			{
 				_genreRepository.Remove(oldGenre);
 			}
+
+			var album = song.Album;
+			var albumGenreGroups=album.Songs.GroupBy(song => song.GenreId, song=>song,
+				(genreId, songs) => new {Key = genreId, Count = songs.Count()});
+			albumGenreGroups=albumGenreGroups.OrderByDescending(e => e.Count);
+			song.Album.GenreId = albumGenreGroups.First().Key;
 		}
 
 		public new void Remove(Song song)

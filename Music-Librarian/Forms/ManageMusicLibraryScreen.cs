@@ -8,6 +8,7 @@ using Business.Commands;
 using Business.Commands.ManageLibrary;
 using Business.Commands.ManageLibrary.ChangeSongDetailsCommands;
 using Business.DTOs;
+using Business.Enums;
 using Forms.Commands;
 
 namespace Forms
@@ -18,11 +19,14 @@ namespace Forms
 		private ISet<SongDTO> _songs;
 		private ISet<GenreDTO> _genres;
 		private Timer _searchTimer;
-		private IDictionary<string, string> _changeTextBoxesContent = new Dictionary<string, string> {
-			{"Filename", ""},{"Album Artist", ""}, {"Album", ""}, {"Contributing Artists", ""}, {"Song Title", ""},
-			{"Genre", ""}, {"Year", ""},{"Track Number", ""},{"Disc Number", ""}, {"Play Count", ""}};
 
-		private IDictionary<string, bool> _searchParameters = new Dictionary<string, bool>
+		private readonly IDictionary<string, string> _changeTextBoxesContent = new Dictionary<string, string>
+		{
+			{"Filename", ""}, {"Album Artist", ""}, {"Album", ""}, {"Contributing Artists", ""}, {"Song Title", ""},
+			{"Genre", ""}, {"Year", ""}, {"Track Number", ""}, {"Disc Number", ""}, {"Play Count", ""}
+		};
+
+		private readonly IDictionary<string, bool> _searchParameters = new Dictionary<string, bool>
 		{
 			{"Album Artist", false}, {"Album", false}, {"Contributing Artists", false}, {"Song Title", false},
 			{"Genre", false}, {"Year", false}, {"Play Count", false}
@@ -45,10 +49,11 @@ namespace Forms
 			var newFilename = TextBoxChangeFilename.Text.Trim();
 			if (newFilename != _changeTextBoxesContent["Filename"])
 			{
-				macroCommand.Add(new CommandRenameSelectedListBoxItem(newFilename,ListBoxSongFilenames));
-				macroCommand.Add(new CommandChangeFilename(GetSelectedSongs().First(),newFilename));
+				macroCommand.Add(new CommandRenameSelectedListBoxItem(newFilename, ListBoxSongFilenames));
+				macroCommand.Add(new CommandChangeFilename(GetSelectedSongs().First(), newFilename));
 				executeMacro = true;
 			}
+
 			var macroChangeSongDetailsCommand = new MacroCommandChangeSongsDetails(GetSelectedSongs());
 			var newAlbumArtist = TextBoxChangeAlbumArtist.Text.Trim();
 			if (newAlbumArtist != _changeTextBoxesContent["Album Artist"])
@@ -85,39 +90,140 @@ namespace Forms
 				executeMacro = true;
 			}
 
-			var newYear = TextBoxChangeYear.Text.Trim();
-			if (newYear != _changeTextBoxesContent["Year"])
+			var newYearText = TextBoxChangeYear.Text.Trim();
+			if (newYearText != _changeTextBoxesContent["Year"])
 			{
-				
+				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+				var yearChange = (int) commandParameters[1];
+				macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
 				executeMacro = true;
 			}
 
-			var newTrackNumber = TextBoxChangeTrackNumber.Text.Trim();
-			if (newTrackNumber != _changeTextBoxesContent["Track Number"])
+			var newTrackNumberText = TextBoxChangeTrackNumber.Text.Trim();
+			if (newTrackNumberText != _changeTextBoxesContent["Track Number"])
 			{
-				
+				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+				var trackNumberChange = (int) commandParameters[1];
+				//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
 				executeMacro = true;
 			}
 
-			var newDiscNumber = TextBoxChangeDiscNumber.Text.Trim();
-			if (newDiscNumber != _changeTextBoxesContent["Disc Number"])
+			var newDiscNumberText = TextBoxChangeDiscNumber.Text.Trim();
+			if (newDiscNumberText != _changeTextBoxesContent["Disc Number"])
 			{
-				
+				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+				var discNumberChange = (int) commandParameters[1];
+				//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
 				executeMacro = true;
 			}
 
-			var newPlayCount = TextBoxChangePlayCount.Text.Trim();
-			if (newPlayCount != _changeTextBoxesContent["Play Count"])
+			var newPlayCountText = TextBoxChangePlayCount.Text.Trim();
+			if (newPlayCountText != _changeTextBoxesContent["Play Count"])
 			{
-				
+				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+				var playCountChange = (int) commandParameters[1];
+				//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
 				executeMacro = true;
 			}
-			if(executeMacro)
+
+			if (executeMacro)
 			{
 				macroCommand.Add(macroChangeSongDetailsCommand);
 				CommandsManager.Instance.Execute(macroCommand);
 			}
+
 			FillChangeTextBoxes();
+		}
+
+		private object[] GetIntegerDetailsChangeParameters(string text)
+		{
+			var textSplit = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+			var integerChange = 0;
+			var changeType = IntegerSongDetailsChangeType.Set;
+			switch (textSplit.Length)
+			{
+				case > 2:
+					ShowTextBoxErrorMessage(TextBoxYear,
+						"Wrong format. Needs to be \"+2\" or \"+ 2\", for example");
+					break;
+				case 2:
+				{
+					var changeOperator = textSplit[0];
+					try
+					{
+						integerChange = int.Parse(textSplit[1]);
+
+						switch (changeOperator)
+						{
+							case "+":
+								changeType = IntegerSongDetailsChangeType.Add;
+								break;
+							case "-":
+								changeType = IntegerSongDetailsChangeType.Subtract;
+								break;
+							default:
+								ShowTextBoxErrorMessage(TextBoxYear,
+									"You didn't indicate a valid comparison operator, check help if you have doubts");
+								break;
+						}
+					}
+					catch (FormatException)
+					{
+						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid number");
+					}
+
+					break;
+				}
+				default:
+				{
+					var indexOfFirstNumber = textSplit[0].IndexOfAny("123456789".ToCharArray());
+					if (indexOfFirstNumber == -1)
+					{
+						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid number");
+					}
+					else
+					{
+						var comparisonOperator = textSplit[0][..indexOfFirstNumber];
+						try
+						{
+							integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
+
+							switch (comparisonOperator)
+							{
+								case "+":
+									changeType = IntegerSongDetailsChangeType.Add;
+									break;
+								case "-":
+									changeType = IntegerSongDetailsChangeType.Subtract;
+									break;
+								default:
+									if (int.TryParse(textSplit[0], out integerChange))
+									{
+										changeType = IntegerSongDetailsChangeType.Set;
+										integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
+									}
+									else
+										ShowTextBoxErrorMessage(TextBoxYear,
+											"You didn't indicate a valid number");
+
+									break;
+							}
+						}
+						catch (FormatException)
+						{
+							ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid number");
+						}
+					}
+
+					break;
+				}
+			}
+
+			return new object[]{changeType,integerChange};
 		}
 
 		private void ManageMusicLibraryScreen_Enter(object sender, EventArgs e)
@@ -141,6 +247,7 @@ namespace Forms
 			var autoCompleteCustomSource = new AutoCompleteStringCollection();
 			autoCompleteCustomSource.AddRange(_genres.Select(genre => genre.Name).ToArray());
 			TextBoxGenre.AutoCompleteCustomSource = autoCompleteCustomSource;
+			TextBoxChangeGenre.AutoCompleteCustomSource = autoCompleteCustomSource;
 			autoCompleteCustomSource = new AutoCompleteStringCollection();
 			autoCompleteCustomSource.AddRange(_songs.Select(song => song.AlbumArtist).ToArray());
 			TextBoxAlbumArtist.AutoCompleteCustomSource = autoCompleteCustomSource;
@@ -325,198 +432,11 @@ namespace Forms
 							ContainsIgnoreCase(song.Genre, TextBoxGenre.Text.Trim()));
 						break;
 					case "Year":
-						var yearTextSplit = TextBoxYear.Text.Trim()
-							.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-						switch (yearTextSplit.Length)
-						{
-							case > 2:
-								ShowTextBoxErrorMessage(TextBoxYear,
-									"Wrong format. Needs to be \">2000\" or \"> 2000\", for example");
-								break;
-							case 2:
-							{
-								var comparisonOperator = yearTextSplit[0];
-								try
-								{
-									var year = int.Parse(yearTextSplit[1]);
-
-									switch (comparisonOperator)
-									{
-										case ">":
-											resultSongs = resultSongs.Where(song => song.Year > year);
-											break;
-										case ">=":
-											resultSongs = resultSongs.Where(song => song.Year >= year);
-											break;
-										case "<":
-											resultSongs = resultSongs.Where(song => song.Year < year);
-											break;
-										case "<=":
-											resultSongs = resultSongs.Where(song => song.Year <= year);
-											break;
-										default:
-											ShowTextBoxErrorMessage(TextBoxYear,
-												"You didn't indicate a valid comparison operator, check help if you have doubts");
-											break;
-									}
-								}
-								catch (FormatException)
-								{
-									ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
-								}
-
-								break;
-							}
-							default:
-							{
-								var indexOfFirstNumber = yearTextSplit[0].IndexOfAny("123456789".ToCharArray());
-								if (indexOfFirstNumber == -1)
-								{
-									ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
-								}
-								else
-								{
-									var comparisonOperator = yearTextSplit[0][..indexOfFirstNumber];
-									try
-									{
-										var year = int.Parse(yearTextSplit[0][indexOfFirstNumber..]);
-
-										switch (comparisonOperator)
-										{
-											case ">":
-												resultSongs = resultSongs.Where(song => song.Year > year);
-												break;
-											case ">=":
-												resultSongs = resultSongs.Where(song => song.Year >= year);
-												break;
-											case "<":
-												resultSongs = resultSongs.Where(song => song.Year < year);
-												break;
-											case "<=":
-												resultSongs = resultSongs.Where(song => song.Year <= year);
-												break;
-											default:
-												if (int.TryParse(yearTextSplit[0], out year))
-												{
-													resultSongs = resultSongs.Where(song => song.Year == year);
-												}
-												else
-												{
-													ShowTextBoxErrorMessage(TextBoxYear,
-														"You didn't indicate a valid year");
-												}
-
-												break;
-										}
-									}
-									catch (FormatException)
-									{
-										ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
-									}
-								}
-
-								break;
-							}
-						}
+						resultSongs = FilterSongsByYear(resultSongs);
 
 						break;
 					case "Play Count":
-						var playCountTextSplit = TextBoxPlayCount.Text.Trim()
-							.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-						switch (playCountTextSplit.Length)
-						{
-							case > 2:
-								ShowTextBoxErrorMessage(TextBoxPlayCount,
-									"Wrong format. Needs to be \">=2\" or \">= 2\", for example");
-								break;
-							case 2:
-							{
-								var comparisonOperator = playCountTextSplit[0];
-								try
-								{
-									var playCount = int.Parse(playCountTextSplit[1]);
-
-									switch (comparisonOperator)
-									{
-										case ">":
-											resultSongs = resultSongs.Where(song => song.PlayCount > playCount);
-											break;
-										case ">=":
-											resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
-											break;
-										case "<":
-											resultSongs = resultSongs.Where(song => song.PlayCount < playCount);
-											break;
-										case "<=":
-											resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
-											break;
-										default:
-											ShowTextBoxErrorMessage(TextBoxPlayCount,
-												"You didn't indicate a valid comparison operator, check help if you have doubts");
-											break;
-									}
-								}
-								catch (FormatException)
-								{
-									ShowTextBoxErrorMessage(TextBoxPlayCount,
-										"You didn't indicate a valid play count number");
-								}
-
-								break;
-							}
-							default:
-							{
-								var indexOfFirstNumber = playCountTextSplit[0].IndexOfAny("123456789".ToCharArray());
-								if (indexOfFirstNumber == -1)
-								{
-									ShowTextBoxErrorMessage(TextBoxPlayCount,
-										"You didn't indicate a valid play count number");
-								}
-								else
-								{
-									var comparisonOperator = playCountTextSplit[0][..indexOfFirstNumber];
-									try
-									{
-										var playCount = int.Parse(playCountTextSplit[0][indexOfFirstNumber..]);
-
-										switch (comparisonOperator)
-										{
-											case ">":
-												resultSongs = resultSongs.Where(song => song.PlayCount > playCount);
-												break;
-											case ">=":
-												resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
-												break;
-											case "<":
-												resultSongs = resultSongs.Where(song => song.PlayCount < playCount);
-												break;
-											case "<=":
-												resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
-												break;
-											default:
-												if (int.TryParse(playCountTextSplit[0], out playCount))
-												{
-													resultSongs = resultSongs.Where(song => song.PlayCount == playCount);
-												}
-												else
-												{
-													ShowTextBoxErrorMessage(TextBoxPlayCount,
-														"You didn't indicate a valid play count number");
-												}
-
-												break;
-										}
-									}
-									catch (FormatException)
-									{
-										ShowTextBoxErrorMessage(TextBoxPlayCount,
-											"You didn't indicate a valid play count number");
-									}
-								}
-
-								break;
-							}
-						}
+						resultSongs = FilterSongsByPlayCount(resultSongs);
 
 						break;
 				}
@@ -528,6 +448,187 @@ namespace Forms
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
+		}
+
+		private IEnumerable<SongDTO> FilterSongsByPlayCount(IEnumerable<SongDTO> resultSongs)
+		{
+			var playCountTextSplit = TextBoxPlayCount.Text.Trim()
+				.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+			switch (playCountTextSplit.Length)
+			{
+				case > 2:
+					ShowTextBoxErrorMessage(TextBoxPlayCount,
+						"Wrong format. Needs to be \">=2\" or \">= 2\", for example");
+					break;
+				case 2:
+				{
+					var comparisonOperator = playCountTextSplit[0];
+					try
+					{
+						var playCount = int.Parse(playCountTextSplit[1]);
+
+						switch (comparisonOperator)
+						{
+							case ">":
+								return resultSongs.Where(song => song.PlayCount > playCount);
+							case ">=":
+								return resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
+							case "<":
+								return resultSongs = resultSongs.Where(song => song.PlayCount < playCount);
+							case "<=":
+								return resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
+							default:
+								ShowTextBoxErrorMessage(TextBoxPlayCount,
+									"You didn't indicate a valid comparison operator, check help if you have doubts");
+								break;
+						}
+					}
+					catch (FormatException)
+					{
+						ShowTextBoxErrorMessage(TextBoxPlayCount,
+							"You didn't indicate a valid play count number");
+					}
+
+					break;
+				}
+				default:
+				{
+					var indexOfFirstNumber = playCountTextSplit[0].IndexOfAny("123456789".ToCharArray());
+					if (indexOfFirstNumber == -1)
+					{
+						ShowTextBoxErrorMessage(TextBoxPlayCount,
+							"You didn't indicate a valid play count number");
+					}
+					else
+					{
+						var comparisonOperator = playCountTextSplit[0][..indexOfFirstNumber];
+						try
+						{
+							var playCount = int.Parse(playCountTextSplit[0][indexOfFirstNumber..]);
+
+							switch (comparisonOperator)
+							{
+								case ">":
+									return resultSongs = resultSongs.Where(song => song.PlayCount > playCount);
+								case ">=":
+									return resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
+								case "<":
+									return resultSongs = resultSongs.Where(song => song.PlayCount < playCount);
+								case "<=":
+									return resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
+								default:
+									if (int.TryParse(playCountTextSplit[0], out playCount))
+									{
+										return resultSongs.Where(song =>
+											song.PlayCount == playCount);
+									}
+
+									ShowTextBoxErrorMessage(TextBoxPlayCount,
+										"You didn't indicate a valid play count number");
+									break;
+							}
+						}
+						catch (FormatException)
+						{
+							ShowTextBoxErrorMessage(TextBoxPlayCount,
+								"You didn't indicate a valid play count number");
+						}
+					}
+
+					break;
+				}
+			}
+
+			return resultSongs;
+		}
+
+		private IEnumerable<SongDTO> FilterSongsByYear(IEnumerable<SongDTO> resultSongs)
+		{
+			var yearTextSplit = TextBoxYear.Text.Trim()
+				.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+			switch (yearTextSplit.Length)
+			{
+				case > 2:
+					ShowTextBoxErrorMessage(TextBoxYear,
+						"Wrong format. Needs to be \">2000\" or \"> 2000\", for example");
+					break;
+				case 2:
+				{
+					var comparisonOperator = yearTextSplit[0];
+					try
+					{
+						var year = int.Parse(yearTextSplit[1]);
+
+						switch (comparisonOperator)
+						{
+							case ">":
+								return resultSongs = resultSongs.Where(song => song.Year > year);
+							case ">=":
+								return resultSongs = resultSongs.Where(song => song.Year >= year);
+							case "<":
+								return resultSongs = resultSongs.Where(song => song.Year < year);
+							case "<=":
+								return resultSongs = resultSongs.Where(song => song.Year <= year);
+							default:
+								ShowTextBoxErrorMessage(TextBoxYear,
+									"You didn't indicate a valid comparison operator, check help if you have doubts");
+								break;
+						}
+					}
+					catch (FormatException)
+					{
+						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
+					}
+
+					break;
+				}
+				default:
+				{
+					var indexOfFirstNumber = yearTextSplit[0].IndexOfAny("123456789".ToCharArray());
+					if (indexOfFirstNumber == -1)
+					{
+						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
+					}
+					else
+					{
+						var comparisonOperator = yearTextSplit[0][..indexOfFirstNumber];
+						try
+						{
+							var year = int.Parse(yearTextSplit[0][indexOfFirstNumber..]);
+
+							switch (comparisonOperator)
+							{
+								case ">":
+									return resultSongs = resultSongs.Where(song => song.Year > year);
+								case ">=":
+									return resultSongs = resultSongs.Where(song => song.Year >= year);
+								case "<":
+									return resultSongs = resultSongs.Where(song => song.Year < year);
+								case "<=":
+									return resultSongs = resultSongs.Where(song => song.Year <= year);
+								default:
+									if (int.TryParse(yearTextSplit[0], out year))
+									{
+										return resultSongs = resultSongs.Where(song => song.Year == year);
+									}
+
+									ShowTextBoxErrorMessage(TextBoxYear,
+										"You didn't indicate a valid year");
+
+									break;
+							}
+						}
+						catch (FormatException)
+						{
+							ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
+						}
+					}
+
+					break;
+				}
+			}
+
+			return resultSongs;
 		}
 
 		private void TextBoxAlbumArtist_TextChanged(object sender, EventArgs e)
@@ -587,7 +688,7 @@ namespace Forms
 
 		private void ListBoxSongFilenames_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(e.KeyCode!=Keys.Delete)return;
+			if (e.KeyCode != Keys.Delete) return;
 			var macroCommand = new MacroCommand();
 			macroCommand.Add(new CommandDeleteSongs(GetSelectedSongs()));
 			macroCommand.Add(new CommandDeleteSelectedListBoxItems(ListBoxSongFilenames));

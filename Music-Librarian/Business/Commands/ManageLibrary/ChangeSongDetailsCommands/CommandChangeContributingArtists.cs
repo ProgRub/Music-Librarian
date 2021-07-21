@@ -12,7 +12,8 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 	{
 		private File _songFile;
 		private SongDTO _song;
-		private IList<string> _oldContributingArtists, _newContributingArtists;
+		private IList<string> _oldContributingArtists;
+		private readonly IList<string> _newContributingArtists;
 		private Song _songInDB;
 
 		File IChangeSongDetailsCommand.SongFile

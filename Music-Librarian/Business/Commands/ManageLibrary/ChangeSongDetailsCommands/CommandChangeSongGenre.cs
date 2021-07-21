@@ -8,7 +8,8 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 	{
 		private File _songFile;
 		private SongDTO _song;
-		private string _newGenreName, _oldGenreName;
+		private readonly string _newGenreName;
+		private string _oldGenreName;
 
 		File IChangeSongDetailsCommand.SongFile
 		{

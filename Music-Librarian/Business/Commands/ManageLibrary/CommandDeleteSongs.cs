@@ -6,7 +6,7 @@ namespace Business.Commands.ManageLibrary
 {
 	public class CommandDeleteSongs : ICommand
 	{
-		private ISet<SongDTO> _songs;
+		private readonly ISet<SongDTO> _songs;
 		public CommandDeleteSongs(ISet<SongDTO> songs)
 		{
 			_songs = songs;
