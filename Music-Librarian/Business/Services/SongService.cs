@@ -35,6 +35,7 @@ namespace Business.Services
 
 		internal static SongService Instance { get; } = new();
 		internal ISet<SongDTO> AllSongs { get; }
+		internal SongDTO SongToChangeLyrics { get; set; }
 
 		internal Song GetSongById(int id) => _songRepository.GetById(id);
 		internal void SaveChanges()

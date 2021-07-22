@@ -38,6 +38,7 @@ namespace Forms
 
 		private void ButtonEditSelectedSongLyrics_Click(object sender, EventArgs e)
 		{
+			BusinessFacade.Instance.SetSongToEditLyrics(GetSelectedSongs().First());
 			MoveToScreen(new EditSongLyricsScreen(), this);
 		}
 
