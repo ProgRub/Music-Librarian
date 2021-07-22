@@ -15,7 +15,6 @@ namespace Forms
 {
 	public partial class ManageMusicLibraryScreen : BaseControl
 	{
-		private const int SearchDelay = 500;
 		private ISet<SongDTO> _songs;
 		private ISet<GenreDTO> _genres;
 		private Timer _searchTimer;
@@ -439,16 +438,7 @@ namespace Forms
 		}
 
 		#region SearchTextBoxes
-
-		private void Delay(int milliseconds, EventHandler action)
-		{
-			if (_searchTimer is {Enabled: true}) _searchTimer.Enabled = false;
-			_searchTimer = new Timer {Interval = milliseconds};
-			_searchTimer.Tick += (_, _) => _searchTimer.Enabled = false;
-			_searchTimer.Tick += action;
-			_searchTimer.Enabled = true;
-		}
-
+		
 		private void SearchSongs()
 		{
 			IEnumerable<SongDTO> resultSongs = _songs;
@@ -494,6 +484,7 @@ namespace Forms
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
+			SetFormAcceptButton(ButtonSaveChanges);
 		}
 
 		private IEnumerable<SongDTO> FilterSongsByPlayCount(IEnumerable<SongDTO> resultSongs)
@@ -669,57 +660,47 @@ namespace Forms
 		private void TextBoxAlbumArtist_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Album Artist"] = !string.IsNullOrWhiteSpace(TextBoxAlbumArtist.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		private void TextBoxContributingArtists_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Contributing Artists"] =
 				!string.IsNullOrWhiteSpace(TextBoxContributingArtists.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		private void TextBoxAlbum_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Album"] = !string.IsNullOrWhiteSpace(TextBoxAlbum.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		private void TextBoxSongTitle_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Song Title"] = !string.IsNullOrWhiteSpace(TextBoxSongTitle.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		private void TextBoxGenre_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Genre"] = !string.IsNullOrWhiteSpace(TextBoxGenre.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		private void TextBoxYear_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Year"] = !string.IsNullOrWhiteSpace(TextBoxYear.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		private void TextBoxPlayCount_TextChanged(object sender, EventArgs e)
 		{
 			_searchParameters["Play Count"] = !string.IsNullOrWhiteSpace(TextBoxPlayCount.Text.Trim());
-			Delay(SearchDelay, (_, _) => SearchSongs());
+			SetFormAcceptButton(ButtonSearchLibrary);
 		}
 
 		#endregion
-
-		private void TextBoxYear_Click(object sender, EventArgs e)
-		{
-			TextBoxYear.PlaceholderText = "";
-		}
-
-		private void TextBoxPlayCount_Click(object sender, EventArgs e)
-		{
-			TextBoxPlayCount.PlaceholderText = "";
-		}
 
 		private void ListBoxSongFilenames_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -728,6 +709,11 @@ namespace Forms
 			macroCommand.Add(new CommandDeleteSongs(GetSelectedSongs()));
 			macroCommand.Add(new CommandDeleteSelectedListBoxItems(ListBoxSongFilenames));
 			CommandsManager.Instance.Execute(macroCommand);
+		}
+
+		private void ButtonSearchLibrary_Click(object sender, EventArgs e)
+		{
+			SearchSongs();
 		}
 	}
 }
