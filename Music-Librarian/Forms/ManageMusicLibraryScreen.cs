@@ -123,10 +123,10 @@ namespace Forms
 			{
 				try
 				{
-					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var commandParameters = GetIntegerDetailsChangeParameters(newTrackNumberText);
 					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
 					var trackNumberChange = (int) commandParameters[1];
-					//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					macroChangeSongDetailsCommand.Add(new CommandChangeSongTrackNumber(changeType, trackNumberChange));
 					executeMacro = true;
 				}
 				catch (FormatException)
@@ -148,10 +148,10 @@ namespace Forms
 			{
 				try
 				{
-					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var commandParameters = GetIntegerDetailsChangeParameters(newDiscNumberText);
 					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
 					var discNumberChange = (int) commandParameters[1];
-					//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					macroChangeSongDetailsCommand.Add(new CommandChangeSongDiscNumber(changeType, discNumberChange));
 					executeMacro = true;
 				}
 				catch (FormatException)
@@ -173,10 +173,10 @@ namespace Forms
 			{
 				try
 				{
-					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var commandParameters = GetIntegerDetailsChangeParameters(newPlayCountText);
 					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
 					var playCountChange = (int) commandParameters[1];
-					//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					macroChangeSongDetailsCommand.Add(new CommandChangeSongPlayCount(changeType, playCountChange));
 					executeMacro = true;
 				}
 				catch (FormatException)
