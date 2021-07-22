@@ -503,8 +503,7 @@ namespace Forms
 			switch (playCountTextSplit.Length)
 			{
 				case > 2:
-					ShowTextBoxErrorMessage(TextBoxPlayCount,
-						"Wrong format. Needs to be \">=2\" or \">= 2\", for example");
+					ShowInformationMessageBox("Wrong format. Needs to be \">=2\" or \">= 2\", for example", "Error");
 					break;
 				case 2:
 				{
@@ -524,15 +523,13 @@ namespace Forms
 							case "<=":
 								return resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
 							default:
-								ShowTextBoxErrorMessage(TextBoxPlayCount,
-									"You didn't indicate a valid comparison operator, check help if you have doubts");
+								ShowInformationMessageBox("You didn't indicate a valid comparison operator, check help if you have doubts", "Error");
 								break;
 						}
 					}
 					catch (FormatException)
 					{
-						ShowTextBoxErrorMessage(TextBoxPlayCount,
-							"You didn't indicate a valid play count number");
+						ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
 					}
 
 					break;
@@ -542,8 +539,7 @@ namespace Forms
 					var indexOfFirstNumber = playCountTextSplit[0].IndexOfAny("123456789".ToCharArray());
 					if (indexOfFirstNumber == -1)
 					{
-						ShowTextBoxErrorMessage(TextBoxPlayCount,
-							"You didn't indicate a valid play count number");
+						ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
 					}
 					else
 					{
@@ -568,16 +564,13 @@ namespace Forms
 										return resultSongs.Where(song =>
 											song.PlayCount == playCount);
 									}
-
-									ShowTextBoxErrorMessage(TextBoxPlayCount,
-										"You didn't indicate a valid play count number");
+									ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
 									break;
 							}
 						}
 						catch (FormatException)
 						{
-							ShowTextBoxErrorMessage(TextBoxPlayCount,
-								"You didn't indicate a valid play count number");
+							ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
 						}
 					}
 
@@ -595,8 +588,7 @@ namespace Forms
 			switch (yearTextSplit.Length)
 			{
 				case > 2:
-					ShowTextBoxErrorMessage(TextBoxYear,
-						"Wrong format. Needs to be \">2000\" or \"> 2000\", for example");
+					ShowInformationMessageBox("Wrong format. Needs to be \">2000\" or \"> 2000\", for example", "Error");
 					break;
 				case 2:
 				{
@@ -616,14 +608,13 @@ namespace Forms
 							case "<=":
 								return resultSongs = resultSongs.Where(song => song.Year <= year);
 							default:
-								ShowTextBoxErrorMessage(TextBoxYear,
-									"You didn't indicate a valid comparison operator, check help if you have doubts");
+								ShowInformationMessageBox("You didn't indicate a valid comparison operator, check help if you have doubts", "Error");
 								break;
 						}
 					}
 					catch (FormatException)
 					{
-						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
+						ShowInformationMessageBox("You didn't indicate a valid year", "Error");
 					}
 
 					break;
@@ -633,7 +624,7 @@ namespace Forms
 					var indexOfFirstNumber = yearTextSplit[0].IndexOfAny("123456789".ToCharArray());
 					if (indexOfFirstNumber == -1)
 					{
-						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
+						ShowInformationMessageBox("You didn't indicate a valid year", "Error");
 					}
 					else
 					{
@@ -657,16 +648,14 @@ namespace Forms
 									{
 										return resultSongs = resultSongs.Where(song => song.Year == year);
 									}
-
-									ShowTextBoxErrorMessage(TextBoxYear,
-										"You didn't indicate a valid year");
+									ShowInformationMessageBox("You didn't indicate a valid year", "Error");
 
 									break;
 							}
 						}
 						catch (FormatException)
 						{
-							ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid year");
+							ShowInformationMessageBox("You didn't indicate a valid year", "Error");
 						}
 					}
 
