@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Business.DTOs;
 using Business.Services;
 using DB.Entities;
-using TagLib;
 
 namespace Business.Commands.ManageGenres
 {

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Business.DTOs;
-using DB;
+﻿using DB;
 using DB.Repositories.Implementations;
 using DB.Repositories.Interfaces;
 

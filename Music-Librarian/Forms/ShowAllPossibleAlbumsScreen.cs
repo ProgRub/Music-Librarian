@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Business.DTOs;
@@ -16,8 +10,8 @@ namespace Forms
 	public partial class ShowAllPossibleAlbumsScreen : BaseControl
 	{
 		private IEnumerable<AlbumDTO> _albums;
-		private string _timeSpanFormat;
-		private ListViewColumnSorter _columnSorter;
+		private readonly string _timeSpanFormat;
+		private readonly ListViewColumnSorter _columnSorter;
 
 		public ShowAllPossibleAlbumsScreen()
 		{

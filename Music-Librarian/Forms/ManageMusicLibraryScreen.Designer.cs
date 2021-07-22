@@ -80,6 +80,7 @@ namespace Forms
 			this.ButtonSaveChanges = new System.Windows.Forms.Button();
 			this.LabelChangeFilename = new System.Windows.Forms.Label();
 			this.TextBoxChangeFilename = new System.Windows.Forms.TextBox();
+			this.ButtonSearchLibrary = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).BeginInit();
@@ -130,6 +131,7 @@ namespace Forms
 			this.ListBoxSongFilenames.Size = new System.Drawing.Size(595, 498);
 			this.ListBoxSongFilenames.TabIndex = 14;
 			this.ListBoxSongFilenames.SelectedIndexChanged += new System.EventHandler(this.ListBoxSongFilenames_SelectedIndexChanged);
+			this.ListBoxSongFilenames.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxSongFilenames_KeyDown);
 			// 
 			// TextBoxAlbumArtist
 			// 
@@ -263,7 +265,6 @@ namespace Forms
 			this.TextBoxYear.Name = "TextBoxYear";
 			this.TextBoxYear.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxYear.TabIndex = 25;
-			this.TextBoxYear.Click += new System.EventHandler(this.TextBoxYear_Click);
 			this.TextBoxYear.TextChanged += new System.EventHandler(this.TextBoxYear_TextChanged);
 			// 
 			// ControlHint
@@ -369,7 +370,6 @@ namespace Forms
 			this.TextBoxPlayCount.Name = "TextBoxPlayCount";
 			this.TextBoxPlayCount.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxPlayCount.TabIndex = 28;
-			this.TextBoxPlayCount.Click += new System.EventHandler(this.TextBoxPlayCount_Click);
 			this.TextBoxPlayCount.TextChanged += new System.EventHandler(this.TextBoxPlayCount_TextChanged);
 			// 
 			// LabelSearchFields
@@ -399,7 +399,6 @@ namespace Forms
 			this.TextBoxChangePlayCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangePlayCount.Location = new System.Drawing.Point(1380, 307);
 			this.TextBoxChangePlayCount.Name = "TextBoxChangePlayCount";
-			this.TextBoxChangePlayCount.ReadOnly = true;
 			this.TextBoxChangePlayCount.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangePlayCount.TabIndex = 45;
 			// 
@@ -421,7 +420,6 @@ namespace Forms
 			this.TextBoxChangeYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeYear.Location = new System.Drawing.Point(1380, 217);
 			this.TextBoxChangeYear.Name = "TextBoxChangeYear";
-			this.TextBoxChangeYear.ReadOnly = true;
 			this.TextBoxChangeYear.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeYear.TabIndex = 42;
 			// 
@@ -436,6 +434,8 @@ namespace Forms
 			// 
 			// TextBoxChangeGenre
 			// 
+			this.TextBoxChangeGenre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.TextBoxChangeGenre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.TextBoxChangeGenre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxChangeGenre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxChangeGenre.Enabled = false;
@@ -443,7 +443,6 @@ namespace Forms
 			this.TextBoxChangeGenre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeGenre.Location = new System.Drawing.Point(1380, 187);
 			this.TextBoxChangeGenre.Name = "TextBoxChangeGenre";
-			this.TextBoxChangeGenre.ReadOnly = true;
 			this.TextBoxChangeGenre.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeGenre.TabIndex = 40;
 			// 
@@ -465,7 +464,6 @@ namespace Forms
 			this.TextBoxChangeSongTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeSongTitle.Location = new System.Drawing.Point(1380, 157);
 			this.TextBoxChangeSongTitle.Name = "TextBoxChangeSongTitle";
-			this.TextBoxChangeSongTitle.ReadOnly = true;
 			this.TextBoxChangeSongTitle.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeSongTitle.TabIndex = 38;
 			// 
@@ -487,7 +485,6 @@ namespace Forms
 			this.TextBoxChangeAlbum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeAlbum.Location = new System.Drawing.Point(1380, 127);
 			this.TextBoxChangeAlbum.Name = "TextBoxChangeAlbum";
-			this.TextBoxChangeAlbum.ReadOnly = true;
 			this.TextBoxChangeAlbum.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeAlbum.TabIndex = 36;
 			// 
@@ -509,7 +506,6 @@ namespace Forms
 			this.TextBoxChangeContributingArtists.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeContributingArtists.Location = new System.Drawing.Point(1380, 97);
 			this.TextBoxChangeContributingArtists.Name = "TextBoxChangeContributingArtists";
-			this.TextBoxChangeContributingArtists.ReadOnly = true;
 			this.TextBoxChangeContributingArtists.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeContributingArtists.TabIndex = 34;
 			// 
@@ -531,7 +527,6 @@ namespace Forms
 			this.TextBoxChangeAlbumArtist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeAlbumArtist.Location = new System.Drawing.Point(1380, 67);
 			this.TextBoxChangeAlbumArtist.Name = "TextBoxChangeAlbumArtist";
-			this.TextBoxChangeAlbumArtist.ReadOnly = true;
 			this.TextBoxChangeAlbumArtist.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeAlbumArtist.TabIndex = 32;
 			// 
@@ -562,7 +557,6 @@ namespace Forms
 			this.TextBoxChangeTrackNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeTrackNumber.Location = new System.Drawing.Point(1380, 247);
 			this.TextBoxChangeTrackNumber.Name = "TextBoxChangeTrackNumber";
-			this.TextBoxChangeTrackNumber.ReadOnly = true;
 			this.TextBoxChangeTrackNumber.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeTrackNumber.TabIndex = 49;
 			// 
@@ -584,7 +578,6 @@ namespace Forms
 			this.TextBoxChangeDiscNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeDiscNumber.Location = new System.Drawing.Point(1380, 277);
 			this.TextBoxChangeDiscNumber.Name = "TextBoxChangeDiscNumber";
-			this.TextBoxChangeDiscNumber.ReadOnly = true;
 			this.TextBoxChangeDiscNumber.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeDiscNumber.TabIndex = 52;
 			// 
@@ -669,14 +662,34 @@ namespace Forms
 			this.TextBoxChangeFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.TextBoxChangeFilename.Location = new System.Drawing.Point(1380, 37);
 			this.TextBoxChangeFilename.Name = "TextBoxChangeFilename";
-			this.TextBoxChangeFilename.ReadOnly = true;
 			this.TextBoxChangeFilename.Size = new System.Drawing.Size(378, 24);
 			this.TextBoxChangeFilename.TabIndex = 58;
+			// 
+			// ButtonSearchLibrary
+			// 
+			this.ButtonSearchLibrary.AutoSize = true;
+			this.ButtonSearchLibrary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ButtonSearchLibrary.BackColor = System.Drawing.Color.Transparent;
+			this.ButtonSearchLibrary.FlatAppearance.BorderSize = 0;
+			this.ButtonSearchLibrary.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.ButtonSearchLibrary.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonSearchLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonSearchLibrary.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.ButtonSearchLibrary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.ButtonSearchLibrary.Location = new System.Drawing.Point(315, 252);
+			this.ButtonSearchLibrary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonSearchLibrary.Name = "ButtonSearchLibrary";
+			this.ButtonSearchLibrary.Size = new System.Drawing.Size(131, 27);
+			this.ButtonSearchLibrary.TabIndex = 61;
+			this.ButtonSearchLibrary.Text = "Search Library";
+			this.ButtonSearchLibrary.UseVisualStyleBackColor = false;
+			this.ButtonSearchLibrary.Click += new System.EventHandler(this.ButtonSearchLibrary_Click);
 			// 
 			// ManageMusicLibraryScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.ButtonSearchLibrary);
 			this.Controls.Add(this.PictureBoxListBox);
 			this.Controls.Add(this.LabelChangeFilename);
 			this.Controls.Add(this.TextBoxChangeFilename);
@@ -777,6 +790,7 @@ namespace Forms
 			this.Controls.SetChildIndex(this.TextBoxChangeFilename, 0);
 			this.Controls.SetChildIndex(this.LabelChangeFilename, 0);
 			this.Controls.SetChildIndex(this.PictureBoxListBox, 0);
+			this.Controls.SetChildIndex(this.ButtonSearchLibrary, 0);
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).EndInit();
@@ -840,5 +854,6 @@ namespace Forms
 		private System.Windows.Forms.Label LabelChangeFilename;
 		private System.Windows.Forms.TextBox TextBoxChangeFilename;
 		private System.Windows.Forms.PictureBox PictureBoxListBox;
+		private System.Windows.Forms.Button ButtonSearchLibrary;
 	}
 }

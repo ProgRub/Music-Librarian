@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using DB.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace DB.Repositories.Implementations
 {

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Business.DTOs;
-using DB.Entities;
 using iTunesLib;
 
 namespace Business.Services.MusicServices
@@ -38,24 +39,81 @@ namespace Business.Services.MusicServices
 			GetTrack(song.Title, song.Album).Delete();
 		}
 
+		public void ChangeAlbumArtist(SongDTO song, string newAlbumArtist)
+		{
+			GetTrack(song.Title, song.Album).AlbumArtist = newAlbumArtist;
+		}
+
+		public void ChangeContributingArtists(SongDTO song, IEnumerable<string> newContributingArtists)
+		{
+			GetTrack(song.Title, song.Album).Artist = string.Join(';', newContributingArtists);
+		}
+
+		public void ChangeAlbum(SongDTO song, string newAlbum)
+		{
+			GetTrack(song.Title, song.Album).Album = newAlbum;
+		}
+
+		public void ChangeGenre(SongDTO song, string newGenre)
+		{
+			GetTrack(song.Title, song.Album).Genre = newGenre;
+		}
+
+		public void ChangeSongTitle(SongDTO song, string newSongTitle)
+		{
+			GetTrack(song.Title, song.Album).Name = newSongTitle;
+		}
+
+		public void ChangeYear(SongDTO song, int newYear)
+		{
+			GetTrack(song.Title, song.Album).Year = newYear;
+		}
+
+		public void ChangeTrackNumber(SongDTO song, int newTrackNumber)
+		{
+			GetTrack(song.Title, song.Album).TrackNumber = newTrackNumber;
+		}
+
+		public void ChangeDiscNumber(SongDTO song, int newDiscNumber)
+		{
+			GetTrack(song.Title, song.Album).DiscNumber = newDiscNumber;
+		}
+		public void ChangePlayCount(SongDTO song, int newPlayCount)
+		{
+			GetTrack(song.Title, song.Album).PlayedCount = newPlayCount;
+		}
+
 		public int GetPlayCountOfSong(SongDTO song)
 		{
 			return GetTrack(song.Title, song.Album).PlayedCount;
 		}
-		public IITTrack GetTrack(string title, string album)
+		public IITFileOrCDTrack GetTrack(string title, string album)
 		{
 			if (_iTunes == null)
 			{
 				OpenService();
 			}
 
-			var tracks = _iTunesLibrary.Search(title, ITPlaylistSearchField.ITPlaylistSearchFieldSongNames);
+			IITTrackCollection tracks;
+			while (true)
+			{
+				try
+				{
+					tracks = _iTunesLibrary.Search(title, ITPlaylistSearchField.ITPlaylistSearchFieldSongNames);
+					break;
+				}
+				catch (Exception)
+				{
+					Debug.WriteLine("NO PLAYLIST");
+					_iTunesLibrary = _iTunes.LibraryPlaylist;
+				}
+			}
 			if (tracks == null) return null;
 			for (var index = 1; index <= tracks.Count; index++)
 			{
 				if (tracks[index].Album == album)
 				{
-					return tracks[index];
+					return (IITFileOrCDTrack) tracks[index];
 				}
 			}
 

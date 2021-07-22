@@ -1,6 +1,5 @@
-﻿using Business.DTOs;
-using DB.Entities;
-using iTunesLib;
+﻿using System.Collections.Generic;
+using Business.DTOs;
 
 namespace Business.Services.MusicServices
 {
@@ -8,8 +7,16 @@ namespace Business.Services.MusicServices
 	{
 		void AddSong(SongDTO song);
 		void DeleteSong(SongDTO song);
+		void ChangePlayCount(SongDTO song, int newPlayCount);
+		void ChangeAlbumArtist(SongDTO song, string newAlbumArtist);
+		void ChangeContributingArtists(SongDTO song, IEnumerable<string> newContributingArtists);
+		void ChangeAlbum(SongDTO song,string newAlbum);
+		void ChangeGenre(SongDTO song, string newGenre);
+		void ChangeSongTitle(SongDTO song, string newSongTitle);
+		void ChangeYear(SongDTO song, int newYear);
+		void ChangeTrackNumber(SongDTO song, int newTrackNumber);
+		void ChangeDiscNumber(SongDTO song, int newDiscNumber);
 		int GetPlayCountOfSong(SongDTO song);
-		IITTrack GetTrack(string title, string album);
 		void OpenService();
 		void OpenAlbum(AlbumDTO albumDto);
 		void EndLink();
