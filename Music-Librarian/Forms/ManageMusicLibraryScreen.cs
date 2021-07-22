@@ -205,8 +205,8 @@ namespace Forms
 		private object[] GetIntegerDetailsChangeParameters(string text)
 		{
 			var textSplit = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-			var integerChange = 0;
-			var changeType = IntegerSongDetailsChangeType.Set;
+			int integerChange;
+			IntegerSongDetailsChangeType changeType;
 			switch (textSplit.Length)
 			{
 				case > 2:
@@ -214,25 +214,14 @@ namespace Forms
 				case 2:
 				{
 					var changeOperator = textSplit[0];
-					try
-					{
-						integerChange = int.Parse(textSplit[1]);
+					integerChange = int.Parse(textSplit[1]);
 
-						switch (changeOperator)
-						{
-							case "+":
-								changeType = IntegerSongDetailsChangeType.Add;
-								break;
-							case "-":
-								changeType = IntegerSongDetailsChangeType.Subtract;
-								break;
-							default: throw new ArgumentOutOfRangeException();
-						}
-					}
-					catch (FormatException exception)
+					changeType = changeOperator switch
 					{
-						throw exception;
-					}
+						"+" => IntegerSongDetailsChangeType.Add,
+						"-" => IntegerSongDetailsChangeType.Subtract,
+						_ => throw new ArgumentOutOfRangeException()
+					};
 
 					break;
 				}
@@ -243,37 +232,28 @@ namespace Forms
 					{
 						throw new FormatException();
 					}
-					else
+
+					var comparisonOperator = textSplit[0][..indexOfFirstNumber];
+					integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
+
+					switch (comparisonOperator)
 					{
-						var comparisonOperator = textSplit[0][..indexOfFirstNumber];
-						try
-						{
-							integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
-
-							switch (comparisonOperator)
+						case "+":
+							changeType = IntegerSongDetailsChangeType.Add;
+							break;
+						case "-":
+							changeType = IntegerSongDetailsChangeType.Subtract;
+							break;
+						default:
+							if (int.TryParse(textSplit[0], out integerChange))
 							{
-								case "+":
-									changeType = IntegerSongDetailsChangeType.Add;
-									break;
-								case "-":
-									changeType = IntegerSongDetailsChangeType.Subtract;
-									break;
-								default:
-									if (int.TryParse(textSplit[0], out integerChange))
-									{
-										changeType = IntegerSongDetailsChangeType.Set;
-										integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
-									}
-									else
-										throw new FormatException();
-
-									break;
+								changeType = IntegerSongDetailsChangeType.Set;
+								integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
 							}
-						}
-						catch (FormatException exception)
-						{
-							throw exception;
-						}
+							else
+								throw new FormatException();
+
+							break;
 					}
 
 					break;
