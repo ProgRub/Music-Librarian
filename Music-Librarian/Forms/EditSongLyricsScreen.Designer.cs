@@ -45,7 +45,6 @@ namespace Forms
 			// TextBoxLyrics
 			// 
 			this.TextBoxLyrics.AcceptsReturn = true;
-			this.TextBoxLyrics.AcceptsTab = true;
 			this.TextBoxLyrics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxLyrics.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxLyrics.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -53,6 +52,7 @@ namespace Forms
 			this.TextBoxLyrics.Location = new System.Drawing.Point(62, 55);
 			this.TextBoxLyrics.Multiline = true;
 			this.TextBoxLyrics.Name = "TextBoxLyrics";
+			this.TextBoxLyrics.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.TextBoxLyrics.Size = new System.Drawing.Size(740, 650);
 			this.TextBoxLyrics.TabIndex = 6;
 			// 

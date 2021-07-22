@@ -273,6 +273,7 @@ namespace Forms
 			_genres = BusinessFacade.Instance.GetAllGenres().ToHashSet();
 			_songs = BusinessFacade.Instance.GetAllSongs().ToHashSet();
 			SetAutoCompletesOnSearchTextBoxes();
+			if(ListBoxSongFilenames.Items.Count>0)return;
 			foreach (var song in _songs)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);

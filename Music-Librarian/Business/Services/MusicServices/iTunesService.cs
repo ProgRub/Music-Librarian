@@ -78,6 +78,11 @@ namespace Business.Services.MusicServices
 		{
 			GetTrack(song.Title, song.Album).DiscNumber = newDiscNumber;
 		}
+
+		public void ChangeSongLyrics(SongDTO song, string newLyrics)
+		{
+			GetTrack(song.Title, song.Album).Lyrics = newLyrics;
+		}
 		public void ChangePlayCount(SongDTO song, int newPlayCount)
 		{
 			GetTrack(song.Title, song.Album).PlayedCount = newPlayCount;

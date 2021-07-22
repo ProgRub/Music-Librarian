@@ -16,6 +16,11 @@ namespace Business.Commands.ManageLibrary
 			_songs = songs;
 		}
 
+		public MacroCommandChangeSongsDetails(SongDTO song)
+		{
+			_songs = new HashSet<SongDTO>{song};
+		}
+
 		public void Add(IChangeSongDetailsCommand command)
 		{
 			_commands.Add(command);

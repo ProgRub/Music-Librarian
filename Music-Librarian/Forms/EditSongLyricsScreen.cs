@@ -1,5 +1,6 @@
 ﻿using Business;
 using Business.Commands;
+using Business.Commands.ManageLibrary;
 using Business.DTOs;
 
 namespace Forms
@@ -23,17 +24,21 @@ namespace Forms
 
 		private void ButtonSaveChanges_Click(object sender, System.EventArgs e)
 		{
-
+			var auxMacroCommand = new MacroCommandChangeSongsDetails(_song);
+			auxMacroCommand.Add(new CommandEditSongLyrics(TextBoxLyrics.Text));
+			CommandsManager.Instance.Execute(auxMacroCommand);
 		}
 
 		private void ButtonUndo_Click(object sender, System.EventArgs e)
 		{
 			CommandsManager.Instance.Undo();
+			TextBoxLyrics.Text = _song.Lyrics;
 		}
 
 		private void ButtonRedo_Click(object sender, System.EventArgs e)
 		{
 			CommandsManager.Instance.Redo();
+			TextBoxLyrics.Text = _song.Lyrics;
 		}
 	}
 }
