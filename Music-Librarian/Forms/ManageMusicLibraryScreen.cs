@@ -38,6 +38,7 @@ namespace Forms
 
 		private void ButtonEditSelectedSongLyrics_Click(object sender, EventArgs e)
 		{
+			BusinessFacade.Instance.SetSongToEditLyrics(GetSelectedSongs().First());
 			MoveToScreen(new EditSongLyricsScreen(), this);
 		}
 
@@ -272,6 +273,7 @@ namespace Forms
 			_genres = BusinessFacade.Instance.GetAllGenres().ToHashSet();
 			_songs = BusinessFacade.Instance.GetAllSongs().ToHashSet();
 			SetAutoCompletesOnSearchTextBoxes();
+			if(ListBoxSongFilenames.Items.Count>0)return;
 			foreach (var song in _songs)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);

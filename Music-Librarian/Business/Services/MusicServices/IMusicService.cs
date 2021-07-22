@@ -20,5 +20,6 @@ namespace Business.Services.MusicServices
 		void OpenService();
 		void OpenAlbum(AlbumDTO albumDto);
 		void EndLink();
+		void ChangeSongLyrics(SongDTO song, string newLyrics);
 	}
 }

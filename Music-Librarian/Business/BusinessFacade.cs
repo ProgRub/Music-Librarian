@@ -97,5 +97,9 @@ namespace Business
 		{
 			SongService.Instance.SetAllMusicServicePlayCounts();
 		}
+
+		public void SetSongToEditLyrics(SongDTO song) => SongService.Instance.SongToChangeLyrics = song;
+
+		public SongDTO GetSongToEditLyrics() => SongService.Instance.SongToChangeLyrics;
 	}
 }
