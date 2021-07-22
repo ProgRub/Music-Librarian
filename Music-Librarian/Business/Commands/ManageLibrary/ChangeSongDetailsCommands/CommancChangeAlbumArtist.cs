@@ -38,6 +38,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 			_songFile.Tag.AlbumArtists = new[] {_newAlbumArtist};
 			_song.AlbumArtist = _newAlbumArtist;
 			_songInDB.AlbumArtist = _newAlbumArtist;
+			_songInDB.Album.Artist = _newAlbumArtist;
 			BusinessFacade.Instance.MusicService.ChangeAlbumArtist(_song,_newAlbumArtist);
 		}
 
@@ -46,6 +47,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 			_songFile.Tag.AlbumArtists = new[] {_oldAlbumArtist};
 			_song.AlbumArtist = _oldAlbumArtist;
 			_songInDB.AlbumArtist = _oldAlbumArtist;
+			_songInDB.Album.Artist = _oldAlbumArtist;
 			BusinessFacade.Instance.MusicService.ChangeAlbumArtist(_song,_oldAlbumArtist);
 		}
 
@@ -54,6 +56,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 			_songFile.Tag.AlbumArtists = new[] {_newAlbumArtist};
 			_song.AlbumArtist = _newAlbumArtist;
 			_songInDB.AlbumArtist = _newAlbumArtist;
+			_songInDB.Album.Artist = _newAlbumArtist;
 			BusinessFacade.Instance.MusicService.ChangeAlbumArtist(_song,_newAlbumArtist);
 		}
 	}

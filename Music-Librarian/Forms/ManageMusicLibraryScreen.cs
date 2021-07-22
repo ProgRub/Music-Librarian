@@ -46,7 +46,7 @@ namespace Forms
 		{
 			var executeMacro = false;
 			var macroCommand = new MacroCommand();
-			if(TextBoxChangeFilename.Enabled)
+			if (TextBoxChangeFilename.Enabled)
 			{
 				var newFilename = TextBoxChangeFilename.Text.Trim();
 				if (newFilename != _changeTextBoxesContent["Filename"])
@@ -96,41 +96,101 @@ namespace Forms
 			var newYearText = TextBoxChangeYear.Text.Trim();
 			if (newYearText != _changeTextBoxesContent["Year"])
 			{
-				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
-				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-				var yearChange = (int) commandParameters[1];
-				macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
-				executeMacro = true;
+				try
+				{
+					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+					var yearChange = (int) commandParameters[1];
+					macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					executeMacro = true;
+				}
+				catch (FormatException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid number", "Error");
+				}
+				catch (ArgumentNullException)
+				{
+					ShowInformationMessageBox("Wrong format. Needs to be \"+2\" or \"+ 2\", for example", "Error");
+				}
+				catch (ArgumentOutOfRangeException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid operator, check help if you have doubts", "Error");
+				}
 			}
 
 			var newTrackNumberText = TextBoxChangeTrackNumber.Text.Trim();
 			if (newTrackNumberText != _changeTextBoxesContent["Track Number"])
 			{
-				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
-				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-				var trackNumberChange = (int) commandParameters[1];
-				//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
-				executeMacro = true;
+				try
+				{
+					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+					var trackNumberChange = (int) commandParameters[1];
+					//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					executeMacro = true;
+				}
+				catch (FormatException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid number", "Error");
+				}
+				catch (ArgumentNullException)
+				{
+					ShowInformationMessageBox("Wrong format. Needs to be \"+2\" or \"+ 2\", for example", "Error");
+				}
+				catch (ArgumentOutOfRangeException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid operator, check help if you have doubts", "Error");
+				}
 			}
 
 			var newDiscNumberText = TextBoxChangeDiscNumber.Text.Trim();
 			if (newDiscNumberText != _changeTextBoxesContent["Disc Number"])
 			{
-				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
-				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-				var discNumberChange = (int) commandParameters[1];
-				//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
-				executeMacro = true;
+				try
+				{
+					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+					var discNumberChange = (int) commandParameters[1];
+					//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					executeMacro = true;
+				}
+				catch (FormatException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid number", "Error");
+				}
+				catch (ArgumentNullException)
+				{
+					ShowInformationMessageBox("Wrong format. Needs to be \"+2\" or \"+ 2\", for example", "Error");
+				}
+				catch (ArgumentOutOfRangeException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid operator, check help if you have doubts", "Error");
+				}
 			}
 
 			var newPlayCountText = TextBoxChangePlayCount.Text.Trim();
 			if (newPlayCountText != _changeTextBoxesContent["Play Count"])
 			{
-				var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
-				var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-				var playCountChange = (int) commandParameters[1];
-				//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
-				executeMacro = true;
+				try
+				{
+					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
+					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
+					var playCountChange = (int) commandParameters[1];
+					//macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
+					executeMacro = true;
+				}
+				catch (FormatException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid number", "Error");
+				}
+				catch (ArgumentNullException)
+				{
+					ShowInformationMessageBox("Wrong format. Needs to be \"+2\" or \"+ 2\", for example", "Error");
+				}
+				catch (ArgumentOutOfRangeException)
+				{
+					ShowInformationMessageBox("You didn't indicate a valid operator, check help if you have doubts", "Error");
+				}
 			}
 
 			if (executeMacro)
@@ -150,9 +210,7 @@ namespace Forms
 			switch (textSplit.Length)
 			{
 				case > 2:
-					ShowTextBoxErrorMessage(TextBoxYear,
-						"Wrong format. Needs to be \"+2\" or \"+ 2\", for example");
-					break;
+					throw new ArgumentNullException();
 				case 2:
 				{
 					var changeOperator = textSplit[0];
@@ -168,15 +226,12 @@ namespace Forms
 							case "-":
 								changeType = IntegerSongDetailsChangeType.Subtract;
 								break;
-							default:
-								ShowTextBoxErrorMessage(TextBoxYear,
-									"You didn't indicate a valid comparison operator, check help if you have doubts");
-								break;
+							default: throw new ArgumentOutOfRangeException();
 						}
 					}
-					catch (FormatException)
+					catch (FormatException exception)
 					{
-						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid number");
+						throw exception;
 					}
 
 					break;
@@ -186,7 +241,7 @@ namespace Forms
 					var indexOfFirstNumber = textSplit[0].IndexOfAny("123456789".ToCharArray());
 					if (indexOfFirstNumber == -1)
 					{
-						ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid number");
+						throw new FormatException();
 					}
 					else
 					{
@@ -210,15 +265,14 @@ namespace Forms
 										integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
 									}
 									else
-										ShowTextBoxErrorMessage(TextBoxYear,
-											"You didn't indicate a valid number");
+										throw new FormatException();
 
 									break;
 							}
 						}
-						catch (FormatException)
+						catch (FormatException exception)
 						{
-							ShowTextBoxErrorMessage(TextBoxYear, "You didn't indicate a valid number");
+							throw exception;
 						}
 					}
 
@@ -226,7 +280,7 @@ namespace Forms
 				}
 			}
 
-			return new object[]{changeType,integerChange};
+			return new object[] {changeType, integerChange};
 		}
 
 		private void ManageMusicLibraryScreen_Enter(object sender, EventArgs e)
@@ -309,54 +363,63 @@ namespace Forms
 			{
 				TextBoxChangeAlbumArtist.Text = firstSong.AlbumArtist;
 			}
+
 			_changeTextBoxesContent["Album Artist"] = TextBoxChangeAlbumArtist.Text;
 
 			if (selectedSongs.All(song => Equals(song.ContributingArtists, firstSong.ContributingArtists)))
 			{
 				TextBoxChangeContributingArtists.Text = string.Join(';', firstSong.ContributingArtists);
 			}
+
 			_changeTextBoxesContent["Contributing Artists"] = TextBoxChangeContributingArtists.Text;
 
 			if (selectedSongs.All(song => song.Album == firstSong.Album))
 			{
 				TextBoxChangeAlbum.Text = firstSong.Album;
 			}
+
 			_changeTextBoxesContent["Album"] = TextBoxChangeAlbum.Text;
 
 			if (selectedSongs.All(song => song.Title == firstSong.Title))
 			{
 				TextBoxChangeSongTitle.Text = firstSong.Title;
 			}
+
 			_changeTextBoxesContent["Song Title"] = TextBoxChangeSongTitle.Text;
 
 			if (selectedSongs.All(song => song.Genre == firstSong.Genre))
 			{
 				TextBoxChangeGenre.Text = firstSong.Genre;
 			}
+
 			_changeTextBoxesContent["Genre"] = TextBoxChangeGenre.Text;
 
 			if (selectedSongs.All(song => song.Year == firstSong.Year))
 			{
 				TextBoxChangeYear.Text = firstSong.Year.ToString();
 			}
+
 			_changeTextBoxesContent["Year"] = TextBoxChangeYear.Text;
 
 			if (selectedSongs.All(song => song.TrackNumber == firstSong.TrackNumber))
 			{
 				TextBoxChangeTrackNumber.Text = firstSong.TrackNumber.ToString();
 			}
+
 			_changeTextBoxesContent["Track Number"] = TextBoxChangeTrackNumber.Text;
 
 			if (selectedSongs.All(song => song.DiscNumber == firstSong.DiscNumber))
 			{
 				TextBoxChangeDiscNumber.Text = firstSong.DiscNumber.ToString();
 			}
+
 			_changeTextBoxesContent["Disc Number"] = TextBoxChangeDiscNumber.Text;
 
 			if (selectedSongs.All(song => song.PlayCount == firstSong.PlayCount))
 			{
 				TextBoxChangePlayCount.Text = firstSong.PlayCount.ToString();
 			}
+
 			_changeTextBoxesContent["Play Count"] = TextBoxChangePlayCount.Text;
 		}
 

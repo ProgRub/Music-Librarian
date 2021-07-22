@@ -48,6 +48,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 			SongService.Instance.MusicService.ChangeYear(_song,_newYear);
 			_songFile.Tag.Year = (uint) _newYear;
 			_songInDB.Year = _newYear;
+			_songInDB.Album.Year = _newYear;
 			_song.Year = _newYear;
 		}
 
@@ -56,6 +57,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 			SongService.Instance.MusicService.ChangeYear(_song,_oldYear);
 			_songFile.Tag.Year = (uint) _oldYear;
 			_songInDB.Year = _oldYear;
+			_songInDB.Album.Year = _oldYear;
 			_song.Year = _oldYear;
 		}
 
@@ -64,6 +66,7 @@ namespace Business.Commands.ManageLibrary.ChangeSongDetailsCommands
 			SongService.Instance.MusicService.ChangeYear(_song,_newYear);
 			_songFile.Tag.Year = (uint) _newYear;
 			_songInDB.Year = _newYear;
+			_songInDB.Album.Year = _newYear;
 			_song.Year = _newYear;
 		}
 	}
