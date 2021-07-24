@@ -143,12 +143,12 @@ namespace Forms
 			this.ButtonChooseSelectWorkout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonChooseSelectWorkout.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonChooseSelectWorkout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonChooseSelectWorkout.Location = new System.Drawing.Point(489, 66);
+			this.ButtonChooseSelectWorkout.Location = new System.Drawing.Point(408, 66);
 			this.ButtonChooseSelectWorkout.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonChooseSelectWorkout.Name = "ButtonChooseSelectWorkout";
-			this.ButtonChooseSelectWorkout.Size = new System.Drawing.Size(149, 27);
+			this.ButtonChooseSelectWorkout.Size = new System.Drawing.Size(314, 27);
 			this.ButtonChooseSelectWorkout.TabIndex = 23;
-			this.ButtonChooseSelectWorkout.Text = "Choose Workout";
+			this.ButtonChooseSelectWorkout.Text = "Get Album Time For Selected Workout";
 			this.ButtonChooseSelectWorkout.UseVisualStyleBackColor = false;
 			this.ButtonChooseSelectWorkout.Click += new System.EventHandler(this.ButtonChooseWorkout_Click);
 			// 
@@ -156,13 +156,13 @@ namespace Forms
 			// 
 			this.ComboBoxWorkouts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.ComboBoxWorkouts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ComboBoxWorkouts.Enabled = false;
+			this.ComboBoxWorkouts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ComboBoxWorkouts.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.ComboBoxWorkouts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.ComboBoxWorkouts.FormattingEnabled = true;
 			this.ComboBoxWorkouts.Location = new System.Drawing.Point(408, 39);
 			this.ComboBoxWorkouts.Name = "ComboBoxWorkouts";
-			this.ComboBoxWorkouts.Size = new System.Drawing.Size(312, 24);
+			this.ComboBoxWorkouts.Size = new System.Drawing.Size(314, 24);
 			this.ComboBoxWorkouts.TabIndex = 24;
 			// 
 			// ButtonAllAlbums

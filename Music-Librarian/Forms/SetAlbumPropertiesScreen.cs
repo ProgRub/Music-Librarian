@@ -11,11 +11,42 @@ namespace Forms
 {
 	public partial class SetAlbumPropertiesScreen : BaseControl
 	{
+		private bool _firstTime;
 
 		private IEnumerable<GenreDTO> _genres;
+
+		private IEnumerable<WorkoutDTO> _workouts;
+
 		public SetAlbumPropertiesScreen()
 		{
 			InitializeComponent();
+			_firstTime = true;
+		}
+
+		private void SetAlbumPropertiesScreen_Enter(object sender, EventArgs e)
+		{
+			_genres = BusinessFacade.Instance.GetAllGenres();
+			_workouts = BusinessFacade.Instance.GetAllWorkouts();
+			const int heightToAdd = 25;
+			var height = CheckBoxSelectAll.Location.Y + heightToAdd;
+			if (!_firstTime) return;
+			_firstTime = false;
+			foreach (var genre in _genres)
+			{
+				var checkBox = new CheckBox
+				{
+					ForeColor = genre.Color, Text = genre.Name,
+					Location = new Point(CheckBoxSelectAll.Location.X, height), AutoSize = true, UseMnemonic = false
+				};
+				checkBox.Click += CheckBoxGenre_Clicked;
+				Controls.Add(checkBox);
+				height += heightToAdd;
+			}
+
+			foreach (var workout in _workouts)
+			{
+				ComboBoxWorkouts.Items.Add($"{workout.Id} - {workout.Name}");
+			}
 		}
 
 		private void ButtonGetPossibleAlbums_Click(object sender, EventArgs e)
@@ -23,9 +54,9 @@ namespace Forms
 			BusinessFacade.Instance.SetAlbumProperties(DateTimePickerAlbumTime.Value.TimeOfDay,
 				DateTimePickerLeeway.Value.TimeOfDay);
 			BusinessFacade.Instance.SetSelectedGenres(_genres.Where(genre =>
-				Controls.OfType<CheckBox>().Any(checkBox =>checkBox.Checked&& checkBox.Text == genre.Name)));
+				Controls.OfType<CheckBox>().Any(checkBox => checkBox.Checked && checkBox.Text == genre.Name)));
 			BusinessFacade.Instance.SetLeewayType(GetSelectedLeewayType());
-			MoveToScreen(new ShowAllPossibleAlbumsScreen(),this);
+			MoveToScreen(new ShowAllPossibleAlbumsScreen(), this);
 		}
 
 		private LeewayType GetSelectedLeewayType()
@@ -40,49 +71,28 @@ namespace Forms
 
 		private void ButtonChooseWorkout_Click(object sender, EventArgs e)
 		{
-			if (ButtonChooseSelectWorkout.Text == "Choose Workout")
-			{
-				ButtonChooseSelectWorkout.Text = "Get Album Time For Selected Workout";
-				ComboBoxWorkouts.Enabled = true;
-			}
-			else
-			{
-				ButtonChooseSelectWorkout.Text = "Choose Workout";
-				ComboBoxWorkouts.Enabled = false;
-			}
+			BusinessFacade.Instance.SetSelectedWorkout(_workouts.First(e =>
+				e.Id.ToString() == ComboBoxWorkouts.Text.Split(" - ")[0]));
+			DateTimePickerAlbumTime.Value =
+				DateTimePickerAlbumTime.MinDate.Add(BusinessFacade.Instance
+					.GetAverageCompletionTimeOfSelectedWorkout());
+			DateTimePickerLeeway.Value =
+				DateTimePickerLeeway.MinDate.Add(BusinessFacade.Instance.GetMaximumLeewayOfSelectedWorkout());
 		}
 
 		private void ButtonAllAlbums_Click(object sender, EventArgs e)
 		{
-			DateTimePickerAlbumTime.Value = new DateTime(2000, 1,1, 1, 30, 0);
-			DateTimePickerLeeway.Value = new DateTime(2000, 1,1, 1, 30, 0);
+			DateTimePickerAlbumTime.Value = new DateTime(2000, 1, 1, 1, 30, 0);
+			DateTimePickerLeeway.Value = new DateTime(2000, 1, 1, 1, 30, 0);
 			foreach (var checkBox in Controls.OfType<CheckBox>())
 			{
 				checkBox.Checked = true;
 			}
 		}
 
-		private void SetAlbumPropertiesScreen_Enter(object sender, EventArgs e)
-		{
-			_genres = BusinessFacade.Instance.GetAllGenres();
-			var heightToAdd = 25;
-			var height = CheckBoxSelectAll.Location.Y + heightToAdd;
-			foreach (var genre in _genres)
-			{
-				var checkBox = new CheckBox
-				{
-					ForeColor = genre.Color, Text = genre.Name,
-					Location = new Point(CheckBoxSelectAll.Location.X, height),AutoSize = true,UseMnemonic = false
-				};
-				checkBox.Click += CheckBoxGenre_Clicked;
-				Controls.Add(checkBox);
-				height += heightToAdd;
-			}
-		}
-
 		private void CheckBoxSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var checkBox in Controls.OfType<CheckBox>().Where(checkBox=>checkBox!=CheckBoxSelectAll))
+			foreach (var checkBox in Controls.OfType<CheckBox>().Where(checkBox => checkBox != CheckBoxSelectAll))
 			{
 				checkBox.Checked = CheckBoxSelectAll.Checked;
 			}
@@ -90,7 +100,8 @@ namespace Forms
 
 		private void CheckBoxGenre_Clicked(object sender, EventArgs e)
 		{
-			CheckBoxSelectAll.Checked = Controls.OfType<CheckBox>().Where(checkBox=>checkBox!=CheckBoxSelectAll).All(checkBox => checkBox.Checked);
+			CheckBoxSelectAll.Checked = Controls.OfType<CheckBox>().Where(checkBox => checkBox != CheckBoxSelectAll)
+				.All(checkBox => checkBox.Checked);
 		}
 	}
 }

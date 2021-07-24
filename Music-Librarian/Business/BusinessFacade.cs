@@ -101,5 +101,14 @@ namespace Business
 		public void SetSongToEditLyrics(SongDTO song) => SongService.Instance.SongToChangeLyrics = song;
 
 		public SongDTO GetSongToEditLyrics() => SongService.Instance.SongToChangeLyrics;
+
+		public IEnumerable<WorkoutDTO> GetAllWorkouts() => WorkoutService.Instance.GetWorkouts();
+
+		public void SetSelectedWorkout(WorkoutDTO selectedWorkout) => WorkoutService.Instance.SelectedWorkout = selectedWorkout;
+
+		public TimeSpan GetAverageCompletionTimeOfSelectedWorkout() => WorkoutService.Instance.GetAverageCompletionTimeOfSelectedWorkout();
+
+		public TimeSpan GetMaximumLeewayOfSelectedWorkout() =>
+			WorkoutService.Instance.GetMaximumLeewayOfSelectedWorkout();
 	}
 }
