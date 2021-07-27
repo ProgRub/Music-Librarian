@@ -31,10 +31,10 @@ namespace DB.Repositories.Implementations
 
 		public void ChangeAlbum(Song song, string albumTitle,  int totalTrackCount, int totalDiscCount)
 		{
-			var newAlbum =
-				_albumRepository.GetAlbumOrCreateNewOne(albumTitle, song.Genre, song, totalTrackCount, totalDiscCount);
 			var oldAlbum = song.Album;
-			song.Album = newAlbum;
+			song.Album = _albumRepository.GetAlbumOrCreateNewOne(albumTitle, song.Genre, song, totalTrackCount, totalDiscCount);
+			song.Album.Songs.Add(song);
+			SaveChanges();
 			oldAlbum.Songs.Remove(song);
 			if (oldAlbum.Songs.Count == 0)
 			{

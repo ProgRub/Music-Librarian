@@ -19,8 +19,8 @@ namespace Business
 		{
 			AlbumService.Instance.GetAlbumsFromDatabase();
 			MusicService = iTunesService.Instance;
-			SongService.Instance.MusicService = MusicService;
 			MusicService.OpenService();
+			SongService.Instance.MusicService = MusicService;
 			SongService.Instance.NotifyUpdatePlayCounts +=
 				(sender, args) => NotifyUpdatePlayCounts.Invoke(sender, args);
 		}
