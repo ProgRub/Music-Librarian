@@ -44,15 +44,13 @@ namespace DB.Repositories.Implementations
 
 		public void ChangeGenre(Song song, string genreName)
 		{
-			var newGenre = _genreRepository.GetGenreOrCreateNewOne(genreName);
 			var oldGenre = song.Genre;
-			song.Genre = newGenre;
+			song.Genre = _genreRepository.GetGenreOrCreateNewOne(genreName);
+			SaveChanges();
 			if (!Find(e => e.Genre == oldGenre).Any())
 			{
 				_genreRepository.Remove(oldGenre);
 			}
-
-			SaveChanges();
 
 			var album = song.Album;
 			var albumGenreGroups=album.Songs.GroupBy(song => song.GenreId, song=>song,
