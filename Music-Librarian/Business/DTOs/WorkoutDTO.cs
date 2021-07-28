@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Business.Services;
 using DB.Entities;
 
 namespace Business
@@ -14,7 +15,7 @@ namespace Business
 		{
 			return new()
 			{
-				Id = workout.Id, Name = workout.Name, WorkoutDateTimes = workout.WorkoutDateTimes
+				Id = workout.Id, Name = workout.Name, WorkoutDateTimes =workout.WorkoutDateTimes
 			};
 		}
 	}

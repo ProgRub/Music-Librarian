@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.Linq;
 using DB.Entities;
 using DB.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +18,10 @@ namespace DB.Repositories.Implementations
 		public void AddTimeToWorkoutById(int workoutId, TimeSpan time)
 		{
 			var workout = GetById(workoutId);
-			var workoutDateTimes = workout.WorkoutDateTimes;
-			workoutDateTimes.Add(DateTime.Today.Date.Add(time));
-			workout.WorkoutDateTimes=workoutDateTimes;
-			SaveChanges();
+			workout.WorkoutDateTimes.Add(DateTime.Today.Date.Add(time));
+			using var context=Database.GetContext();
+			context.Update(workout);
+			context.SaveChanges();
 		}
 
 	}

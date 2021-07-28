@@ -43,5 +43,6 @@ namespace Business.Services
 			return differenceBetweenMaxAndAverage >
 			       differenceBetweenMinAndAverage ? differenceBetweenMaxAndAverage : differenceBetweenMinAndAverage;
 		}
+		
 	}
 }
