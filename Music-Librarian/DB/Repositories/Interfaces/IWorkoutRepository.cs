@@ -6,6 +6,6 @@ namespace DB.Repositories.Interfaces
 {
 	public interface IWorkoutRepository : IGenericRepository<Workout>
 	{
-		void AddTimeToWorkoutById(int workoutId, TimeSpan time);
+		void AddTimeToWorkoutById(int workoutId,  DateTime dateTime);
 	}
 }

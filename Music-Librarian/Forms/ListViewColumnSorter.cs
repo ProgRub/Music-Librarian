@@ -29,10 +29,23 @@ namespace Forms
 			var listViewX = (ListViewItem) x;
 			var listViewY = (ListViewItem) y;
 			
-			var compareResult = _objectCompare.Compare(listViewX.SubItems[_columnToSort].Text,
-				listViewY.SubItems[_columnToSort].Text);
+			int compareResult;
+            float a, b;
+            if (float.TryParse(listViewX.SubItems[_columnToSort].Text, out a) &&
+                float.TryParse(listViewY.SubItems[_columnToSort].Text, out b))
+            {
+                if (a < b) compareResult = -1;
+				else if (a > b) compareResult = 1;
+				else compareResult=0;
 
-			return _orderOfSort switch
+
+            }else{
+                compareResult = _objectCompare.Compare(listViewX.SubItems[_columnToSort].Text,
+                    listViewY.SubItems[_columnToSort].Text);
+            }
+            
+
+            return _orderOfSort switch
 			{
 				SortOrder.Ascending => compareResult,
 				SortOrder.Descending => (-compareResult),

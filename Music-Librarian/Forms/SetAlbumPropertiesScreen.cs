@@ -82,12 +82,14 @@ namespace Forms
 
 		private void ButtonAllAlbums_Click(object sender, EventArgs e)
 		{
-			DateTimePickerAlbumTime.Value = new DateTime(2000, 1, 1, 1, 30, 0);
+			DateTimePickerAlbumTime.Value = new DateTime(2000, 1, 1, 0,20, 0);
 			DateTimePickerLeeway.Value = new DateTime(2000, 1, 1, 1, 30, 0);
 			foreach (var checkBox in Controls.OfType<CheckBox>())
 			{
 				checkBox.Checked = true;
 			}
+
+			RadioButtonOver.Checked = true;
 		}
 
 		private void CheckBoxSelectAll_Click(object sender, EventArgs e)

@@ -15,10 +15,10 @@ namespace DB.Repositories.Implementations
 		{
 		}
 
-		public void AddTimeToWorkoutById(int workoutId, TimeSpan time)
+		public void AddTimeToWorkoutById(int workoutId, DateTime dateTime)
 		{
 			var workout = GetById(workoutId);
-			workout.WorkoutDateTimes.Add(DateTime.Today.Date.Add(time));
+			workout.WorkoutDateTimes.Add(dateTime);
 			using var context=Database.GetContext();
 			context.Update(workout);
 			context.SaveChanges();
