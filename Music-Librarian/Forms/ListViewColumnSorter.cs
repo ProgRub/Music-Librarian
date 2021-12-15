@@ -30,9 +30,8 @@ namespace Forms
 			var listViewY = (ListViewItem) y;
 			
 			int compareResult;
-            float a, b;
-            if (float.TryParse(listViewX.SubItems[_columnToSort].Text, out a) &&
-                float.TryParse(listViewY.SubItems[_columnToSort].Text, out b))
+            if (float.TryParse(listViewX.SubItems[_columnToSort].Text, out var a) &&
+                float.TryParse(listViewY.SubItems[_columnToSort].Text, out var b))
             {
                 if (a < b) compareResult = -1;
 				else if (a > b) compareResult = 1;
