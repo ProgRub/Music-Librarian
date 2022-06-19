@@ -11,6 +11,7 @@ namespace Forms
 		private int _numberOfWrittenLines;
 		private readonly object _mutex=new();
 		private readonly UpdatePlayCountsType _type;
+		private int _songsProcessed, _songsTotal;
 
 		public UpdatePlayCountsScreen(UpdatePlayCountsType type)
 		{
@@ -25,7 +26,9 @@ namespace Forms
 			buddies = new Control[] {SyncRichTextBoxArtist, SyncRichTextBoxAlbum, SyncRichTextBoxTitle};
 			SyncRichTextBoxPlayCountChange.Buddies = buddies;
 			_numberOfWrittenLines = 0;
-		}
+            _songsProcessed = 0;
+            _songsTotal = BusinessFacade.Instance.GetNumberOfSongs();
+        }
 
 		private void UpdatePlayCountsScreen_Enter(object sender, EventArgs e)
 		{
@@ -93,6 +96,11 @@ namespace Forms
 				SyncRichTextBoxPlayCountChange.ScrollToCaret();
 			}));
 			_numberOfWrittenLines++;
-		}
+            _songsProcessed++;
+            if (_songsProcessed == _songsTotal)
+            {
+                LabelAllDone.Invoke(new MethodInvoker(delegate { LabelAllDone.Visible = true; }));
+            }
+        }
 	}
 }

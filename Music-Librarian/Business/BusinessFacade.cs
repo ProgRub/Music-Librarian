@@ -87,6 +87,7 @@ namespace Business
 		}
 
 		public IEnumerable<SongDTO> GetAllSongs() => SongService.Instance.AllSongs;
+        public int GetNumberOfSongs() => SongService.Instance.AllSongs.Count;
 
 		public void UpdateDatabasePlayCounts()
 		{
