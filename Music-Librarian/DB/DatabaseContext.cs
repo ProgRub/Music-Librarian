@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace DB
 {
@@ -13,7 +15,7 @@ namespace DB
 		{
 			optionsBuilder.EnableSensitiveDataLogging();
 			optionsBuilder.UseLazyLoadingProxies().UseSqlServer(
-				@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MusicWorkoutsAndOthersDb;MultipleActiveResultSets=True");
+				@"Data Source=(localdb)\ProjectModels;Initial Catalog=MusicWorkoutsAndOthersDB;MultipleActiveResultSets=True");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

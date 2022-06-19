@@ -38,6 +38,8 @@ namespace Forms
 			this.ButtonManageGenres = new System.Windows.Forms.Button();
 			this.ButtonUpdatePlayCounts = new System.Windows.Forms.Button();
 			this.ButtonSetPlayCountsFromDB = new System.Windows.Forms.Button();
+			this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
+			this.tableLayoutPanelMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ButtonBack
@@ -50,27 +52,30 @@ namespace Forms
 			// 
 			// LabelMusicStoredIn
 			// 
+			this.LabelMusicStoredIn.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelMusicStoredIn.AutoSize = true;
-			this.LabelMusicStoredIn.Location = new System.Drawing.Point(3, 33);
+			this.LabelMusicStoredIn.Location = new System.Drawing.Point(7, 5);
 			this.LabelMusicStoredIn.Name = "LabelMusicStoredIn";
-			this.LabelMusicStoredIn.Size = new System.Drawing.Size(349, 17);
+			this.LabelMusicStoredIn.Size = new System.Drawing.Size(187, 34);
 			this.LabelMusicStoredIn.TabIndex = 6;
 			this.LabelMusicStoredIn.Text = "The Folder Where You Store All Your Music:";
 			// 
 			// TextBoxDirectory
 			// 
+			this.TextBoxDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.TextBoxDirectory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
 			this.TextBoxDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxDirectory.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxDirectory.Location = new System.Drawing.Point(369, 30);
+			this.TextBoxDirectory.Location = new System.Drawing.Point(200, 10);
 			this.TextBoxDirectory.Name = "TextBoxDirectory";
 			this.TextBoxDirectory.ReadOnly = true;
-			this.TextBoxDirectory.Size = new System.Drawing.Size(454, 24);
+			this.TextBoxDirectory.Size = new System.Drawing.Size(686, 24);
 			this.TextBoxDirectory.TabIndex = 7;
 			// 
 			// ButtonChooseFolder
 			// 
+			this.ButtonChooseFolder.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.ButtonChooseFolder.AutoSize = true;
 			this.ButtonChooseFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonChooseFolder.BackColor = System.Drawing.Color.Transparent;
@@ -80,7 +85,7 @@ namespace Forms
 			this.ButtonChooseFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonChooseFolder.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonChooseFolder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonChooseFolder.Location = new System.Drawing.Point(830, 28);
+			this.ButtonChooseFolder.Location = new System.Drawing.Point(893, 8);
 			this.ButtonChooseFolder.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonChooseFolder.Name = "ButtonChooseFolder";
 			this.ButtonChooseFolder.Size = new System.Drawing.Size(59, 27);
@@ -95,6 +100,7 @@ namespace Forms
 			// 
 			// ButtonChooseAlbum
 			// 
+			this.ButtonChooseAlbum.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.ButtonChooseAlbum.AutoSize = true;
 			this.ButtonChooseAlbum.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonChooseAlbum.BackColor = System.Drawing.Color.Transparent;
@@ -104,7 +110,7 @@ namespace Forms
 			this.ButtonChooseAlbum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonChooseAlbum.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonChooseAlbum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonChooseAlbum.Location = new System.Drawing.Point(410, 75);
+			this.ButtonChooseAlbum.Location = new System.Drawing.Point(427, 47);
 			this.ButtonChooseAlbum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonChooseAlbum.Name = "ButtonChooseAlbum";
 			this.ButtonChooseAlbum.Size = new System.Drawing.Size(231, 27);
@@ -115,6 +121,7 @@ namespace Forms
 			// 
 			// ButtonSearchLibrary
 			// 
+			this.ButtonSearchLibrary.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.ButtonSearchLibrary.AutoSize = true;
 			this.ButtonSearchLibrary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonSearchLibrary.BackColor = System.Drawing.Color.Transparent;
@@ -124,7 +131,7 @@ namespace Forms
 			this.ButtonSearchLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonSearchLibrary.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonSearchLibrary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonSearchLibrary.Location = new System.Drawing.Point(410, 108);
+			this.ButtonSearchLibrary.Location = new System.Drawing.Point(419, 91);
 			this.ButtonSearchLibrary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonSearchLibrary.Name = "ButtonSearchLibrary";
 			this.ButtonSearchLibrary.Size = new System.Drawing.Size(248, 27);
@@ -135,6 +142,7 @@ namespace Forms
 			// 
 			// ButtonManageGenres
 			// 
+			this.ButtonManageGenres.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.ButtonManageGenres.AutoSize = true;
 			this.ButtonManageGenres.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonManageGenres.BackColor = System.Drawing.Color.Transparent;
@@ -144,7 +152,7 @@ namespace Forms
 			this.ButtonManageGenres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonManageGenres.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonManageGenres.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonManageGenres.Location = new System.Drawing.Point(410, 141);
+			this.ButtonManageGenres.Location = new System.Drawing.Point(474, 135);
 			this.ButtonManageGenres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonManageGenres.Name = "ButtonManageGenres";
 			this.ButtonManageGenres.Size = new System.Drawing.Size(137, 27);
@@ -155,6 +163,7 @@ namespace Forms
 			// 
 			// ButtonUpdatePlayCounts
 			// 
+			this.ButtonUpdatePlayCounts.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.ButtonUpdatePlayCounts.AutoSize = true;
 			this.ButtonUpdatePlayCounts.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonUpdatePlayCounts.BackColor = System.Drawing.Color.Transparent;
@@ -164,7 +173,7 @@ namespace Forms
 			this.ButtonUpdatePlayCounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonUpdatePlayCounts.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonUpdatePlayCounts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonUpdatePlayCounts.Location = new System.Drawing.Point(410, 174);
+			this.ButtonUpdatePlayCounts.Location = new System.Drawing.Point(458, 179);
 			this.ButtonUpdatePlayCounts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonUpdatePlayCounts.Name = "ButtonUpdatePlayCounts";
 			this.ButtonUpdatePlayCounts.Size = new System.Drawing.Size(170, 27);
@@ -175,6 +184,7 @@ namespace Forms
 			// 
 			// ButtonSetPlayCountsFromDB
 			// 
+			this.ButtonSetPlayCountsFromDB.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.ButtonSetPlayCountsFromDB.AutoSize = true;
 			this.ButtonSetPlayCountsFromDB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ButtonSetPlayCountsFromDB.BackColor = System.Drawing.Color.Transparent;
@@ -184,7 +194,7 @@ namespace Forms
 			this.ButtonSetPlayCountsFromDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonSetPlayCountsFromDB.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonSetPlayCountsFromDB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonSetPlayCountsFromDB.Location = new System.Drawing.Point(410, 207);
+			this.ButtonSetPlayCountsFromDB.Location = new System.Drawing.Point(437, 223);
 			this.ButtonSetPlayCountsFromDB.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ButtonSetPlayCountsFromDB.Name = "ButtonSetPlayCountsFromDB";
 			this.ButtonSetPlayCountsFromDB.Size = new System.Drawing.Size(212, 27);
@@ -193,30 +203,46 @@ namespace Forms
 			this.ButtonSetPlayCountsFromDB.UseVisualStyleBackColor = false;
 			this.ButtonSetPlayCountsFromDB.Click += new System.EventHandler(this.ButtonSetPlayCountsFromDB_Click);
 			// 
+			// tableLayoutPanelMain
+			// 
+			this.tableLayoutPanelMain.ColumnCount = 3;
+			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+			this.tableLayoutPanelMain.Controls.Add(this.LabelMusicStoredIn, 0, 0);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonSetPlayCountsFromDB, 1, 5);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonChooseFolder, 2, 0);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonUpdatePlayCounts, 1, 4);
+			this.tableLayoutPanelMain.Controls.Add(this.TextBoxDirectory, 1, 0);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonManageGenres, 1, 3);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonChooseAlbum, 1, 1);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonSearchLibrary, 1, 2);
+			this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanelMain.MinimumSize = new System.Drawing.Size(978, 256);
+			this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
+			this.tableLayoutPanelMain.RowCount = 6;
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66736F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66736F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66736F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66736F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66736F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.6632F));
+			this.tableLayoutPanelMain.Size = new System.Drawing.Size(989, 266);
+			this.tableLayoutPanelMain.TabIndex = 14;
+			// 
 			// HomeScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.ButtonSetPlayCountsFromDB);
-			this.Controls.Add(this.ButtonUpdatePlayCounts);
-			this.Controls.Add(this.ButtonManageGenres);
-			this.Controls.Add(this.ButtonSearchLibrary);
-			this.Controls.Add(this.ButtonChooseAlbum);
-			this.Controls.Add(this.ButtonChooseFolder);
-			this.Controls.Add(this.TextBoxDirectory);
-			this.Controls.Add(this.LabelMusicStoredIn);
+			this.Controls.Add(this.tableLayoutPanelMain);
 			this.Name = "HomeScreen";
-			this.Size = new System.Drawing.Size(893, 447);
+			this.Size = new System.Drawing.Size(989, 266);
 			this.Enter += new System.EventHandler(this.HomeScreen_Enter);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
-			this.Controls.SetChildIndex(this.LabelMusicStoredIn, 0);
-			this.Controls.SetChildIndex(this.TextBoxDirectory, 0);
-			this.Controls.SetChildIndex(this.ButtonChooseFolder, 0);
-			this.Controls.SetChildIndex(this.ButtonChooseAlbum, 0);
-			this.Controls.SetChildIndex(this.ButtonSearchLibrary, 0);
-			this.Controls.SetChildIndex(this.ButtonManageGenres, 0);
-			this.Controls.SetChildIndex(this.ButtonUpdatePlayCounts, 0);
-			this.Controls.SetChildIndex(this.ButtonSetPlayCountsFromDB, 0);
+			this.Controls.SetChildIndex(this.tableLayoutPanelMain, 0);
+			this.tableLayoutPanelMain.ResumeLayout(false);
+			this.tableLayoutPanelMain.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -233,5 +259,6 @@ namespace Forms
 		private System.Windows.Forms.Button ButtonChooseFolder;
 		private System.Windows.Forms.Button ButtonUpdatePlayCounts;
 		private System.Windows.Forms.Button ButtonSetPlayCountsFromDB;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
 	}
 }

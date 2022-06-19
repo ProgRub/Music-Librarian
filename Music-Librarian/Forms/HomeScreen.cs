@@ -18,6 +18,7 @@ namespace Forms
 			CommandsManager.Instance.ResetCommandsList();
 			_musicToDirectory = BusinessFacade.Instance.GetMusicLibraryDirectory();
 			TextBoxDirectory.Text = _musicToDirectory;
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,false);
 		}
 
 		private void ButtonChooseFolder_Click(object sender, EventArgs e)
