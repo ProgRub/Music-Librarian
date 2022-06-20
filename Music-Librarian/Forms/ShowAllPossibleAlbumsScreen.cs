@@ -39,6 +39,7 @@ namespace Forms
 				ListViewPossibleAlbums.Items.Add(item);
 			}
 			ListViewPossibleAlbums.Sort();
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,false);
 		}
 
 		private AlbumDTO GetSelectedAlbum()

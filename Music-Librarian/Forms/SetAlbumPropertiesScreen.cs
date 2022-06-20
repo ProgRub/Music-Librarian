@@ -30,7 +30,12 @@ namespace Forms
 			_workouts = BusinessFacade.Instance.GetAllWorkouts();
 			const int heightToAdd = 25;
 			var height = CheckBoxSelectAll.Location.Y + heightToAdd;
-			if (!_firstTime) return;
+			if (!_firstTime)
+			{
+				SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain, false);
+				SetFormAcceptButton(ButtonGetPossibleAlbums);
+				return;
+			}
 			_firstTime = false;
 			foreach (var genre in _genres)
 			{
@@ -60,14 +65,14 @@ namespace Forms
 			BusinessFacade.Instance.SetAlbumProperties(DateTimePickerAlbumTime.Value.TimeOfDay,
 				DateTimePickerLeeway.Value.TimeOfDay);
 			BusinessFacade.Instance.SetSelectedGenres(_genres.Where(genre =>
-				Controls.OfType<CheckBox>().Any(checkBox => checkBox.Checked && checkBox.Text == genre.Name)));
+				tableLayoutPanelMain.Controls.OfType<CheckBox>().Any(checkBox => checkBox.Checked && checkBox.Text == genre.Name)));
 			BusinessFacade.Instance.SetLeewayType(GetSelectedLeewayType());
 			MoveToScreen(new ShowAllPossibleAlbumsScreen(), this);
 		}
 
 		private LeewayType GetSelectedLeewayType()
 		{
-			return Controls.OfType<RadioButton>().First(e => e.Checked).Text switch
+			return tableLayoutPanelMain.Controls.OfType<RadioButton>().First(e => e.Checked).Text switch
 			{
 				"Over" => LeewayType.Over,
 				"Under" => LeewayType.Under,
@@ -90,7 +95,7 @@ namespace Forms
 		{
 			DateTimePickerAlbumTime.Value = new DateTime(2000, 1, 1, 0,20, 0);
 			DateTimePickerLeeway.Value = new DateTime(2000, 1, 1, 1, 30, 0);
-			foreach (var checkBox in Controls.OfType<CheckBox>())
+			foreach (var checkBox in tableLayoutPanelMain.Controls.OfType<CheckBox>())
 			{
 				checkBox.Checked = true;
 			}
@@ -100,7 +105,7 @@ namespace Forms
 
 		private void CheckBoxSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var checkBox in Controls.OfType<CheckBox>().Where(checkBox => checkBox != CheckBoxSelectAll))
+			foreach (var checkBox in tableLayoutPanelMain.Controls.OfType<CheckBox>().Where(checkBox => checkBox != CheckBoxSelectAll))
 			{
 				checkBox.Checked = CheckBoxSelectAll.Checked;
 			}
@@ -108,7 +113,7 @@ namespace Forms
 
 		private void CheckBoxGenre_Clicked(object sender, EventArgs e)
 		{
-			CheckBoxSelectAll.Checked = Controls.OfType<CheckBox>().Where(checkBox => checkBox != CheckBoxSelectAll)
+			CheckBoxSelectAll.Checked = tableLayoutPanelMain.Controls.OfType<CheckBox>().Where(checkBox => checkBox != CheckBoxSelectAll)
 				.All(checkBox => checkBox.Checked);
 		}
 	}
