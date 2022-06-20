@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -39,14 +40,19 @@ namespace Forms
 					Location = new Point(CheckBoxSelectAll.Location.X, height), AutoSize = true, UseMnemonic = false
 				};
 				checkBox.Click += CheckBoxGenre_Clicked;
-				Controls.Add(checkBox);
-				height += heightToAdd;
+				tableLayoutPanelMain.RowCount+=1;
+				tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, (float)((7 + _genres.Count()) / 100.0 * 100.0)));
+				tableLayoutPanelMain.Controls.Add(checkBox,0, tableLayoutPanelMain.RowCount - 1);
+				tableLayoutPanelMain.MinimumSize = new Size(tableLayoutPanelMain.MinimumSize.Width,
+					tableLayoutPanelMain.MinimumSize.Height +30);
 			}
 
 			foreach (var workout in _workouts)
 			{
 				ComboBoxWorkouts.Items.Add($"{workout.Id} - {workout.Name}");
 			}
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,false);
+			SetFormAcceptButton(ButtonGetPossibleAlbums);
 		}
 
 		private void ButtonGetPossibleAlbums_Click(object sender, EventArgs e)
