@@ -62,7 +62,7 @@ namespace Forms
 			this.ListViewPossibleAlbums.Location = new System.Drawing.Point(3, 33);
 			this.ListViewPossibleAlbums.MultiSelect = false;
 			this.ListViewPossibleAlbums.Name = "ListViewPossibleAlbums";
-			this.ListViewPossibleAlbums.Size = new System.Drawing.Size(1186, 377);
+			this.ListViewPossibleAlbums.Size = new System.Drawing.Size(1189, 387);
 			this.ListViewPossibleAlbums.TabIndex = 12;
 			this.ListViewPossibleAlbums.UseCompatibleStateImageBehavior = false;
 			this.ListViewPossibleAlbums.View = System.Windows.Forms.View.Details;
@@ -93,7 +93,7 @@ namespace Forms
 			// 
 			this.LabelAlbumTimeRange.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.LabelAlbumTimeRange.AutoSize = true;
-			this.LabelAlbumTimeRange.Location = new System.Drawing.Point(343, 13);
+			this.LabelAlbumTimeRange.Location = new System.Drawing.Point(344, 13);
 			this.LabelAlbumTimeRange.Name = "LabelAlbumTimeRange";
 			this.LabelAlbumTimeRange.Size = new System.Drawing.Size(506, 17);
 			this.LabelAlbumTimeRange.TabIndex = 13;
@@ -107,13 +107,14 @@ namespace Forms
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanelMain.Controls.Add(this.LabelAlbumTimeRange, 0, 0);
 			this.tableLayoutPanelMain.Controls.Add(this.ListViewPossibleAlbums, 0, 1);
-			this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 3);
+			this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanelMain.MinimumSize = new System.Drawing.Size(1192, 413);
 			this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
 			this.tableLayoutPanelMain.RowCount = 2;
 			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanelMain.Size = new System.Drawing.Size(1192, 413);
+			this.tableLayoutPanelMain.Size = new System.Drawing.Size(1195, 423);
 			this.tableLayoutPanelMain.TabIndex = 14;
 			// 
 			// ShowAllPossibleAlbumsScreen

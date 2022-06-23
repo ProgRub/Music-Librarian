@@ -39,6 +39,7 @@ namespace Forms
 			}
 			TextBoxTrackList.Text = TextBoxTrackList.Text.Trim();
 			TextBoxTrackList.Height = TextBoxTrackList.Font.Height * _album.Songs.Count() + (TextBoxTrackList.Height - TextBoxTrackList.ClientSize.Height);
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,false);
 		}
 
 		private void ButtonShowAlbumOnService_Click(object sender, EventArgs e)
