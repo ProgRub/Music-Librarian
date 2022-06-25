@@ -278,6 +278,7 @@ namespace Forms
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,true);
 		}
 
 		private void SetAutoCompletesOnSearchTextBoxes()

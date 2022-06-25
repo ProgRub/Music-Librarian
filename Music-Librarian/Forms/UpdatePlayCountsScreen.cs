@@ -40,9 +40,14 @@ namespace Forms
 				}
 			};
 			if (_type == UpdatePlayCountsType.UpdatePlayCountsFromMusicService)
+			{
 				BusinessFacade.Instance.UpdateDatabasePlayCounts();
+			}
 			else
+			{
 				BusinessFacade.Instance.SetMusicServicePlayCountsBasedOnDatabase();
+			}
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,true);
 		}
 
 		private void AddSongToTextBoxes(UpdatePlayCountEventArgs eventArgs)
