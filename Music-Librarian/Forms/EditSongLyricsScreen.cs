@@ -20,6 +20,7 @@ namespace Forms
 			_song = BusinessFacade.Instance.GetSongToEditLyrics();
 			TextBoxLyrics.Text = _song.Lyrics;
 			LabelSongInfo.Text = $"{_song.AlbumArtist} | {_song.Album} | {_song.Title}";
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,false);
 		}
 
 		private void ButtonSaveChanges_Click(object sender, System.EventArgs e)
