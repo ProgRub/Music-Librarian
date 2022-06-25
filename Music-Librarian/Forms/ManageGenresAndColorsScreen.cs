@@ -62,6 +62,7 @@ namespace Forms
 			{
 				ListBoxGenres.Items.Add($"{genre.Id} | {genre.Name}");
 			}
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,false);
 		}
 
 		private GenreDTO GetGenreFromString(string genre) =>
