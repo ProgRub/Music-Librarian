@@ -18,6 +18,7 @@ namespace DB.Entities
 		public int DiscNumber { get; set; }
 		public int Year { get; set; }
 		public int PlayCount { get; set; }
+		public int Rating { get; set; }
 		public string Lyrics { get; set; }
 		public TimeSpan Duration { get; set; }
 		public DateTime LastModified { get; set; }

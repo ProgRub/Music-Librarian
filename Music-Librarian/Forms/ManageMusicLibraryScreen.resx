@@ -60,12 +60,6 @@
   <metadata name="ControlHint.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="PictureBoxListBox.ToolTip" xml:space="preserve">
-    <value>Select the songs you want to change or delete. 
-If you want to delete them simply press the Delete key after selecting the songs you want to delete.
-After you select the songs, the text boxes on the right will allow you to change the selected songs' details.
-If they're blank, that means that detail is not equal in all the selected songs, you can still change the detail on all the selected songs.</value>
-  </data>
   <data name="PictureBoxHelpYear.ToolTip" xml:space="preserve">
     <value>Start with '&gt;' to get the songs with year greater than the one you specify
 Example: "&gt; 2000" will get the songs released after the year 2000. You can use other comparison operators.
@@ -95,5 +89,11 @@ If you want to specify the disc number outright, just type in the disc number or
     <value>Start with '+' or '-' to increase or decrease, respectivel, the play count of the selected songs by the number you specify after.
 Example: "+5" will increase the selected songs' play count by five.
 If you want to specify the play count outright, just type in the year or change the written one.</value>
+  </data>
+  <data name="PictureBoxListBox.ToolTip" xml:space="preserve">
+    <value>Select the songs you want to change or delete. 
+If you want to delete them simply press the Delete key after selecting the songs you want to delete.
+After you select the songs, the text boxes on the right will allow you to change the selected songs' details.
+If they're blank, that means that detail is not equal in all the selected songs, you can still change the detail on all the selected songs.</value>
   </data>
 </root>

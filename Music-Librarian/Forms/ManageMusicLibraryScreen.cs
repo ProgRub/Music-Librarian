@@ -17,7 +17,7 @@ namespace Forms
 	{
 		private ISet<SongDTO> _songs;
 		private ISet<GenreDTO> _genres;
-		private Timer _searchTimer;
+		private int _chosenRating,_songsRating;
 
 		private readonly IDictionary<string, string> _changeTextBoxesContent = new Dictionary<string, string>
 		{
@@ -99,8 +99,8 @@ namespace Forms
 				try
 				{
 					var commandParameters = GetIntegerDetailsChangeParameters(newYearText);
-					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-					var yearChange = (int) commandParameters[1];
+					var changeType = (IntegerSongDetailsChangeType)commandParameters[0];
+					var yearChange = (int)commandParameters[1];
 					macroChangeSongDetailsCommand.Add(new CommandChangeSongYear(changeType, yearChange));
 					executeMacro = true;
 				}
@@ -124,8 +124,8 @@ namespace Forms
 				try
 				{
 					var commandParameters = GetIntegerDetailsChangeParameters(newTrackNumberText);
-					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-					var trackNumberChange = (int) commandParameters[1];
+					var changeType = (IntegerSongDetailsChangeType)commandParameters[0];
+					var trackNumberChange = (int)commandParameters[1];
 					macroChangeSongDetailsCommand.Add(new CommandChangeSongTrackNumber(changeType, trackNumberChange));
 					executeMacro = true;
 				}
@@ -149,8 +149,8 @@ namespace Forms
 				try
 				{
 					var commandParameters = GetIntegerDetailsChangeParameters(newDiscNumberText);
-					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-					var discNumberChange = (int) commandParameters[1];
+					var changeType = (IntegerSongDetailsChangeType)commandParameters[0];
+					var discNumberChange = (int)commandParameters[1];
 					macroChangeSongDetailsCommand.Add(new CommandChangeSongDiscNumber(changeType, discNumberChange));
 					executeMacro = true;
 				}
@@ -174,8 +174,8 @@ namespace Forms
 				try
 				{
 					var commandParameters = GetIntegerDetailsChangeParameters(newPlayCountText);
-					var changeType = (IntegerSongDetailsChangeType) commandParameters[0];
-					var playCountChange = (int) commandParameters[1];
+					var changeType = (IntegerSongDetailsChangeType)commandParameters[0];
+					var playCountChange = (int)commandParameters[1];
 					macroChangeSongDetailsCommand.Add(new CommandChangeSongPlayCount(changeType, playCountChange));
 					executeMacro = true;
 				}
@@ -191,6 +191,11 @@ namespace Forms
 				{
 					ShowInformationMessageBox("You didn't indicate a valid operator, check help if you have doubts", "Error");
 				}
+			}
+			if (_songsRating != _chosenRating)
+			{
+				macroChangeSongDetailsCommand.Add(new CommandChangeSongRating(_chosenRating));
+				executeMacro = true;
 			}
 
 			if (executeMacro)
@@ -212,55 +217,55 @@ namespace Forms
 				case > 2:
 					throw new ArgumentNullException();
 				case 2:
-				{
-					var changeOperator = textSplit[0];
-					integerChange = int.Parse(textSplit[1]);
-
-					changeType = changeOperator switch
 					{
-						"+" => IntegerSongDetailsChangeType.Add,
-						"-" => IntegerSongDetailsChangeType.Subtract,
-						_ => throw new ArgumentOutOfRangeException()
-					};
+						var changeOperator = textSplit[0];
+						integerChange = int.Parse(textSplit[1]);
 
-					break;
-				}
+						changeType = changeOperator switch
+						{
+							"+" => IntegerSongDetailsChangeType.Add,
+							"-" => IntegerSongDetailsChangeType.Subtract,
+							_ => throw new ArgumentOutOfRangeException()
+						};
+
+						break;
+					}
 				default:
-				{
-					var indexOfFirstNumber = textSplit[0].IndexOfAny("123456789".ToCharArray());
-					if (indexOfFirstNumber == -1)
 					{
-						throw new FormatException();
+						var indexOfFirstNumber = textSplit[0].IndexOfAny("123456789".ToCharArray());
+						if (indexOfFirstNumber == -1)
+						{
+							throw new FormatException();
+						}
+
+						var comparisonOperator = textSplit[0][..indexOfFirstNumber];
+						integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
+
+						switch (comparisonOperator)
+						{
+							case "+":
+								changeType = IntegerSongDetailsChangeType.Add;
+								break;
+							case "-":
+								changeType = IntegerSongDetailsChangeType.Subtract;
+								break;
+							default:
+								if (int.TryParse(textSplit[0], out integerChange))
+								{
+									changeType = IntegerSongDetailsChangeType.Set;
+									integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
+								}
+								else
+									throw new FormatException();
+
+								break;
+						}
+
+						break;
 					}
-
-					var comparisonOperator = textSplit[0][..indexOfFirstNumber];
-					integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
-
-					switch (comparisonOperator)
-					{
-						case "+":
-							changeType = IntegerSongDetailsChangeType.Add;
-							break;
-						case "-":
-							changeType = IntegerSongDetailsChangeType.Subtract;
-							break;
-						default:
-							if (int.TryParse(textSplit[0], out integerChange))
-							{
-								changeType = IntegerSongDetailsChangeType.Set;
-								integerChange = int.Parse(textSplit[0][indexOfFirstNumber..]);
-							}
-							else
-								throw new FormatException();
-
-							break;
-					}
-
-					break;
-				}
 			}
 
-			return new object[] {changeType, integerChange};
+			return new object[] { changeType, integerChange };
 		}
 
 		private void ManageMusicLibraryScreen_Enter(object sender, EventArgs e)
@@ -273,12 +278,12 @@ namespace Forms
 			_genres = BusinessFacade.Instance.GetAllGenres().ToHashSet();
 			_songs = BusinessFacade.Instance.GetAllSongs().ToHashSet();
 			SetAutoCompletesOnSearchTextBoxes();
-			if(ListBoxSongFilenames.Items.Count>0)return;
+			if (ListBoxSongFilenames.Items.Count > 0) return;
 			foreach (var song in _songs)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
-			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,true);
+			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain, true);
 		}
 
 		private void SetAutoCompletesOnSearchTextBoxes()
@@ -403,6 +408,37 @@ namespace Forms
 			}
 
 			_changeTextBoxesContent["Play Count"] = TextBoxChangePlayCount.Text;
+
+			if (selectedSongs.All(song => song.Rating == firstSong.Rating))
+			{
+				switch (selectedSongs.First().Rating)
+				{
+					case 0:
+						PictureBoxRating.Image = Properties.Resources.NoRating;
+						_songsRating = 0;
+						break;
+					case 1:
+						PictureBoxRating.Image = Properties.Resources._1StarRating;
+						_songsRating = 1;
+						break;
+					case 2:
+						PictureBoxRating.Image = Properties.Resources._2StarRating;
+						_songsRating = 2;
+						break;
+					case 3:
+						PictureBoxRating.Image = Properties.Resources._3StarRating;
+						_songsRating = 3;
+						break;
+					case 4:
+						PictureBoxRating.Image = Properties.Resources._4StarRating;
+						_songsRating = 4;
+						break;
+					case 5:
+						PictureBoxRating.Image = Properties.Resources._5StarRating;
+						_songsRating = 5;
+						break;
+				}
+			}
 		}
 
 		private void ClearChangeTextBoxes()
@@ -431,6 +467,7 @@ namespace Forms
 			TextBoxChangeTrackNumber.Enabled = state;
 			TextBoxChangeYear.Enabled = state;
 			ButtonSaveChanges.Enabled = state;
+			PictureBoxRating.Enabled = state;
 		}
 
 		#endregion
@@ -441,7 +478,7 @@ namespace Forms
 		}
 
 		#region SearchTextBoxes
-		
+
 		private void SearchSongs()
 		{
 			IEnumerable<SongDTO> resultSongs = _songs;
@@ -500,52 +537,16 @@ namespace Forms
 					ShowInformationMessageBox("Wrong format. Needs to be \">=2\" or \">= 2\", for example", "Error");
 					break;
 				case 2:
-				{
-					var comparisonOperator = playCountTextSplit[0];
-					try
 					{
-						var playCount = int.Parse(playCountTextSplit[1]);
-
-						switch (comparisonOperator)
-						{
-							case ">":
-								return resultSongs.Where(song => song.PlayCount > playCount);
-							case ">=":
-								return resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
-							case "<":
-								return resultSongs = resultSongs.Where(song => song.PlayCount < playCount);
-							case "<=":
-								return resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
-							default:
-								ShowInformationMessageBox("You didn't indicate a valid comparison operator, check help if you have doubts", "Error");
-								break;
-						}
-					}
-					catch (FormatException)
-					{
-						ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
-					}
-
-					break;
-				}
-				default:
-				{
-					var indexOfFirstNumber = playCountTextSplit[0].IndexOfAny("123456789".ToCharArray());
-					if (indexOfFirstNumber == -1)
-					{
-						ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
-					}
-					else
-					{
-						var comparisonOperator = playCountTextSplit[0][..indexOfFirstNumber];
+						var comparisonOperator = playCountTextSplit[0];
 						try
 						{
-							var playCount = int.Parse(playCountTextSplit[0][indexOfFirstNumber..]);
+							var playCount = int.Parse(playCountTextSplit[1]);
 
 							switch (comparisonOperator)
 							{
 								case ">":
-									return resultSongs = resultSongs.Where(song => song.PlayCount > playCount);
+									return resultSongs.Where(song => song.PlayCount > playCount);
 								case ">=":
 									return resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
 								case "<":
@@ -553,12 +554,7 @@ namespace Forms
 								case "<=":
 									return resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
 								default:
-									if (int.TryParse(playCountTextSplit[0], out playCount))
-									{
-										return resultSongs.Where(song =>
-											song.PlayCount == playCount);
-									}
-									ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
+									ShowInformationMessageBox("You didn't indicate a valid comparison operator, check help if you have doubts", "Error");
 									break;
 							}
 						}
@@ -566,10 +562,51 @@ namespace Forms
 						{
 							ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
 						}
-					}
 
-					break;
-				}
+						break;
+					}
+				default:
+					{
+						var indexOfFirstNumber = playCountTextSplit[0].IndexOfAny("123456789".ToCharArray());
+						if (indexOfFirstNumber == -1)
+						{
+							ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
+						}
+						else
+						{
+							var comparisonOperator = playCountTextSplit[0][..indexOfFirstNumber];
+							try
+							{
+								var playCount = int.Parse(playCountTextSplit[0][indexOfFirstNumber..]);
+
+								switch (comparisonOperator)
+								{
+									case ">":
+										return resultSongs = resultSongs.Where(song => song.PlayCount > playCount);
+									case ">=":
+										return resultSongs = resultSongs.Where(song => song.PlayCount >= playCount);
+									case "<":
+										return resultSongs = resultSongs.Where(song => song.PlayCount < playCount);
+									case "<=":
+										return resultSongs = resultSongs.Where(song => song.PlayCount <= playCount);
+									default:
+										if (int.TryParse(playCountTextSplit[0], out playCount))
+										{
+											return resultSongs.Where(song =>
+												song.PlayCount == playCount);
+										}
+										ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
+										break;
+								}
+							}
+							catch (FormatException)
+							{
+								ShowInformationMessageBox("You didn't indicate a valid play count number", "Error");
+							}
+						}
+
+						break;
+					}
 			}
 
 			return resultSongs;
@@ -585,47 +622,11 @@ namespace Forms
 					ShowInformationMessageBox("Wrong format. Needs to be \">2000\" or \"> 2000\", for example", "Error");
 					break;
 				case 2:
-				{
-					var comparisonOperator = yearTextSplit[0];
-					try
 					{
-						var year = int.Parse(yearTextSplit[1]);
-
-						switch (comparisonOperator)
-						{
-							case ">":
-								return resultSongs = resultSongs.Where(song => song.Year > year);
-							case ">=":
-								return resultSongs = resultSongs.Where(song => song.Year >= year);
-							case "<":
-								return resultSongs = resultSongs.Where(song => song.Year < year);
-							case "<=":
-								return resultSongs = resultSongs.Where(song => song.Year <= year);
-							default:
-								ShowInformationMessageBox("You didn't indicate a valid comparison operator, check help if you have doubts", "Error");
-								break;
-						}
-					}
-					catch (FormatException)
-					{
-						ShowInformationMessageBox("You didn't indicate a valid year", "Error");
-					}
-
-					break;
-				}
-				default:
-				{
-					var indexOfFirstNumber = yearTextSplit[0].IndexOfAny("123456789".ToCharArray());
-					if (indexOfFirstNumber == -1)
-					{
-						ShowInformationMessageBox("You didn't indicate a valid year", "Error");
-					}
-					else
-					{
-						var comparisonOperator = yearTextSplit[0][..indexOfFirstNumber];
+						var comparisonOperator = yearTextSplit[0];
 						try
 						{
-							var year = int.Parse(yearTextSplit[0][indexOfFirstNumber..]);
+							var year = int.Parse(yearTextSplit[1]);
 
 							switch (comparisonOperator)
 							{
@@ -638,12 +639,7 @@ namespace Forms
 								case "<=":
 									return resultSongs = resultSongs.Where(song => song.Year <= year);
 								default:
-									if (int.TryParse(yearTextSplit[0], out year))
-									{
-										return resultSongs = resultSongs.Where(song => song.Year == year);
-									}
-									ShowInformationMessageBox("You didn't indicate a valid year", "Error");
-
+									ShowInformationMessageBox("You didn't indicate a valid comparison operator, check help if you have doubts", "Error");
 									break;
 							}
 						}
@@ -651,10 +647,51 @@ namespace Forms
 						{
 							ShowInformationMessageBox("You didn't indicate a valid year", "Error");
 						}
-					}
 
-					break;
-				}
+						break;
+					}
+				default:
+					{
+						var indexOfFirstNumber = yearTextSplit[0].IndexOfAny("123456789".ToCharArray());
+						if (indexOfFirstNumber == -1)
+						{
+							ShowInformationMessageBox("You didn't indicate a valid year", "Error");
+						}
+						else
+						{
+							var comparisonOperator = yearTextSplit[0][..indexOfFirstNumber];
+							try
+							{
+								var year = int.Parse(yearTextSplit[0][indexOfFirstNumber..]);
+
+								switch (comparisonOperator)
+								{
+									case ">":
+										return resultSongs = resultSongs.Where(song => song.Year > year);
+									case ">=":
+										return resultSongs = resultSongs.Where(song => song.Year >= year);
+									case "<":
+										return resultSongs = resultSongs.Where(song => song.Year < year);
+									case "<=":
+										return resultSongs = resultSongs.Where(song => song.Year <= year);
+									default:
+										if (int.TryParse(yearTextSplit[0], out year))
+										{
+											return resultSongs = resultSongs.Where(song => song.Year == year);
+										}
+										ShowInformationMessageBox("You didn't indicate a valid year", "Error");
+
+										break;
+								}
+							}
+							catch (FormatException)
+							{
+								ShowInformationMessageBox("You didn't indicate a valid year", "Error");
+							}
+						}
+
+						break;
+					}
 			}
 
 			return resultSongs;
@@ -717,6 +754,50 @@ namespace Forms
 		private void ButtonSearchLibrary_Click(object sender, EventArgs e)
 		{
 			SearchSongs();
+		}
+
+		private void ManageMusicLibraryScreen_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void pictureBoxRating_Click(object sender, EventArgs e)
+		{
+			MouseEventArgs e2 = (MouseEventArgs)e;
+			double positionRatio = e2.X / (double)PictureBoxRating.Size.Width;
+			if (positionRatio < 0.2)
+			{
+				if (_chosenRating==1)
+				{
+					PictureBoxRating.Image = Properties.Resources.NoRating;
+					_chosenRating = 0;
+				}
+				else
+				{
+					PictureBoxRating.Image = Properties.Resources._1StarRating;
+					_chosenRating = 1;
+				}
+			}
+			else if (positionRatio < 0.4)
+			{
+				PictureBoxRating.Image = Properties.Resources._2StarRating;
+				_chosenRating = 2;
+			}
+			else if (positionRatio < 0.6)
+			{
+				PictureBoxRating.Image = Properties.Resources._3StarRating;
+				_chosenRating = 3;
+			}
+			else if (positionRatio < 0.8)
+			{
+				PictureBoxRating.Image = Properties.Resources._4StarRating;
+				_chosenRating = 4;
+			}
+			else
+			{
+				PictureBoxRating.Image = Properties.Resources._5StarRating;
+				_chosenRating = 5;
+			}
 		}
 	}
 }

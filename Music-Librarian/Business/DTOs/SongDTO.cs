@@ -18,6 +18,7 @@ namespace Business.DTOs
 		public int DiscNumber { get; set; }
 		public int Year { get; set; }
 		public int PlayCount { get; set; }
+		public int Rating { get; set; }
 		public string Lyrics { get; set; }
 		public DateTime LastModified { get; private init; }
 		public TimeSpan Duration { get; private init; }
@@ -36,6 +37,7 @@ namespace Business.DTOs
 				Title = song.Title,
 				Genre = song.Genre.Name,
 				Year = song.Year,
+				Rating=song.Rating,
 				Lyrics = song.Lyrics,
 				LastModified = File.GetLastWriteTime(song.Filename),
 				Duration = song.Duration, PlayCount = song.PlayCount

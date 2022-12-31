@@ -16,6 +16,7 @@ namespace Business.Services.MusicServices
 		void ChangeYear(SongDTO song, int newYear);
 		void ChangeTrackNumber(SongDTO song, int newTrackNumber);
 		void ChangeDiscNumber(SongDTO song, int newDiscNumber);
+		void ChangeRating(SongDTO song, int newRating);
 		int GetPlayCountOfSong(SongDTO song);
 		void OpenService();
 		void OpenAlbum(AlbumDTO albumDto);

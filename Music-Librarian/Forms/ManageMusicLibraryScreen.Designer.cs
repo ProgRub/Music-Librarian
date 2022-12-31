@@ -88,6 +88,8 @@ namespace Forms
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.panel6 = new System.Windows.Forms.Panel();
+			this.labelRating = new System.Windows.Forms.Label();
+			this.PictureBoxRating = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).BeginInit();
@@ -102,6 +104,7 @@ namespace Forms
 			this.panel4.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.panel6.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxRating)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ButtonBack
@@ -109,6 +112,8 @@ namespace Forms
 			this.ButtonBack.FlatAppearance.BorderSize = 0;
 			this.ButtonBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.ButtonBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.ButtonBack.Location = new System.Drawing.Point(0, 4);
+			this.ButtonBack.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			// 
 			// ButtonEditSelectedSongLyrics
 			// 
@@ -124,10 +129,10 @@ namespace Forms
 			this.ButtonEditSelectedSongLyrics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonEditSelectedSongLyrics.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonEditSelectedSongLyrics.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonEditSelectedSongLyrics.Location = new System.Drawing.Point(1092, 439);
-			this.ButtonEditSelectedSongLyrics.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonEditSelectedSongLyrics.Location = new System.Drawing.Point(1455, 629);
+			this.ButtonEditSelectedSongLyrics.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			this.ButtonEditSelectedSongLyrics.Name = "ButtonEditSelectedSongLyrics";
-			this.ButtonEditSelectedSongLyrics.Size = new System.Drawing.Size(226, 27);
+			this.ButtonEditSelectedSongLyrics.Size = new System.Drawing.Size(276, 30);
 			this.ButtonEditSelectedSongLyrics.TabIndex = 11;
 			this.ButtonEditSelectedSongLyrics.Text = "Edit Selected Song\'s Lyrics";
 			this.ButtonEditSelectedSongLyrics.UseVisualStyleBackColor = false;
@@ -142,12 +147,13 @@ namespace Forms
 			this.ListBoxSongFilenames.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.ListBoxSongFilenames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
 			this.ListBoxSongFilenames.FormattingEnabled = true;
-			this.ListBoxSongFilenames.ItemHeight = 16;
-			this.ListBoxSongFilenames.Location = new System.Drawing.Point(567, 43);
+			this.ListBoxSongFilenames.ItemHeight = 20;
+			this.ListBoxSongFilenames.Location = new System.Drawing.Point(757, 54);
+			this.ListBoxSongFilenames.Margin = new System.Windows.Forms.Padding(4);
 			this.ListBoxSongFilenames.Name = "ListBoxSongFilenames";
-			this.tableLayoutPanelMain.SetRowSpan(this.ListBoxSongFilenames, 13);
+			this.tableLayoutPanelMain.SetRowSpan(this.ListBoxSongFilenames, 14);
 			this.ListBoxSongFilenames.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.ListBoxSongFilenames.Size = new System.Drawing.Size(518, 423);
+			this.ListBoxSongFilenames.Size = new System.Drawing.Size(689, 608);
 			this.ListBoxSongFilenames.TabIndex = 14;
 			this.ListBoxSongFilenames.SelectedIndexChanged += new System.EventHandler(this.ListBoxSongFilenames_SelectedIndexChanged);
 			this.ListBoxSongFilenames.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxSongFilenames_KeyDown);
@@ -161,9 +167,10 @@ namespace Forms
 			this.TextBoxAlbumArtist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxAlbumArtist.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxAlbumArtist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxAlbumArtist.Location = new System.Drawing.Point(164, 44);
+			this.TextBoxAlbumArtist.Location = new System.Drawing.Point(219, 57);
+			this.TextBoxAlbumArtist.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxAlbumArtist.Name = "TextBoxAlbumArtist";
-			this.TextBoxAlbumArtist.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxAlbumArtist.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxAlbumArtist.TabIndex = 15;
 			this.TextBoxAlbumArtist.TextChanged += new System.EventHandler(this.TextBoxAlbumArtist_TextChanged);
 			// 
@@ -171,9 +178,10 @@ namespace Forms
 			// 
 			this.LabelAlbumArtist.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelAlbumArtist.AutoSize = true;
-			this.LabelAlbumArtist.Location = new System.Drawing.Point(48, 48);
+			this.LabelAlbumArtist.Location = new System.Drawing.Point(75, 61);
+			this.LabelAlbumArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelAlbumArtist.Name = "LabelAlbumArtist";
-			this.LabelAlbumArtist.Size = new System.Drawing.Size(110, 17);
+			this.LabelAlbumArtist.Size = new System.Drawing.Size(136, 20);
 			this.LabelAlbumArtist.TabIndex = 16;
 			this.LabelAlbumArtist.Text = "Album Artist:";
 			// 
@@ -181,9 +189,10 @@ namespace Forms
 			// 
 			this.LabelContributingArtists.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelContributingArtists.AutoSize = true;
-			this.LabelContributingArtists.Location = new System.Drawing.Point(47, 73);
+			this.LabelContributingArtists.Location = new System.Drawing.Point(6, 104);
+			this.LabelContributingArtists.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelContributingArtists.Name = "LabelContributingArtists";
-			this.LabelContributingArtists.Size = new System.Drawing.Size(111, 33);
+			this.LabelContributingArtists.Size = new System.Drawing.Size(205, 20);
 			this.LabelContributingArtists.TabIndex = 18;
 			this.LabelContributingArtists.Text = "Contributing Artists:";
 			// 
@@ -196,9 +205,10 @@ namespace Forms
 			this.TextBoxContributingArtists.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxContributingArtists.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxContributingArtists.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxContributingArtists.Location = new System.Drawing.Point(164, 77);
+			this.TextBoxContributingArtists.Location = new System.Drawing.Point(219, 100);
+			this.TextBoxContributingArtists.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxContributingArtists.Name = "TextBoxContributingArtists";
-			this.TextBoxContributingArtists.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxContributingArtists.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxContributingArtists.TabIndex = 17;
 			this.TextBoxContributingArtists.TextChanged += new System.EventHandler(this.TextBoxContributingArtists_TextChanged);
 			// 
@@ -206,9 +216,10 @@ namespace Forms
 			// 
 			this.LabelAlbum.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelAlbum.AutoSize = true;
-			this.LabelAlbum.Location = new System.Drawing.Point(95, 114);
+			this.LabelAlbum.Location = new System.Drawing.Point(134, 147);
+			this.LabelAlbum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelAlbum.Name = "LabelAlbum";
-			this.LabelAlbum.Size = new System.Drawing.Size(63, 17);
+			this.LabelAlbum.Size = new System.Drawing.Size(77, 20);
 			this.LabelAlbum.TabIndex = 20;
 			this.LabelAlbum.Text = "Album:";
 			// 
@@ -221,9 +232,10 @@ namespace Forms
 			this.TextBoxAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxAlbum.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxAlbum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxAlbum.Location = new System.Drawing.Point(164, 110);
+			this.TextBoxAlbum.Location = new System.Drawing.Point(219, 143);
+			this.TextBoxAlbum.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxAlbum.Name = "TextBoxAlbum";
-			this.TextBoxAlbum.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxAlbum.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxAlbum.TabIndex = 19;
 			this.TextBoxAlbum.TextChanged += new System.EventHandler(this.TextBoxAlbum_TextChanged);
 			// 
@@ -231,9 +243,10 @@ namespace Forms
 			// 
 			this.LabelSongTitle.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelSongTitle.AutoSize = true;
-			this.LabelSongTitle.Location = new System.Drawing.Point(66, 147);
+			this.LabelSongTitle.Location = new System.Drawing.Point(98, 190);
+			this.LabelSongTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelSongTitle.Name = "LabelSongTitle";
-			this.LabelSongTitle.Size = new System.Drawing.Size(92, 17);
+			this.LabelSongTitle.Size = new System.Drawing.Size(113, 20);
 			this.LabelSongTitle.TabIndex = 22;
 			this.LabelSongTitle.Text = "Song Title:";
 			// 
@@ -244,9 +257,10 @@ namespace Forms
 			this.TextBoxSongTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxSongTitle.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxSongTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxSongTitle.Location = new System.Drawing.Point(164, 143);
+			this.TextBoxSongTitle.Location = new System.Drawing.Point(219, 186);
+			this.TextBoxSongTitle.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxSongTitle.Name = "TextBoxSongTitle";
-			this.TextBoxSongTitle.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxSongTitle.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxSongTitle.TabIndex = 21;
 			this.TextBoxSongTitle.TextChanged += new System.EventHandler(this.TextBoxSongTitle_TextChanged);
 			// 
@@ -254,9 +268,10 @@ namespace Forms
 			// 
 			this.LabelGenre.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelGenre.AutoSize = true;
-			this.LabelGenre.Location = new System.Drawing.Point(98, 180);
+			this.LabelGenre.Location = new System.Drawing.Point(139, 233);
+			this.LabelGenre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelGenre.Name = "LabelGenre";
-			this.LabelGenre.Size = new System.Drawing.Size(60, 17);
+			this.LabelGenre.Size = new System.Drawing.Size(72, 20);
 			this.LabelGenre.TabIndex = 24;
 			this.LabelGenre.Text = "Genre:";
 			// 
@@ -269,9 +284,10 @@ namespace Forms
 			this.TextBoxGenre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxGenre.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxGenre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxGenre.Location = new System.Drawing.Point(164, 176);
+			this.TextBoxGenre.Location = new System.Drawing.Point(219, 229);
+			this.TextBoxGenre.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxGenre.Name = "TextBoxGenre";
-			this.TextBoxGenre.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxGenre.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxGenre.TabIndex = 23;
 			this.TextBoxGenre.TextChanged += new System.EventHandler(this.TextBoxGenre_TextChanged);
 			// 
@@ -279,9 +295,10 @@ namespace Forms
 			// 
 			this.LabelYear.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelYear.AutoSize = true;
-			this.LabelYear.Location = new System.Drawing.Point(106, 3);
+			this.LabelYear.Location = new System.Drawing.Point(141, 0);
+			this.LabelYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelYear.Name = "LabelYear";
-			this.LabelYear.Size = new System.Drawing.Size(49, 17);
+			this.LabelYear.Size = new System.Drawing.Size(59, 20);
 			this.LabelYear.TabIndex = 26;
 			this.LabelYear.Text = "Year:";
 			// 
@@ -292,9 +309,10 @@ namespace Forms
 			this.TextBoxYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxYear.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxYear.Location = new System.Drawing.Point(164, 209);
+			this.TextBoxYear.Location = new System.Drawing.Point(219, 272);
+			this.TextBoxYear.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxYear.Name = "TextBoxYear";
-			this.TextBoxYear.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxYear.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxYear.TabIndex = 25;
 			this.TextBoxYear.TextChanged += new System.EventHandler(this.TextBoxYear_TextChanged);
 			// 
@@ -309,10 +327,10 @@ namespace Forms
 			// 
 			this.PictureBoxHelpYear.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxHelpYear.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpYear.Location = new System.Drawing.Point(73, 4);
+			this.PictureBoxHelpYear.Location = new System.Drawing.Point(97, 1);
 			this.PictureBoxHelpYear.Margin = new System.Windows.Forms.Padding(0);
 			this.PictureBoxHelpYear.Name = "PictureBoxHelpYear";
-			this.PictureBoxHelpYear.Size = new System.Drawing.Size(30, 20);
+			this.PictureBoxHelpYear.Size = new System.Drawing.Size(40, 25);
 			this.PictureBoxHelpYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxHelpYear.TabIndex = 27;
 			this.PictureBoxHelpYear.TabStop = false;
@@ -322,10 +340,10 @@ namespace Forms
 			// 
 			this.PictureBoxHelpPlayCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxHelpPlayCount.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpPlayCount.Location = new System.Drawing.Point(24, 3);
+			this.PictureBoxHelpPlayCount.Location = new System.Drawing.Point(32, 0);
 			this.PictureBoxHelpPlayCount.Margin = new System.Windows.Forms.Padding(0);
 			this.PictureBoxHelpPlayCount.Name = "PictureBoxHelpPlayCount";
-			this.PictureBoxHelpPlayCount.Size = new System.Drawing.Size(30, 20);
+			this.PictureBoxHelpPlayCount.Size = new System.Drawing.Size(40, 25);
 			this.PictureBoxHelpPlayCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxHelpPlayCount.TabIndex = 30;
 			this.PictureBoxHelpPlayCount.TabStop = false;
@@ -335,10 +353,10 @@ namespace Forms
 			// 
 			this.PictureBoxHelpChangePlayCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxHelpChangePlayCount.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpChangePlayCount.Location = new System.Drawing.Point(24, 3);
+			this.PictureBoxHelpChangePlayCount.Location = new System.Drawing.Point(32, 0);
 			this.PictureBoxHelpChangePlayCount.Margin = new System.Windows.Forms.Padding(0);
 			this.PictureBoxHelpChangePlayCount.Name = "PictureBoxHelpChangePlayCount";
-			this.PictureBoxHelpChangePlayCount.Size = new System.Drawing.Size(30, 20);
+			this.PictureBoxHelpChangePlayCount.Size = new System.Drawing.Size(40, 25);
 			this.PictureBoxHelpChangePlayCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxHelpChangePlayCount.TabIndex = 47;
 			this.PictureBoxHelpChangePlayCount.TabStop = false;
@@ -348,10 +366,10 @@ namespace Forms
 			// 
 			this.PictureBoxHelpChangeYear.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxHelpChangeYear.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpChangeYear.Location = new System.Drawing.Point(73, 3);
+			this.PictureBoxHelpChangeYear.Location = new System.Drawing.Point(97, 0);
 			this.PictureBoxHelpChangeYear.Margin = new System.Windows.Forms.Padding(0);
 			this.PictureBoxHelpChangeYear.Name = "PictureBoxHelpChangeYear";
-			this.PictureBoxHelpChangeYear.Size = new System.Drawing.Size(30, 20);
+			this.PictureBoxHelpChangeYear.Size = new System.Drawing.Size(40, 25);
 			this.PictureBoxHelpChangeYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxHelpChangeYear.TabIndex = 44;
 			this.PictureBoxHelpChangeYear.TabStop = false;
@@ -361,10 +379,10 @@ namespace Forms
 			// 
 			this.PictureBoxHelpChangeTrackNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxHelpChangeTrackNumber.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxHelpChangeTrackNumber.Location = new System.Drawing.Point(-1, 3);
+			this.PictureBoxHelpChangeTrackNumber.Location = new System.Drawing.Point(-1, 0);
 			this.PictureBoxHelpChangeTrackNumber.Margin = new System.Windows.Forms.Padding(0);
 			this.PictureBoxHelpChangeTrackNumber.Name = "PictureBoxHelpChangeTrackNumber";
-			this.PictureBoxHelpChangeTrackNumber.Size = new System.Drawing.Size(30, 20);
+			this.PictureBoxHelpChangeTrackNumber.Size = new System.Drawing.Size(40, 25);
 			this.PictureBoxHelpChangeTrackNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxHelpChangeTrackNumber.TabIndex = 51;
 			this.PictureBoxHelpChangeTrackNumber.TabStop = false;
@@ -374,10 +392,10 @@ namespace Forms
 			// 
 			this.PictureBoxChangeDiscNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxChangeDiscNumber.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxChangeDiscNumber.Location = new System.Drawing.Point(11, 3);
+			this.PictureBoxChangeDiscNumber.Location = new System.Drawing.Point(15, 0);
 			this.PictureBoxChangeDiscNumber.Margin = new System.Windows.Forms.Padding(0);
 			this.PictureBoxChangeDiscNumber.Name = "PictureBoxChangeDiscNumber";
-			this.PictureBoxChangeDiscNumber.Size = new System.Drawing.Size(30, 20);
+			this.PictureBoxChangeDiscNumber.Size = new System.Drawing.Size(40, 25);
 			this.PictureBoxChangeDiscNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxChangeDiscNumber.TabIndex = 54;
 			this.PictureBoxChangeDiscNumber.TabStop = false;
@@ -387,9 +405,10 @@ namespace Forms
 			// 
 			this.PictureBoxListBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.PictureBoxListBox.Image = global::Forms.Properties.Resources.HelpQuestionMark;
-			this.PictureBoxListBox.Location = new System.Drawing.Point(528, 440);
+			this.PictureBoxListBox.Location = new System.Drawing.Point(705, 629);
+			this.PictureBoxListBox.Margin = new System.Windows.Forms.Padding(4);
 			this.PictureBoxListBox.Name = "PictureBoxListBox";
-			this.PictureBoxListBox.Size = new System.Drawing.Size(33, 24);
+			this.PictureBoxListBox.Size = new System.Drawing.Size(44, 30);
 			this.PictureBoxListBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.PictureBoxListBox.TabIndex = 60;
 			this.PictureBoxListBox.TabStop = false;
@@ -399,9 +418,10 @@ namespace Forms
 			// 
 			this.LabelPlayCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelPlayCount.AutoSize = true;
-			this.LabelPlayCount.Location = new System.Drawing.Point(57, 3);
+			this.LabelPlayCount.Location = new System.Drawing.Point(76, 0);
+			this.LabelPlayCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelPlayCount.Name = "LabelPlayCount";
-			this.LabelPlayCount.Size = new System.Drawing.Size(98, 17);
+			this.LabelPlayCount.Size = new System.Drawing.Size(118, 20);
 			this.LabelPlayCount.TabIndex = 29;
 			this.LabelPlayCount.Text = "Play Count:";
 			// 
@@ -412,9 +432,10 @@ namespace Forms
 			this.TextBoxPlayCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.TextBoxPlayCount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxPlayCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxPlayCount.Location = new System.Drawing.Point(164, 242);
+			this.TextBoxPlayCount.Location = new System.Drawing.Point(219, 315);
+			this.TextBoxPlayCount.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxPlayCount.Name = "TextBoxPlayCount";
-			this.TextBoxPlayCount.Size = new System.Drawing.Size(397, 24);
+			this.TextBoxPlayCount.Size = new System.Drawing.Size(530, 28);
 			this.TextBoxPlayCount.TabIndex = 28;
 			this.TextBoxPlayCount.TextChanged += new System.EventHandler(this.TextBoxPlayCount_TextChanged);
 			// 
@@ -422,9 +443,10 @@ namespace Forms
 			// 
 			this.LabelSearchFields.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.LabelSearchFields.AutoSize = true;
-			this.LabelSearchFields.Location = new System.Drawing.Point(167, 23);
+			this.LabelSearchFields.Location = new System.Drawing.Point(244, 30);
+			this.LabelSearchFields.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelSearchFields.Name = "LabelSearchFields";
-			this.LabelSearchFields.Size = new System.Drawing.Size(390, 17);
+			this.LabelSearchFields.Size = new System.Drawing.Size(479, 20);
 			this.LabelSearchFields.TabIndex = 31;
 			this.LabelSearchFields.Text = "Search your Music Library Using the Fields Below";
 			this.LabelSearchFields.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -433,9 +455,10 @@ namespace Forms
 			// 
 			this.LabelChangePlayCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangePlayCount.AutoSize = true;
-			this.LabelChangePlayCount.Location = new System.Drawing.Point(57, 3);
+			this.LabelChangePlayCount.Location = new System.Drawing.Point(76, 0);
+			this.LabelChangePlayCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangePlayCount.Name = "LabelChangePlayCount";
-			this.LabelChangePlayCount.Size = new System.Drawing.Size(98, 17);
+			this.LabelChangePlayCount.Size = new System.Drawing.Size(118, 20);
 			this.LabelChangePlayCount.TabIndex = 46;
 			this.LabelChangePlayCount.Text = "Play Count:";
 			// 
@@ -447,18 +470,20 @@ namespace Forms
 			this.TextBoxChangePlayCount.Enabled = false;
 			this.TextBoxChangePlayCount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangePlayCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangePlayCount.Location = new System.Drawing.Point(1252, 341);
+			this.TextBoxChangePlayCount.Location = new System.Drawing.Point(1669, 444);
+			this.TextBoxChangePlayCount.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangePlayCount.Name = "TextBoxChangePlayCount";
-			this.TextBoxChangePlayCount.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangePlayCount.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangePlayCount.TabIndex = 45;
 			// 
 			// LabelChangeYear
 			// 
 			this.LabelChangeYear.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeYear.AutoSize = true;
-			this.LabelChangeYear.Location = new System.Drawing.Point(106, 3);
+			this.LabelChangeYear.Location = new System.Drawing.Point(141, 0);
+			this.LabelChangeYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeYear.Name = "LabelChangeYear";
-			this.LabelChangeYear.Size = new System.Drawing.Size(49, 17);
+			this.LabelChangeYear.Size = new System.Drawing.Size(59, 20);
 			this.LabelChangeYear.TabIndex = 43;
 			this.LabelChangeYear.Text = "Year:";
 			// 
@@ -470,18 +495,20 @@ namespace Forms
 			this.TextBoxChangeYear.Enabled = false;
 			this.TextBoxChangeYear.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeYear.Location = new System.Drawing.Point(1252, 242);
+			this.TextBoxChangeYear.Location = new System.Drawing.Point(1669, 315);
+			this.TextBoxChangeYear.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeYear.Name = "TextBoxChangeYear";
-			this.TextBoxChangeYear.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeYear.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeYear.TabIndex = 42;
 			// 
 			// LabelChangeGenre
 			// 
 			this.LabelChangeGenre.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeGenre.AutoSize = true;
-			this.LabelChangeGenre.Location = new System.Drawing.Point(1186, 213);
+			this.LabelChangeGenre.Location = new System.Drawing.Point(1589, 276);
+			this.LabelChangeGenre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeGenre.Name = "LabelChangeGenre";
-			this.LabelChangeGenre.Size = new System.Drawing.Size(60, 17);
+			this.LabelChangeGenre.Size = new System.Drawing.Size(72, 20);
 			this.LabelChangeGenre.TabIndex = 41;
 			this.LabelChangeGenre.Text = "Genre:";
 			// 
@@ -495,18 +522,20 @@ namespace Forms
 			this.TextBoxChangeGenre.Enabled = false;
 			this.TextBoxChangeGenre.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeGenre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeGenre.Location = new System.Drawing.Point(1252, 209);
+			this.TextBoxChangeGenre.Location = new System.Drawing.Point(1669, 272);
+			this.TextBoxChangeGenre.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeGenre.Name = "TextBoxChangeGenre";
-			this.TextBoxChangeGenre.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeGenre.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeGenre.TabIndex = 40;
 			// 
 			// LabelChangeSongTitle
 			// 
 			this.LabelChangeSongTitle.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeSongTitle.AutoSize = true;
-			this.LabelChangeSongTitle.Location = new System.Drawing.Point(1154, 180);
+			this.LabelChangeSongTitle.Location = new System.Drawing.Point(1548, 233);
+			this.LabelChangeSongTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeSongTitle.Name = "LabelChangeSongTitle";
-			this.LabelChangeSongTitle.Size = new System.Drawing.Size(92, 17);
+			this.LabelChangeSongTitle.Size = new System.Drawing.Size(113, 20);
 			this.LabelChangeSongTitle.TabIndex = 39;
 			this.LabelChangeSongTitle.Text = "Song Title:";
 			// 
@@ -518,18 +547,20 @@ namespace Forms
 			this.TextBoxChangeSongTitle.Enabled = false;
 			this.TextBoxChangeSongTitle.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeSongTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeSongTitle.Location = new System.Drawing.Point(1252, 176);
+			this.TextBoxChangeSongTitle.Location = new System.Drawing.Point(1669, 229);
+			this.TextBoxChangeSongTitle.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeSongTitle.Name = "TextBoxChangeSongTitle";
-			this.TextBoxChangeSongTitle.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeSongTitle.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeSongTitle.TabIndex = 38;
 			// 
 			// LabelChangeAlbum
 			// 
 			this.LabelChangeAlbum.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeAlbum.AutoSize = true;
-			this.LabelChangeAlbum.Location = new System.Drawing.Point(1183, 147);
+			this.LabelChangeAlbum.Location = new System.Drawing.Point(1584, 190);
+			this.LabelChangeAlbum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeAlbum.Name = "LabelChangeAlbum";
-			this.LabelChangeAlbum.Size = new System.Drawing.Size(63, 17);
+			this.LabelChangeAlbum.Size = new System.Drawing.Size(77, 20);
 			this.LabelChangeAlbum.TabIndex = 37;
 			this.LabelChangeAlbum.Text = "Album:";
 			// 
@@ -541,18 +572,20 @@ namespace Forms
 			this.TextBoxChangeAlbum.Enabled = false;
 			this.TextBoxChangeAlbum.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeAlbum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeAlbum.Location = new System.Drawing.Point(1252, 143);
+			this.TextBoxChangeAlbum.Location = new System.Drawing.Point(1669, 186);
+			this.TextBoxChangeAlbum.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeAlbum.Name = "TextBoxChangeAlbum";
-			this.TextBoxChangeAlbum.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeAlbum.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeAlbum.TabIndex = 36;
 			// 
 			// LabelChangeContributingArtists
 			// 
 			this.LabelChangeContributingArtists.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeContributingArtists.AutoSize = true;
-			this.LabelChangeContributingArtists.Location = new System.Drawing.Point(1135, 106);
+			this.LabelChangeContributingArtists.Location = new System.Drawing.Point(1456, 147);
+			this.LabelChangeContributingArtists.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeContributingArtists.Name = "LabelChangeContributingArtists";
-			this.LabelChangeContributingArtists.Size = new System.Drawing.Size(111, 33);
+			this.LabelChangeContributingArtists.Size = new System.Drawing.Size(205, 20);
 			this.LabelChangeContributingArtists.TabIndex = 35;
 			this.LabelChangeContributingArtists.Text = "Contributing Artists:";
 			// 
@@ -564,18 +597,20 @@ namespace Forms
 			this.TextBoxChangeContributingArtists.Enabled = false;
 			this.TextBoxChangeContributingArtists.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeContributingArtists.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeContributingArtists.Location = new System.Drawing.Point(1252, 110);
+			this.TextBoxChangeContributingArtists.Location = new System.Drawing.Point(1669, 143);
+			this.TextBoxChangeContributingArtists.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeContributingArtists.Name = "TextBoxChangeContributingArtists";
-			this.TextBoxChangeContributingArtists.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeContributingArtists.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeContributingArtists.TabIndex = 34;
 			// 
 			// LabelChangeAlbumArtist
 			// 
 			this.LabelChangeAlbumArtist.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeAlbumArtist.AutoSize = true;
-			this.LabelChangeAlbumArtist.Location = new System.Drawing.Point(1136, 81);
+			this.LabelChangeAlbumArtist.Location = new System.Drawing.Point(1525, 104);
+			this.LabelChangeAlbumArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeAlbumArtist.Name = "LabelChangeAlbumArtist";
-			this.LabelChangeAlbumArtist.Size = new System.Drawing.Size(110, 17);
+			this.LabelChangeAlbumArtist.Size = new System.Drawing.Size(136, 20);
 			this.LabelChangeAlbumArtist.TabIndex = 33;
 			this.LabelChangeAlbumArtist.Text = "Album Artist:";
 			// 
@@ -587,18 +622,20 @@ namespace Forms
 			this.TextBoxChangeAlbumArtist.Enabled = false;
 			this.TextBoxChangeAlbumArtist.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeAlbumArtist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeAlbumArtist.Location = new System.Drawing.Point(1252, 77);
+			this.TextBoxChangeAlbumArtist.Location = new System.Drawing.Point(1669, 100);
+			this.TextBoxChangeAlbumArtist.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeAlbumArtist.Name = "TextBoxChangeAlbumArtist";
-			this.TextBoxChangeAlbumArtist.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeAlbumArtist.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeAlbumArtist.TabIndex = 32;
 			// 
 			// LabelChangeDetails
 			// 
 			this.LabelChangeDetails.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.LabelChangeDetails.AutoSize = true;
-			this.LabelChangeDetails.Location = new System.Drawing.Point(1270, 6);
+			this.LabelChangeDetails.Location = new System.Drawing.Point(1684, 10);
+			this.LabelChangeDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeDetails.Name = "LabelChangeDetails";
-			this.LabelChangeDetails.Size = new System.Drawing.Size(363, 34);
+			this.LabelChangeDetails.Size = new System.Drawing.Size(502, 40);
 			this.LabelChangeDetails.TabIndex = 48;
 			this.LabelChangeDetails.Text = "Change the Selected Songs\' Details using the Fields Below";
 			this.LabelChangeDetails.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -607,9 +644,10 @@ namespace Forms
 			// 
 			this.LabelChangeTrackNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeTrackNumber.AutoSize = true;
-			this.LabelChangeTrackNumber.Location = new System.Drawing.Point(32, 3);
+			this.LabelChangeTrackNumber.Location = new System.Drawing.Point(43, 0);
+			this.LabelChangeTrackNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeTrackNumber.Name = "LabelChangeTrackNumber";
-			this.LabelChangeTrackNumber.Size = new System.Drawing.Size(123, 17);
+			this.LabelChangeTrackNumber.Size = new System.Drawing.Size(149, 20);
 			this.LabelChangeTrackNumber.TabIndex = 50;
 			this.LabelChangeTrackNumber.Text = "Track Number:";
 			// 
@@ -621,18 +659,20 @@ namespace Forms
 			this.TextBoxChangeTrackNumber.Enabled = false;
 			this.TextBoxChangeTrackNumber.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeTrackNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeTrackNumber.Location = new System.Drawing.Point(1252, 275);
+			this.TextBoxChangeTrackNumber.Location = new System.Drawing.Point(1669, 358);
+			this.TextBoxChangeTrackNumber.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeTrackNumber.Name = "TextBoxChangeTrackNumber";
-			this.TextBoxChangeTrackNumber.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeTrackNumber.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeTrackNumber.TabIndex = 49;
 			// 
 			// LabelChangeDiscNumber
 			// 
 			this.LabelChangeDiscNumber.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeDiscNumber.AutoSize = true;
-			this.LabelChangeDiscNumber.Location = new System.Drawing.Point(44, 3);
+			this.LabelChangeDiscNumber.Location = new System.Drawing.Point(59, 0);
+			this.LabelChangeDiscNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeDiscNumber.Name = "LabelChangeDiscNumber";
-			this.LabelChangeDiscNumber.Size = new System.Drawing.Size(111, 17);
+			this.LabelChangeDiscNumber.Size = new System.Drawing.Size(137, 20);
 			this.LabelChangeDiscNumber.TabIndex = 53;
 			this.LabelChangeDiscNumber.Text = "Disc Number:";
 			// 
@@ -644,9 +684,10 @@ namespace Forms
 			this.TextBoxChangeDiscNumber.Enabled = false;
 			this.TextBoxChangeDiscNumber.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeDiscNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeDiscNumber.Location = new System.Drawing.Point(1252, 308);
+			this.TextBoxChangeDiscNumber.Location = new System.Drawing.Point(1669, 401);
+			this.TextBoxChangeDiscNumber.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeDiscNumber.Name = "TextBoxChangeDiscNumber";
-			this.TextBoxChangeDiscNumber.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeDiscNumber.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeDiscNumber.TabIndex = 52;
 			// 
 			// ButtonRedo
@@ -662,8 +703,8 @@ namespace Forms
 			this.ButtonRedo.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonRedo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
 			this.ButtonRedo.Image = global::Forms.Properties.Resources.Redo;
-			this.ButtonRedo.Location = new System.Drawing.Point(850, 472);
-			this.ButtonRedo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonRedo.Location = new System.Drawing.Point(1133, 670);
+			this.ButtonRedo.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			this.ButtonRedo.Name = "ButtonRedo";
 			this.ButtonRedo.Size = new System.Drawing.Size(22, 22);
 			this.ButtonRedo.TabIndex = 56;
@@ -684,8 +725,8 @@ namespace Forms
 			this.ButtonUndo.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonUndo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
 			this.ButtonUndo.Image = global::Forms.Properties.Resources.Undo;
-			this.ButtonUndo.Location = new System.Drawing.Point(780, 472);
-			this.ButtonUndo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonUndo.Location = new System.Drawing.Point(1048, 670);
+			this.ButtonUndo.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			this.ButtonUndo.Name = "ButtonUndo";
 			this.ButtonUndo.Size = new System.Drawing.Size(22, 22);
 			this.ButtonUndo.TabIndex = 55;
@@ -705,10 +746,10 @@ namespace Forms
 			this.ButtonSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonSaveChanges.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonSaveChanges.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonSaveChanges.Location = new System.Drawing.Point(1388, 373);
-			this.ButtonSaveChanges.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonSaveChanges.Location = new System.Drawing.Point(1860, 541);
+			this.ButtonSaveChanges.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			this.ButtonSaveChanges.Name = "ButtonSaveChanges";
-			this.ButtonSaveChanges.Size = new System.Drawing.Size(127, 27);
+			this.ButtonSaveChanges.Size = new System.Drawing.Size(150, 30);
 			this.ButtonSaveChanges.TabIndex = 57;
 			this.ButtonSaveChanges.Text = "Save Changes";
 			this.ButtonSaveChanges.UseVisualStyleBackColor = false;
@@ -718,9 +759,10 @@ namespace Forms
 			// 
 			this.LabelChangeFilename.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.LabelChangeFilename.AutoSize = true;
-			this.LabelChangeFilename.Location = new System.Drawing.Point(1164, 48);
+			this.LabelChangeFilename.Location = new System.Drawing.Point(1559, 61);
+			this.LabelChangeFilename.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.LabelChangeFilename.Name = "LabelChangeFilename";
-			this.LabelChangeFilename.Size = new System.Drawing.Size(82, 17);
+			this.LabelChangeFilename.Size = new System.Drawing.Size(102, 20);
 			this.LabelChangeFilename.TabIndex = 59;
 			this.LabelChangeFilename.Text = "Filename:";
 			// 
@@ -732,9 +774,10 @@ namespace Forms
 			this.TextBoxChangeFilename.Enabled = false;
 			this.TextBoxChangeFilename.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.TextBoxChangeFilename.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
-			this.TextBoxChangeFilename.Location = new System.Drawing.Point(1252, 44);
+			this.TextBoxChangeFilename.Location = new System.Drawing.Point(1669, 57);
+			this.TextBoxChangeFilename.Margin = new System.Windows.Forms.Padding(4);
 			this.TextBoxChangeFilename.Name = "TextBoxChangeFilename";
-			this.TextBoxChangeFilename.Size = new System.Drawing.Size(399, 24);
+			this.TextBoxChangeFilename.Size = new System.Drawing.Size(532, 28);
 			this.TextBoxChangeFilename.TabIndex = 58;
 			// 
 			// ButtonSearchLibrary
@@ -749,10 +792,10 @@ namespace Forms
 			this.ButtonSearchLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.ButtonSearchLibrary.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.ButtonSearchLibrary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.ButtonSearchLibrary.Location = new System.Drawing.Point(297, 274);
-			this.ButtonSearchLibrary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.ButtonSearchLibrary.Location = new System.Drawing.Point(406, 355);
+			this.ButtonSearchLibrary.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			this.ButtonSearchLibrary.Name = "ButtonSearchLibrary";
-			this.ButtonSearchLibrary.Size = new System.Drawing.Size(131, 27);
+			this.ButtonSearchLibrary.Size = new System.Drawing.Size(156, 30);
 			this.ButtonSearchLibrary.TabIndex = 61;
 			this.ButtonSearchLibrary.Text = "Search Library";
 			this.ButtonSearchLibrary.UseVisualStyleBackColor = false;
@@ -764,28 +807,23 @@ namespace Forms
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
 			this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanelMain.Controls.Add(this.LabelSearchFields, 1, 0);
 			this.tableLayoutPanelMain.Controls.Add(this.ButtonSearchLibrary, 1, 8);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelChangeDetails, 6, 0);
-			this.tableLayoutPanelMain.Controls.Add(this.ButtonSaveChanges, 6, 11);
 			this.tableLayoutPanelMain.Controls.Add(this.TextBoxChangeFilename, 6, 1);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelChangeFilename, 5, 1);
 			this.tableLayoutPanelMain.Controls.Add(this.ListBoxSongFilenames, 2, 1);
 			this.tableLayoutPanelMain.Controls.Add(this.TextBoxChangeDiscNumber, 6, 9);
-			this.tableLayoutPanelMain.Controls.Add(this.ButtonUndo, 2, 14);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelChangeGenre, 5, 6);
-			this.tableLayoutPanelMain.Controls.Add(this.ButtonRedo, 4, 14);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelChangeSongTitle, 5, 5);
-			this.tableLayoutPanelMain.Controls.Add(this.PictureBoxListBox, 1, 13);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelChangeAlbum, 5, 4);
 			this.tableLayoutPanelMain.Controls.Add(this.TextBoxChangePlayCount, 6, 10);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelChangeContributingArtists, 5, 3);
 			this.tableLayoutPanelMain.Controls.Add(this.TextBoxChangeTrackNumber, 6, 8);
-			this.tableLayoutPanelMain.Controls.Add(this.ButtonEditSelectedSongLyrics, 5, 13);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelAlbumArtist, 0, 1);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelContributingArtists, 0, 2);
 			this.tableLayoutPanelMain.Controls.Add(this.LabelAlbum, 0, 3);
@@ -811,27 +849,36 @@ namespace Forms
 			this.tableLayoutPanelMain.Controls.Add(this.panel4, 5, 8);
 			this.tableLayoutPanelMain.Controls.Add(this.panel5, 5, 9);
 			this.tableLayoutPanelMain.Controls.Add(this.panel6, 5, 10);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonRedo, 4, 15);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonUndo, 2, 15);
+			this.tableLayoutPanelMain.Controls.Add(this.PictureBoxListBox, 1, 14);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonSaveChanges, 6, 12);
+			this.tableLayoutPanelMain.Controls.Add(this.labelRating, 5, 11);
+			this.tableLayoutPanelMain.Controls.Add(this.ButtonEditSelectedSongLyrics, 5, 14);
+			this.tableLayoutPanelMain.Controls.Add(this.PictureBoxRating, 6, 11);
 			this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanelMain.MinimumSize = new System.Drawing.Size(1648, 499);
+			this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(4);
+			this.tableLayoutPanelMain.MinimumSize = new System.Drawing.Size(2197, 700);
 			this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
-			this.tableLayoutPanelMain.RowCount = 15;
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
-			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-			this.tableLayoutPanelMain.Size = new System.Drawing.Size(1654, 505);
+			this.tableLayoutPanelMain.RowCount = 16;
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692485F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.690176F));
+			this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+			this.tableLayoutPanelMain.Size = new System.Drawing.Size(2205, 700);
 			this.tableLayoutPanelMain.TabIndex = 62;
 			// 
 			// panel1
@@ -839,9 +886,10 @@ namespace Forms
 			this.panel1.Controls.Add(this.LabelYear);
 			this.panel1.Controls.Add(this.PictureBoxHelpYear);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(3, 208);
+			this.panel1.Location = new System.Drawing.Point(4, 269);
+			this.panel1.Margin = new System.Windows.Forms.Padding(4);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(155, 27);
+			this.panel1.Size = new System.Drawing.Size(207, 35);
 			this.panel1.TabIndex = 62;
 			// 
 			// panel2
@@ -849,9 +897,10 @@ namespace Forms
 			this.panel2.Controls.Add(this.LabelPlayCount);
 			this.panel2.Controls.Add(this.PictureBoxHelpPlayCount);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(3, 241);
+			this.panel2.Location = new System.Drawing.Point(4, 312);
+			this.panel2.Margin = new System.Windows.Forms.Padding(4);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(155, 27);
+			this.panel2.Size = new System.Drawing.Size(207, 35);
 			this.panel2.TabIndex = 63;
 			// 
 			// panel3
@@ -859,9 +908,10 @@ namespace Forms
 			this.panel3.Controls.Add(this.LabelChangeYear);
 			this.panel3.Controls.Add(this.PictureBoxHelpChangeYear);
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel3.Location = new System.Drawing.Point(1091, 241);
+			this.panel3.Location = new System.Drawing.Point(1454, 312);
+			this.panel3.Margin = new System.Windows.Forms.Padding(4);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(155, 27);
+			this.panel3.Size = new System.Drawing.Size(207, 35);
 			this.panel3.TabIndex = 64;
 			// 
 			// panel4
@@ -869,9 +919,10 @@ namespace Forms
 			this.panel4.Controls.Add(this.LabelChangeTrackNumber);
 			this.panel4.Controls.Add(this.PictureBoxHelpChangeTrackNumber);
 			this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel4.Location = new System.Drawing.Point(1091, 274);
+			this.panel4.Location = new System.Drawing.Point(1454, 355);
+			this.panel4.Margin = new System.Windows.Forms.Padding(4);
 			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(155, 27);
+			this.panel4.Size = new System.Drawing.Size(207, 35);
 			this.panel4.TabIndex = 65;
 			// 
 			// panel5
@@ -879,9 +930,10 @@ namespace Forms
 			this.panel5.Controls.Add(this.LabelChangeDiscNumber);
 			this.panel5.Controls.Add(this.PictureBoxChangeDiscNumber);
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel5.Location = new System.Drawing.Point(1091, 307);
+			this.panel5.Location = new System.Drawing.Point(1454, 398);
+			this.panel5.Margin = new System.Windows.Forms.Padding(4);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(155, 27);
+			this.panel5.Size = new System.Drawing.Size(207, 35);
 			this.panel5.TabIndex = 66;
 			// 
 			// panel6
@@ -889,18 +941,44 @@ namespace Forms
 			this.panel6.Controls.Add(this.LabelChangePlayCount);
 			this.panel6.Controls.Add(this.PictureBoxHelpChangePlayCount);
 			this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel6.Location = new System.Drawing.Point(1091, 340);
+			this.panel6.Location = new System.Drawing.Point(1454, 441);
+			this.panel6.Margin = new System.Windows.Forms.Padding(4);
 			this.panel6.Name = "panel6";
-			this.panel6.Size = new System.Drawing.Size(155, 27);
+			this.panel6.Size = new System.Drawing.Size(207, 35);
 			this.panel6.TabIndex = 67;
+			// 
+			// labelRating
+			// 
+			this.labelRating.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.labelRating.AutoSize = true;
+			this.labelRating.Location = new System.Drawing.Point(1583, 498);
+			this.labelRating.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.labelRating.Name = "labelRating";
+			this.labelRating.Size = new System.Drawing.Size(78, 20);
+			this.labelRating.TabIndex = 68;
+			this.labelRating.Text = "Rating:";
+			// 
+			// PictureBoxRating
+			// 
+			this.PictureBoxRating.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.PictureBoxRating.Enabled = false;
+			this.PictureBoxRating.Image = global::Forms.Properties.Resources.NoRating;
+			this.PictureBoxRating.Location = new System.Drawing.Point(1668, 483);
+			this.PictureBoxRating.Name = "PictureBoxRating";
+			this.PictureBoxRating.Size = new System.Drawing.Size(301, 51);
+			this.PictureBoxRating.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.PictureBoxRating.TabIndex = 69;
+			this.PictureBoxRating.TabStop = false;
+			this.PictureBoxRating.Click += new System.EventHandler(this.pictureBoxRating_Click);
 			// 
 			// ManageMusicLibraryScreen
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tableLayoutPanelMain);
+			this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
 			this.Name = "ManageMusicLibraryScreen";
-			this.Size = new System.Drawing.Size(1654, 505);
+			this.Size = new System.Drawing.Size(2205, 631);
 			this.Enter += new System.EventHandler(this.ManageMusicLibraryScreen_Enter);
 			this.Controls.SetChildIndex(this.tableLayoutPanelMain, 0);
 			this.Controls.SetChildIndex(this.ButtonBack, 0);
@@ -925,6 +1003,7 @@ namespace Forms
 			this.panel5.PerformLayout();
 			this.panel6.ResumeLayout(false);
 			this.panel6.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxRating)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -989,5 +1068,7 @@ namespace Forms
 		private System.Windows.Forms.Panel panel4;
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.Panel panel6;
+		private System.Windows.Forms.Label labelRating;
+		private System.Windows.Forms.PictureBox PictureBoxRating;
 	}
 }

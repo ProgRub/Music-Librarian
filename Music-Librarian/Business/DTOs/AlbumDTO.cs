@@ -17,6 +17,7 @@ namespace Business.DTOs
 		public int Year { get; set; }
 		public TimeSpan Duration { get; set; }
 		public double AveragePlayCount { get; set; }
+		public double AverageRating { get; set; }
 
 		internal static AlbumDTO ConvertAlbumToDTO(Album album)
 		{
@@ -32,6 +33,7 @@ namespace Business.DTOs
 			}
 
 			albumDto.AveragePlayCount = albumDto.Songs.Average(song => song.PlayCount);
+			albumDto.AverageRating = albumDto.Songs.Average(song => song.Rating);
 			return albumDto;
 		}
 
