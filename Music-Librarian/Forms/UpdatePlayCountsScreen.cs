@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Business;
@@ -11,7 +12,8 @@ namespace Forms
 		private int _numberOfWrittenLines;
 		private readonly object _mutex=new();
 		private readonly UpdatePlayCountsType _type;
-		private int _songsProcessed, _songsTotal;
+		private int _songsProcessed;
+		private int _songsTotal;
 
 		public UpdatePlayCountsScreen(UpdatePlayCountsType type)
 		{
@@ -27,7 +29,6 @@ namespace Forms
 			SyncRichTextBoxPlayCountChange.Buddies = buddies;
 			_numberOfWrittenLines = 0;
             _songsProcessed = 0;
-            _songsTotal = BusinessFacade.Instance.GetNumberOfSongs();
         }
 
 		private void UpdatePlayCountsScreen_Enter(object sender, EventArgs e)
@@ -47,6 +48,7 @@ namespace Forms
 			{
 				BusinessFacade.Instance.SetMusicServicePlayCountsBasedOnDatabase();
 			}
+			_songsTotal = BusinessFacade.Instance.GetNumberOfSongs();
 			SetWindowMinimumSizeBasedOnTableLayout(tableLayoutPanelMain,true);
 		}
 

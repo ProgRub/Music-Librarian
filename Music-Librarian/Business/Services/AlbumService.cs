@@ -25,16 +25,13 @@ namespace Business.Services
 		internal TimeSpan MaximumAlbumTime { get; set; }
 		internal ISet<GenreDTO> SelectedGenres { get; set; }
 		internal LeewayType LeewayType { get; set; }
-		internal ISet<AlbumDTO> Albums { get; set; }
 		internal AlbumDTO SelectedAlbum { get; set; }
-
-		internal void GetAlbumsFromDatabase() => new Thread(()=>Albums = _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet()).Start();
 
 		internal IEnumerable<AlbumDTO> GetPossibleAlbums()
 		{
 			MinimumAlbumTime = LeewayType != LeewayType.Over ? AlbumTime - Leeway : AlbumTime;
 			MaximumAlbumTime = LeewayType != LeewayType.Under ? AlbumTime + Leeway : AlbumTime;
-			return Albums.Where(album=>album.Duration>= MinimumAlbumTime && album.Duration <= MaximumAlbumTime &&SelectedGenres.Contains(album.Genre));
+			return _albumRepository.GetAll().Select(AlbumDTO.ConvertAlbumToDTO).ToHashSet().Where(album=>album.Duration>= MinimumAlbumTime && album.Duration <= MaximumAlbumTime &&SelectedGenres.Contains(album.Genre));
 		}
 
 		internal void SaveChanges() => _albumRepository.SaveChanges();

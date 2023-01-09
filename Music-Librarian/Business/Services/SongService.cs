@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -30,20 +31,28 @@ namespace Business.Services
 		{
 			_needToUpdateDatabasePlayCounts = false;
 			_songRepository = new SongRepository(Database.GetContext());
-			AllSongs = _songRepository.GetAll().Select(SongDTO.ConvertSongToDTO).ToHashSet();
 		}
 
 		internal static SongService Instance { get; } = new();
-		internal ISet<SongDTO> AllSongs { get; }
 		internal SongDTO SongToChangeLyrics { get; set; }
+		private int _songCount;
+
+		internal HashSet<SongDTO> GetAllSongs()
+		{
+			var allSongs = _songRepository.GetAll().Select(SongDTO.ConvertSongToDTO).ToHashSet();
+			_songCount = allSongs.Count;
+			return allSongs;
+		}
 
 		internal Song GetSongById(int id) => _songRepository.GetById(id);
+
+		internal int GetTotalSongs() => _songCount;
+
 		internal void SaveChanges()
 		{
 			var musicToDirectory = DirectoriesService.Instance.MusicToDirectory;
 			foreach (var songToDelete in _songsToDelete)
 			{
-				AllSongs.Remove(songToDelete);
 				_songRepository.Remove(_songRepository.GetById(songToDelete.Id));
 				try
 				{
@@ -76,7 +85,7 @@ namespace Business.Services
 
 			if(_needToUpdateDatabasePlayCounts)
 			{
-				foreach (var song in AllSongs)
+				foreach (var song in GetAllSongs())
 				{
 					_songRepository.Find(e => e.Filename == song.Filename).First().PlayCount = song.PlayCount;
 				}
@@ -95,7 +104,8 @@ namespace Business.Services
 		internal void UpdateAllPlayCounts()
 		{
 			_needToUpdateDatabasePlayCounts = true;
-			var totalNumberOfSongs = AllSongs.Count;
+			var allSongs = GetAllSongs();
+			var totalNumberOfSongs = _songCount;
 			var rest = totalNumberOfSongs % _numberOfThreads;
 			var result = totalNumberOfSongs / (double) _numberOfThreads;
 			var filesPerThreadList = new List<int>();
@@ -121,7 +131,7 @@ namespace Business.Services
 
 				thread.Priority = ThreadPriority.Highest;
 				Threads.Add(thread);
-				thread.Start(AllSongs.Skip(previousFiles).Take(filesPerThreadList[index]).ToHashSet());
+				thread.Start(allSongs.Skip(previousFiles).Take(filesPerThreadList[index]).ToHashSet());
 			}
 		}
 
@@ -141,7 +151,8 @@ namespace Business.Services
 		internal void SetAllMusicServicePlayCounts()
 		{
 			_needToUpdateDatabasePlayCounts = true;
-			var totalNumberOfSongs = AllSongs.Count;
+			var allSongs = GetAllSongs();
+			var totalNumberOfSongs = _songCount;
 			var rest = totalNumberOfSongs % _numberOfThreads;
 			var result = totalNumberOfSongs / (double) _numberOfThreads;
 			var filesPerThreadList = new List<int>();
@@ -167,7 +178,7 @@ namespace Business.Services
 
 				thread.Priority = ThreadPriority.Highest;
 				Threads.Add(thread);
-				thread.Start(AllSongs.Skip(previousFiles).Take(filesPerThreadList[index]).ToHashSet());
+				thread.Start(allSongs.Skip(previousFiles).Take(filesPerThreadList[index]).ToHashSet());
 			}
 		}
 

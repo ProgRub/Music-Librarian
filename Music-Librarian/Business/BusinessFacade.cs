@@ -17,7 +17,6 @@ namespace Business
 		internal IMusicService MusicService { get; }
 		private BusinessFacade()
 		{
-			AlbumService.Instance.GetAlbumsFromDatabase();
 			MusicService = iTunesService.Instance;
 			MusicService.OpenService();
 			SongService.Instance.MusicService = MusicService;
@@ -86,8 +85,8 @@ namespace Business
 			MusicService.EndLink();
 		}
 
-		public IEnumerable<SongDTO> GetAllSongs() => SongService.Instance.AllSongs;
-        public int GetNumberOfSongs() => SongService.Instance.AllSongs.Count;
+		public IEnumerable<SongDTO> GetAllSongs() => SongService.Instance.GetAllSongs();
+        public int GetNumberOfSongs() => SongService.Instance.GetTotalSongs();
 
 		public void UpdateDatabasePlayCounts()
 		{
