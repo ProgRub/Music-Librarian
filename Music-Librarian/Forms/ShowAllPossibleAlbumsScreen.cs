@@ -36,6 +36,7 @@ namespace Forms
 				item.SubItems.Add(album.Title);
 				item.SubItems.Add(album.Duration.ToString(_timeSpanFormat));
 				item.SubItems.Add(album.AveragePlayCount.ToString("F5"));
+				item.SubItems.Add(album.AverageRating.ToString("F5"));
 				ListViewPossibleAlbums.Items.Add(item);
 			}
 			ListViewPossibleAlbums.Sort();
