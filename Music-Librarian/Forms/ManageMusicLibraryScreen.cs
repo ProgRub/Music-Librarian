@@ -344,8 +344,16 @@ namespace Forms
 			}
 
 			var selectedSongs = GetSelectedSongs();
-
-			var firstSong = selectedSongs.First();
+			SongDTO firstSong;
+			try
+			{
+				firstSong = selectedSongs.First();
+			}
+			catch (InvalidOperationException e)
+			{
+				return;
+			}
+			
 			if (selectedSongs.All(song => song.AlbumArtist == firstSong.AlbumArtist))
 			{
 				TextBoxChangeAlbumArtist.Text = firstSong.AlbumArtist;
