@@ -90,6 +90,7 @@ namespace Forms
 			this.panel6 = new System.Windows.Forms.Panel();
 			this.labelRating = new System.Windows.Forms.Label();
 			this.PictureBoxRating = new System.Windows.Forms.PictureBox();
+			this.comboBoxSortOrder = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpYear)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpPlayCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxHelpChangePlayCount)).BeginInit();
@@ -856,6 +857,7 @@ namespace Forms
 			this.tableLayoutPanelMain.Controls.Add(this.labelRating, 5, 11);
 			this.tableLayoutPanelMain.Controls.Add(this.ButtonEditSelectedSongLyrics, 5, 14);
 			this.tableLayoutPanelMain.Controls.Add(this.PictureBoxRating, 6, 11);
+			this.tableLayoutPanelMain.Controls.Add(this.comboBoxSortOrder, 4, 0);
 			this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(4);
@@ -971,6 +973,29 @@ namespace Forms
 			this.PictureBoxRating.TabStop = false;
 			this.PictureBoxRating.Click += new System.EventHandler(this.pictureBoxRating_Click);
 			// 
+			// comboBoxSortOrder
+			// 
+			this.comboBoxSortOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSortOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(1)))), ((int)(((byte)(91)))));
+			this.comboBoxSortOrder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxSortOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.comboBoxSortOrder.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.comboBoxSortOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(174)))));
+			this.comboBoxSortOrder.FormattingEnabled = true;
+			this.comboBoxSortOrder.Items.AddRange(new object[] {
+            "Filename",
+            "Track Number",
+            "Album Artist",
+            "Album",
+            "Year",
+            "Genre"});
+			this.comboBoxSortOrder.Location = new System.Drawing.Point(1131, 19);
+			this.comboBoxSortOrder.Name = "comboBoxSortOrder";
+			this.comboBoxSortOrder.Size = new System.Drawing.Size(316, 28);
+			this.comboBoxSortOrder.TabIndex = 70;
+			this.comboBoxSortOrder.SelectedIndexChanged += new System.EventHandler(this.comboBoxSortOrder_SelectedIndexChanged);
+			// 
 			// ManageMusicLibraryScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
@@ -1070,5 +1095,6 @@ namespace Forms
 		private System.Windows.Forms.Panel panel6;
 		private System.Windows.Forms.Label labelRating;
 		private System.Windows.Forms.PictureBox PictureBoxRating;
+		private System.Windows.Forms.ComboBox comboBoxSortOrder;
 	}
 }

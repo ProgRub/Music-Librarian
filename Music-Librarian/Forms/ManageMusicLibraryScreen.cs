@@ -15,7 +15,7 @@ namespace Forms
 {
 	public partial class ManageMusicLibraryScreen : BaseControl
 	{
-		private ISet<SongDTO> _songs;
+		private ISet<SongDTO> _allSongs;
 		private ISet<GenreDTO> _genres;
 		private int _chosenRating,_songsRating;
 
@@ -30,6 +30,8 @@ namespace Forms
 			{"Album Artist", false}, {"Album", false}, {"Contributing Artists", false}, {"Song Title", false},
 			{"Genre", false}, {"Year", false}, {"Play Count", false}
 		};
+
+		private IEnumerable<SongDTO> _songsShownOnListBox;
 
 		public ManageMusicLibraryScreen()
 		{
@@ -276,10 +278,11 @@ namespace Forms
 				ButtonRedo.Enabled = CommandsManager.Instance.HasRedo;
 			};
 			_genres = BusinessFacade.Instance.GetAllGenres().ToHashSet();
-			_songs = BusinessFacade.Instance.GetAllSongs().ToHashSet();
+			_allSongs = BusinessFacade.Instance.GetAllSongs().ToHashSet();
 			SetAutoCompletesOnSearchTextBoxes();
 			if (ListBoxSongFilenames.Items.Count > 0) return;
-			foreach (var song in _songs)
+			_songsShownOnListBox = _allSongs;
+			foreach (var song in _songsShownOnListBox)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
@@ -293,11 +296,11 @@ namespace Forms
 			TextBoxGenre.AutoCompleteCustomSource = autoCompleteCustomSource;
 			TextBoxChangeGenre.AutoCompleteCustomSource = autoCompleteCustomSource;
 			autoCompleteCustomSource = new AutoCompleteStringCollection();
-			autoCompleteCustomSource.AddRange(_songs.Select(song => song.AlbumArtist).ToArray());
+			autoCompleteCustomSource.AddRange(_allSongs.Select(song => song.AlbumArtist).ToArray());
 			TextBoxAlbumArtist.AutoCompleteCustomSource = autoCompleteCustomSource;
 			TextBoxContributingArtists.AutoCompleteCustomSource = autoCompleteCustomSource;
 			autoCompleteCustomSource = new AutoCompleteStringCollection();
-			autoCompleteCustomSource.AddRange(_songs.Select(song => song.Album).ToArray());
+			autoCompleteCustomSource.AddRange(_allSongs.Select(song => song.Album).ToArray());
 			TextBoxAlbum.AutoCompleteCustomSource = autoCompleteCustomSource;
 		}
 
@@ -328,7 +331,7 @@ namespace Forms
 
 		private ISet<SongDTO> GetSelectedSongs()
 		{
-			return _songs.Where(song => ListBoxSongFilenames.SelectedItems.Contains(song.Filename)).ToHashSet();
+			return _allSongs.Where(song => ListBoxSongFilenames.SelectedItems.Contains(song.Filename)).ToHashSet();
 		}
 
 		#region ChangeDetailsTextBoxes
@@ -489,46 +492,46 @@ namespace Forms
 
 		private void SearchSongs()
 		{
-			IEnumerable<SongDTO> resultSongs = _songs;
+			_songsShownOnListBox = _allSongs;
 			foreach (var (searchParameter, needToSearch) in _searchParameters)
 			{
 				if (!needToSearch) continue;
 				switch (searchParameter)
 				{
 					case "Album Artist":
-						resultSongs = resultSongs.Where(song =>
+						_songsShownOnListBox = _songsShownOnListBox.Where(song =>
 							ContainsIgnoreCase(song.AlbumArtist, TextBoxAlbumArtist.Text.Trim()));
 						break;
 					case "Contributing Artists":
-						resultSongs = resultSongs.Where(song => song.ContributingArtists.Any(contributingArtist =>
+						_songsShownOnListBox = _songsShownOnListBox.Where(song => song.ContributingArtists.Any(contributingArtist =>
 							ContainsIgnoreCase(contributingArtist, TextBoxContributingArtists.Text.Trim())));
 						break;
 					case "Album":
-						resultSongs = resultSongs.Where(song =>
+						_songsShownOnListBox = _songsShownOnListBox.Where(song =>
 							ContainsIgnoreCase(song.Album, TextBoxAlbum.Text.Trim()));
 						break;
 					case "Song Title":
-						resultSongs = resultSongs.Where(song =>
+						_songsShownOnListBox = _songsShownOnListBox.Where(song =>
 							ContainsIgnoreCase(song.Title, TextBoxSongTitle.Text.Trim()));
 						break;
 					case "Genre":
-						resultSongs = resultSongs.Where(song =>
+						_songsShownOnListBox = _songsShownOnListBox.Where(song =>
 							ContainsIgnoreCase(song.Genre, TextBoxGenre.Text.Trim()));
 						break;
 					case "Year":
-						resultSongs = FilterSongsByYear(resultSongs);
+						_songsShownOnListBox = FilterSongsByYear(_songsShownOnListBox);
 
 						break;
 					case "Play Count":
-						resultSongs = FilterSongsByPlayCount(resultSongs);
+						_songsShownOnListBox = FilterSongsByPlayCount(_songsShownOnListBox);
 
 						break;
 				}
 			}
 
-			if (resultSongs.Count() == ListBoxSongFilenames.Items.Count) return;
+			if (_songsShownOnListBox.Count() == ListBoxSongFilenames.Items.Count) return;
 			ListBoxSongFilenames.Items.Clear();
-			foreach (var song in resultSongs)
+			foreach (var song in _songsShownOnListBox)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
 			}
@@ -767,6 +770,37 @@ namespace Forms
 		private void ManageMusicLibraryScreen_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void comboBoxSortOrder_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListBoxSongFilenames.Items.Clear();
+			switch (comboBoxSortOrder.Text)
+			{
+				case "Filename":
+					_songsShownOnListBox=_songsShownOnListBox.OrderBy(e => e.Filename);
+					break;
+				case "Track Number":
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.DiscNumber).ThenBy(e=> e.TrackNumber );
+					break;
+				case "Album Artist":
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.AlbumArtist);
+					break;
+				case "Year":
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.Year);
+					break;
+				case "Album":
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.Album);
+					break;
+				case "Genre":
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.Genre);
+					break;
+			}
+
+			foreach (var song in _songsShownOnListBox)
+			{
+				ListBoxSongFilenames.Items.Add(song.Filename);
+			}
 		}
 
 		private void pictureBoxRating_Click(object sender, EventArgs e)

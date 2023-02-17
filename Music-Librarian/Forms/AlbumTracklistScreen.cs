@@ -18,15 +18,16 @@ namespace Forms
 		private void AlbumTrackListScreen_Enter(object sender, EventArgs e)
 		{
 			_album = BusinessFacade.Instance.GetSelectedAlbum();
-			foreach (var song in _album.Songs)
-			{
-				Debug.WriteLine($"{song.TrackNumber}. {song.Title}");
-			}
+			//foreach (var song in _album.Songs)
+			//{
+			//	Debug.WriteLine($"{song.TrackNumber}. {song.Title}");
+			//}
 			LabelArtistAndAlbumTitle.Text =
 				LabelArtistAndAlbumTitle.Text.Replace("º", _album.Artist).Replace("ª", _album.Title);
 			PictureBoxAlbumCover.Image =
 				Image.FromStream(BusinessFacade.Instance.GetAlbumArtworkMemoryStream(_album.Songs.First()));
 			var addToTrackNumber = 0;
+			//var _songs=_album.Songs.OrderBy(e=>e.DiscNumber).ThenBy(e=>e.TrackNumber);
 			for (var discNumber = 1; discNumber <= _album.TotalDiscCount; discNumber++)
 			{
 				var discTracks = _album.Songs.Where(song=>song.DiscNumber==discNumber).OrderBy(song=>song.TrackNumber);
