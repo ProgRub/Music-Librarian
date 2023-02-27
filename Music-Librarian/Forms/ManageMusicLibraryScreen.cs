@@ -10,6 +10,7 @@ using Business.Commands.ManageLibrary.ChangeSongDetailsCommands;
 using Business.DTOs;
 using Business.Enums;
 using Forms.Commands;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Forms
 {
@@ -755,11 +756,21 @@ namespace Forms
 
 		private void ListBoxSongFilenames_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode != Keys.Delete) return;
-			var macroCommand = new MacroCommand();
-			macroCommand.Add(new CommandDeleteSongs(GetSelectedSongs()));
-			macroCommand.Add(new CommandDeleteSelectedListBoxItems(ListBoxSongFilenames));
-			CommandsManager.Instance.Execute(macroCommand);
+			if (e.KeyCode == Keys.Delete)
+			{
+				var macroCommand = new MacroCommand();
+				macroCommand.Add(new CommandDeleteSongs(GetSelectedSongs()));
+				macroCommand.Add(new CommandDeleteSelectedListBoxItems(ListBoxSongFilenames));
+				CommandsManager.Instance.Execute(macroCommand);
+				return;
+			}
+			if (e.KeyCode == Keys.A && e.Control)
+			{
+				for (var i = 0; i < ListBoxSongFilenames.Items.Count; i++)
+				{
+					ListBoxSongFilenames.SetSelected(i, true);
+				}
+			}
 		}
 
 		private void ButtonSearchLibrary_Click(object sender, EventArgs e)
