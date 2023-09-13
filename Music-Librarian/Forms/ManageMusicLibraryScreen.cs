@@ -18,7 +18,7 @@ namespace Forms
 	{
 		private ISet<SongDTO> _allSongs;
 		private ISet<GenreDTO> _genres;
-		private int _chosenRating,_songsRating;
+		private int _chosenRating, _songsRating;
 
 		private readonly IDictionary<string, string> _changeTextBoxesContent = new Dictionary<string, string>
 		{
@@ -357,7 +357,7 @@ namespace Forms
 			{
 				return;
 			}
-			
+
 			if (selectedSongs.All(song => song.AlbumArtist == firstSong.AlbumArtist))
 			{
 				TextBoxChangeAlbumArtist.Text = firstSong.AlbumArtist;
@@ -496,6 +496,7 @@ namespace Forms
 			_songsShownOnListBox = _allSongs;
 			foreach (var (searchParameter, needToSearch) in _searchParameters)
 			{
+				Debug.WriteLine(searchParameter + " " + needToSearch);
 				if (!needToSearch) continue;
 				switch (searchParameter)
 				{
@@ -530,8 +531,9 @@ namespace Forms
 				}
 			}
 
-			if (_songsShownOnListBox.Count() == ListBoxSongFilenames.Items.Count) return;
+			//if (_songsShownOnListBox.Count() == ListBoxSongFilenames.Items.Count) return;
 			ListBoxSongFilenames.Items.Clear();
+			ClearChangeTextBoxes();
 			foreach (var song in _songsShownOnListBox)
 			{
 				ListBoxSongFilenames.Items.Add(song.Filename);
@@ -789,10 +791,10 @@ namespace Forms
 			switch (comboBoxSortOrder.Text)
 			{
 				case "Filename":
-					_songsShownOnListBox=_songsShownOnListBox.OrderBy(e => e.Filename);
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.Filename);
 					break;
 				case "Track Number":
-					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.DiscNumber).ThenBy(e=> e.TrackNumber );
+					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.DiscNumber).ThenBy(e => e.TrackNumber);
 					break;
 				case "Album Artist":
 					_songsShownOnListBox = _songsShownOnListBox.OrderBy(e => e.AlbumArtist);
@@ -820,7 +822,7 @@ namespace Forms
 			double positionRatio = e2.X / (double)PictureBoxRating.Size.Width;
 			if (positionRatio < 0.2)
 			{
-				if (_chosenRating==1)
+				if (_chosenRating == 1)
 				{
 					PictureBoxRating.Image = Properties.Resources.NoRating;
 					_chosenRating = 0;
