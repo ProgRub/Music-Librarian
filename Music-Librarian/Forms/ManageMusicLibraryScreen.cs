@@ -465,6 +465,8 @@ namespace Forms
 			ClearTextBox(TextBoxChangeTrackNumber);
 			ClearTextBox(TextBoxChangeYear);
 			ClearTextBox(TextBoxChangeFilename);
+			PictureBoxRating.Image = Properties.Resources.NoRating; //Clear rating box
+			_chosenRating = 0;
 		}
 
 		private void SetChangeControlsEnabled(bool state)
